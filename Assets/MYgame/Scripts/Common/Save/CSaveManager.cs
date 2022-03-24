@@ -40,7 +40,7 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
         public int                                  m_SceneIndex                    = 0;
         public int                                  m_Coin                          = 0;
         public SeveDataCompleteBuilding[]           m_AllSeveDataCompleteBuilding   = new SeveDataCompleteBuilding[(int)StaticGlobalDel.ECompleteBuilding.eMax];
-        public PlayerOwnCar[]                       m_AllPlayerOwnCar               = new PlayerOwnCar[(int)CGGameSceneData.EPlayerTrailerType.eMax];
+  
         public CGGameSceneData.EPlayerTrailerType   m_CurPlayerTrailer              = CGGameSceneData.EPlayerTrailerType.ePotoType;
 
         public DataBrickObj[]                       m_AllBrickColorObj              = new DataBrickObj[(int)StaticGlobalDel.EBrickColor.eMax];
@@ -135,24 +135,7 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
 
     public void InitData()
     {
-        for (int i = 0; i < (int)CGGameSceneData.EPlayerTrailerType.eMax; i++)
-            m_status.m_AllPlayerOwnCar[i] = new PlayerOwnCar((CGGameSceneData.EPlayerTrailerType)i, CarStatus.Lock, true);
-
-        m_status.m_AllPlayerOwnCar[(int)CGGameSceneData.EPlayerTrailerType.ePotoType].SetData(CarStatus.Bought, true);
-        m_status.m_AllPlayerOwnCar[(int)CGGameSceneData.EPlayerTrailerType.eTruck2].SetData(CarStatus.Unlock, true);
-        m_status.m_AllPlayerOwnCar[(int)CGGameSceneData.EPlayerTrailerType.eTruck3].SetData(CarStatus.Unlock, true);
-
-        for (int i = 0; i < m_status.m_AllSeveDataCompleteBuilding.Length; i++)
-        {
-            if (m_status.m_AllSeveDataCompleteBuilding[i] == null)
-                m_status.m_AllSeveDataCompleteBuilding[i] = new SeveDataCompleteBuilding();
-        }
-
-        for (int i = 0; i < m_status.m_AllBrickColorObj.Length; i++)
-        {
-            if (m_status.m_AllBrickColorObj[i] == null)
-                m_status.m_AllBrickColorObj[i] = new DataBrickObj();
-        }
+       
     }
 
     // Update is called once per frame
@@ -216,27 +199,7 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
 
         return ReturnHistoryComplete;
     }
-
-    public static bool CheckNewCar()
-    {
-        foreach (var data in m_status.m_AllPlayerOwnCar)
-        {
-            if (!data.IsSeen)
-                return true;
-        }
-
-        return false;
-    }
-
-    public static void ShopSkinOldCar()
-    {
-        foreach (var data in m_status.m_AllPlayerOwnCar)
-        {
-            if (data.IsSeen)
-                data.IsSeen = true;
-        }
-    }
-
+   
     public static bool HistoryCompleteNewModel()
     {
         for (int i = 0; i < m_status.m_AllSeveDataCompleteBuilding.Length; i++)

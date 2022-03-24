@@ -87,40 +87,18 @@ public class CGGameSceneData : CSingletonMonoBehaviour<CGGameSceneData>
     [VarRename(CGGameSceneData.EOtherObj.eMax)]
     [SerializeField]  public    GameObject[]               m_AllOtherObj               = null;
     [SerializeField]  public    GameObject[]               m_UIObj                     = null;
-    [SerializeField]  public    CDataPlayerRelevant[]      m_AllDataPlayerRelevant     = null;
 
     [SerializeField]  public    StageData[]                m_AllStageData              = null;
     [SerializeField]  public    GameObject                 m_PrefabEventSystem         = null;
     [SerializeField]  public    GameObject                 m_SaveManager               = null;
     [SerializeField]  public    GameObject                 m_AudioManager              = null;
-
-    [VarRename(new StaticGlobalDel.ECompleteBuilding[] 
-    {
-        (StaticGlobalDel.ECompleteBuilding)0,
-        (StaticGlobalDel.ECompleteBuilding)1,
-        (StaticGlobalDel.ECompleteBuilding)2,
-        (StaticGlobalDel.ECompleteBuilding)3,
-        (StaticGlobalDel.ECompleteBuilding)4,
-        (StaticGlobalDel.ECompleteBuilding)5,
-        (StaticGlobalDel.ECompleteBuilding)6,
-        (StaticGlobalDel.ECompleteBuilding)7,
-        (StaticGlobalDel.ECompleteBuilding)8,
-        (StaticGlobalDel.ECompleteBuilding)9,
-    })]
-    [SerializeField]  public CCompleteBuilding[]    m_AllCompleteBuilding  = null;
-
+    
     [VarRename(new string[] { "Red", "Yellow", "Green", "Blue", "White" })]
     [SerializeField]  public CDateBrick[]    m_AllDateBrick         = new CDateBrick[(int)StaticGlobalDel.EBrickColor.eMax];
-
-    [SerializeField]  public BuildingRecipeData[] m_AllBuildingRecipeData = null;
-
-    protected Dictionary<EPlayerTrailerType, CDataPlayerRelevant> MapCarsStatus = new Dictionary<EPlayerTrailerType, CDataPlayerRelevant>();
-    public CDataPlayerRelevant GetPlayTypeData(EPlayerTrailerType type) { return MapCarsStatus[type]; }
-
+    
     private void Awake()
     {
-        for (int i = 0; i < m_AllDataPlayerRelevant.Length; i++)
-            MapCarsStatus[(EPlayerTrailerType)i] = m_AllDataPlayerRelevant[i];
+
     }
 
     public StageData LevelToStageData(int levelindex)

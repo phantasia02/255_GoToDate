@@ -64,19 +64,6 @@ public class CHomeGameWindow : CSingletonMonoBehaviour<CHomeGameWindow>
             m_AllAccumulationNumberBricks[i].m_Coumt = lTempCount;
             m_AllAccumulationNumberBricks[i].m_AccumulationNumberBricks.SetNumber(lTempCount);
         }
-
-        CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
-        
-        m_HistoryNumber.SetText($"{CSaveManager.CompleteBuildingOKCount().ToString().PadLeft(2, '0')}/{lTempGameSceneData.m_AllCompleteBuilding.Length}");
-
-        m_TotalBricks.SetNumber(CSaveManager.m_status.Coin.Value);
-        CSaveManager.m_status.Coin.Subscribe(VNumber => { m_TotalBricks.SetNumber(VNumber); }).AddTo(this);
-
-        if (!CSaveManager.HistoryCompleteNewModel())
-            m_NewImage.gameObject.SetActive(false);
-
-        if (!CSaveManager.CheckNewCar())
-            m_SkinNewImage.gameObject.SetActive(false);
     }
 
     public void ShowWindow()

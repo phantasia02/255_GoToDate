@@ -8,7 +8,6 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine.SceneManagement;
 using MYgame.Scripts.Window;
-using MYgame.Scripts.Scenes.Building;
 using System;
 
 public class CGameSceneWindow : CSingletonMonoBehaviour<CGameSceneWindow>
@@ -48,9 +47,6 @@ public class CGameSceneWindow : CSingletonMonoBehaviour<CGameSceneWindow>
     public int CurCoinNumber => m_CurCoin;
     public GameObject TotalGroupObj => m_TotalGroupObj;
     public Timer timer => _timer;
-    //public int TargetCoinNumber => m_Coin.MaxNumber;
-
-    [SerializeField] protected CUICompleteBuildingInfo[] m_GroupCompleteBuilding = null;
 
     protected float m_CurFever = 0.0f;
     protected float m_TargetFever = 0.0f;
@@ -129,62 +125,7 @@ public class CGameSceneWindow : CSingletonMonoBehaviour<CGameSceneWindow>
     public void AddTime(float time) { _timer.AddTime(time); }
 
     public void StopTimer() { _timer.StopTimer(); }
-
-    public void SetData(List<BuildingProgress> parAllData, bool updateNumber, bool AnimReady = false)
-    {
-        void updateOK(bool lTempupdateNumber)
-        {
-            BuildingProgress lTempBuildingProgress = null;
-            for (int i = 0; i < m_GroupCompleteBuilding.Length; i++)
-            {
-                lTempBuildingProgress = null;
-                if (parAllData.Count > i)
-                    lTempBuildingProgress = parAllData[i];
-
-                m_GroupCompleteBuilding[i].ChangCompleteBuildingImage(lTempBuildingProgress, lTempupdateNumber);
-            }
-        }
-
-        if (parAllData.Count == 0)
-        {
-            updateOK(updateNumber);
-            return;
-        }
-
-        if (updateNumber)
-        {
-            m_GroupCompleteBuilding[0].gameObject.SetActive(false);
-            RectTransform lTempCurCompleteBuilding = m_GroupCompleteBuilding[0].GetComponent<RectTransform>();
-
-            GameObject lTempGameObject = GameObject.Instantiate(m_GroupCompleteBuilding[1].gameObject, m_GroupCompleteBuilding[1].transform.parent);
-            lTempGameObject.SetActive(true);
-
-            m_GroupCompleteBuilding[1].gameObject.SetActive(false);
-            CUICompleteBuildingInfo lTempNextICompleteBuildingInfo = lTempGameObject.GetComponent<CUICompleteBuildingInfo>();
-            lTempNextICompleteBuildingInfo.ShowCompleteBuildingImage(true);
-
-            RectTransform lNextToCurRectTransform = lTempGameObject.GetComponent<RectTransform>();
-            lNextToCurRectTransform.DOScale(lTempCurCompleteBuilding.localScale, 1.4f);
-            lNextToCurRectTransform.DOAnchorPos(lTempCurCompleteBuilding.anchoredPosition, 1.5f)
-                .onComplete = () =>
-                {
-                    m_GroupCompleteBuilding[1].gameObject.SetActive(true);
-                    m_GroupCompleteBuilding[0].gameObject.SetActive(true);
-                    Destroy(lTempGameObject);
-                    updateOK(updateNumber);
-                };
-        }
-        else
-            updateOK(updateNumber);
-    }
-
-    public void SetIndexColorBricks(int index, StaticGlobalDel.EBrickColor color, int number)
-    {
-        if (index < 0 || index >= m_GroupCompleteBuilding.Length)
-            return;
-
-        m_GroupCompleteBuilding[index].SetNumber(color, number);
-    }
+    
 
     public void SetCurNumberCoin(int NumberCoin) { m_Coin.SetNumber(NumberCoin); }
 
@@ -283,38 +224,7 @@ public class CGameSceneWindow : CSingletonMonoBehaviour<CGameSceneWindow>
     {
         m_TotalCurText.SetTextColor(colorstr);
     }
-
-    public void PlayMoveTotalImage(BuildingProgress MoveImage, int SetTempTotalCount)
-    {
-        m_CurCoin += MoveImage.Score;
-        m_TempTotalCount = SetTempTotalCount;
-        m_CompleteBuildingMoveTotalImage.sprite = MoveImage.buildings.buildingSprite;
-        m_CompleteBuildingMoveTotalImage.SetNativeSize();
-
-        if (m_TotalFramLightTween != null)
-        {
-            m_TotalFramLightTween.Kill();
-            m_TotalFramLightTween = null;
-        }
-
-
-        GameObject lTempGameObject = GameObject.Instantiate(m_CompleteBuildingMoveTotalImage.gameObject, m_CompleteBuildingMoveTotalImage.transform.parent);
-        CUIMoveTarget lTempUIMoveTarget = lTempGameObject.GetComponent<CUIMoveTarget>();
-        lTempUIMoveTarget.ReturnInt = m_TempTotalCount;
-        lTempUIMoveTarget.ObserverDestroyUniRx().Subscribe(V =>
-        {
-            SetTotal(SetTempTotalCount);
-            m_TotalFramLight.color = m_TotalFramLightStartColor;
-            m_TotalFramLight.gameObject.SetActive(true);
-            SetCurNumberCoin(m_CurCoin);
-            PlayTotalAnimaFX();
-            m_TotalFramLightTween = m_TotalFramLight.DOColor(m_TotalFramLightEndColor, 1.0f).SetEase(m_TotalFramLightCurve);
-            m_TotalFramLightTween.onKill = () => { m_TotalFramLight.gameObject.SetActive(false); };
-        }).AddTo(this);
-
-        lTempGameObject.SetActive(true);
-    }
-
+    
     public void SetGameOverTotalFram()
     {
         m_TotalFramLight.gameObject.SetActive(true);

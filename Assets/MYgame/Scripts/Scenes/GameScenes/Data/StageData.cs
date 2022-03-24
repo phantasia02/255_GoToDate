@@ -31,8 +31,6 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
     public class StageData : ScriptableObject
     {
         [SerializeField]
-        private BuildingRecipeData[] _buildings;
-        [SerializeField]
         private TweenHDRColorEaseCurve _creatarchitecture;
         [SerializeField]
         private int _PlayerTrailerCount = 1;
@@ -42,7 +40,7 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         private DataLevelAllColor[] _brickRandomLevelAllColor;
 
     
-        public BuildingRecipeData[] buildings => _buildings;
+   
         public TweenHDRColorEaseCurve creatarchitecture => _creatarchitecture;
         public int PlayerTrailerCount => _PlayerTrailerCount;
         public int TargetBuilding => _TargetBuilding;

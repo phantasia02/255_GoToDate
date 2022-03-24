@@ -5,7 +5,6 @@ using Cinemachine;
 using DG.Tweening;
 using UniRx;
 using MYgame.Scripts.Scenes.GameScenes.Data;
-using MYgame.Scripts.Scenes.Building;
 
 
 public class DataPathNode
@@ -16,12 +15,6 @@ public class DataPathNode
     }
 
     public Vector3 m_Postion = Vector3.zero;
-}
-
-public class DataTrailerBuildingProgress
-{
-    public BuildingProgress m_BuildingProgress = null;
-    public Transform        m_BuildingProgressPos = null;
 }
 
 /// <summary>
