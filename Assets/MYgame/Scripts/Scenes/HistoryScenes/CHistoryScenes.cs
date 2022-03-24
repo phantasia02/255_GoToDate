@@ -1,0 +1,318 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CHistoryScenes : MonoBehaviour
+{
+    public class DataHistoryCompleteBuildingShow
+    {
+        public DataHistoryCompleteBuildingShow(Vector3 scale, int MinDemand, CSaveManager.EHistoryMultiplier setHistoryMultiplier)
+        {
+            m_Scale             = scale;
+            m_MinDemand         = MinDemand;
+            m_HistoryMultiplier = setHistoryMultiplier;
+        }
+
+        public void Copy(DataHistoryCompleteBuildingShow lTempCompleteBuilding)
+        {
+            m_Scale             = lTempCompleteBuilding.m_Scale;
+            m_MinDemand         = lTempCompleteBuilding.m_MinDemand;
+            m_HistoryMultiplier = lTempCompleteBuilding.m_HistoryMultiplier;
+        }
+
+        public Vector3                          m_Scale             = Vector3.one;
+        public int                              m_MinDemand         = 0;
+        public CSaveManager.EHistoryMultiplier  m_HistoryMultiplier = CSaveManager.EHistoryMultiplier.eZero;
+    }
+
+
+    public class CShowModel
+    {
+        public GameObject m_Model   = null;
+        public int m_CurShowIndex   = 0;
+        public int m_NextShowIndex  = -1;
+        public Text m_ScoreText     = null;
+        public Image m_NewImage     = null;
+    }
+
+    public enum EState
+    {
+        eNull = 0,
+        eMove = 1,
+        eMax
+    }
+
+    public enum EMoveType
+    {
+        eLeft = 0,
+        eRight = 1,
+        eMax
+    }
+
+    public const float  CFXInterval         = 100.0f;
+    public const int    CNShowModelCount    = 5;
+    public const float  CFMoveMaxTime       = 0.5f;
+
+    // ==================== SerializeField ===========================================
+
+    [SerializeField] protected GameObject       PrefabGameSceneData     = null;
+    [SerializeField] protected Transform        m_AllShowModleParent    = null;
+    [SerializeField] protected Material         m_ZeroMaterial          = null;
+    [SerializeField] protected CHistoryWindow   m_HistoryWindow         = null;
+
+    // ==================== All ObjData  ===========================================
+
+    protected CShowModel[] m_AllModel = null;
+    protected GameObject[] m_ShowModel = null;
+    protected int m_CurCentralIndex = 0;
+    protected float m_StateTime = 0.0f;
+
+    private EState m_eCurState = EState.eNull;
+    public EState CurState { get { return m_eCurState; } }
+    protected int m_MoveIndex = 0;
+
+    private void Awake()
+    {
+        StaticGlobalDel.CreateSingletonObj(PrefabGameSceneData);
+        CGGameSceneData     lTempCGGameSceneData    = CGGameSceneData.SharedInstance;
+
+
+        m_AllModel = new CShowModel[lTempCGGameSceneData.m_AllCompleteBuilding.Length];
+        m_ShowModel = new GameObject[m_AllModel.Length];
+
+        m_MoveIndex = m_AllModel.Length / 2;
+        Vector3 lTempVector3 = Vector3.zero;
+        float lTempXSet = CFXInterval * -(float)(m_MoveIndex);
+        for (int i = 0; i < m_ShowModel.Length; i++)
+        {
+            m_ShowModel[i] = new GameObject();
+            m_ShowModel[i].transform.parent = m_AllShowModleParent;
+            lTempVector3 = m_ShowModel[i].transform.position;
+            lTempVector3.x = lTempXSet;
+            lTempVector3.y = -5.0f;
+            lTempVector3.z = 0.0f;
+            m_ShowModel[i].transform.localPosition = lTempVector3;
+
+            lTempXSet += CFXInterval;
+        }
+
+        DataHistoryCompleteBuildingShow lTempDataHistoryCompleteBuildingShow = null;
+        Renderer[] lTempModleAllRenderer = null;
+       
+        GameObject lTempset = null;
+        for (int i = 0; i < lTempCGGameSceneData.m_AllCompleteBuilding.Length; i++)
+        {
+            
+            lTempDataHistoryCompleteBuildingShow = null;
+            m_AllModel[i] = new CShowModel();
+            m_AllModel[i].m_Model = GameObject.Instantiate(lTempCGGameSceneData.m_AllCompleteBuilding[i].m_Model);
+            m_AllModel[i].m_Model.transform.parent = m_AllShowModleParent;
+            m_AllModel[i].m_Model.SetActive(true);
+        }
+
+
+        int lTempShowCurIndex = m_CurCentralIndex - m_MoveIndex;
+        if (lTempShowCurIndex < 0)
+            lTempShowCurIndex = m_ShowModel.Length + lTempShowCurIndex;
+
+        bool SaveFlag = false;
+        Transform lTempTransform = null;
+        int lTempIndexCount = 0;
+        int lTempTotleCount = 0;
+        Vector3 lTempScoreTextObjpos = new Vector3(0.0f, 0.0f, 30.0f);
+        for (int i = 0; i < m_AllModel.Length; i++)
+        {
+            lTempIndexCount = CSaveManager.m_status.m_AllSeveDataCompleteBuilding[i].count;
+            lTempTotleCount += lTempIndexCount;
+            m_AllModel[i].m_Model.transform.position = m_ShowModel[lTempShowCurIndex].transform.position;
+            m_AllModel[i].m_Model.transform.forward = -m_ShowModel[lTempShowCurIndex].transform.forward;
+            m_AllModel[i].m_CurShowIndex = lTempShowCurIndex;
+
+            lTempset = GameObject.Instantiate(lTempCGGameSceneData.m_AllOtherObj[(int)CGGameSceneData.EOtherObj.eScoreTextObj]);
+            lTempset.transform.SetParent(m_AllModel[i].m_Model.transform);
+            lTempset.transform.localPosition = lTempScoreTextObjpos;
+            m_AllModel[i].m_ScoreText = lTempset.GetComponentInChildren<Text>();
+            m_AllModel[i].m_ScoreText.text = $"{lTempIndexCount}";
+            m_AllModel[i].m_NewImage = lTempset.GetComponentInChildren<Image>();
+            m_AllModel[i].m_ScoreText.gameObject.SetActive(false);
+
+            if (!(CSaveManager.m_status.m_AllSeveDataCompleteBuilding[i].NewObj == 1 || CSaveManager.m_status.m_AllSeveDataCompleteBuilding[i].NewObj == 2))
+                m_AllModel[i].m_NewImage.gameObject.SetActive(false);
+            
+            if (CSaveManager.m_status.m_AllSeveDataCompleteBuilding[i].NewObj == 1)
+            {
+                CSaveManager.m_status.m_AllSeveDataCompleteBuilding[i].NewObj = 2;
+                SaveFlag = true;
+            }
+
+            lTempTransform = m_AllModel[i].m_Model.transform.Find("AllObj");
+            lTempDataHistoryCompleteBuildingShow = CSaveManager.IndextoHistoryMultiplier(i);
+
+            if (lTempDataHistoryCompleteBuildingShow.m_HistoryMultiplier == CSaveManager.EHistoryMultiplier.eZero)
+            {
+                lTempModleAllRenderer = null;
+                lTempModleAllRenderer = lTempTransform.GetComponentsInChildren<Renderer>();
+
+                if (lTempModleAllRenderer != null)
+                {
+                    foreach (Renderer oneRender in lTempModleAllRenderer)
+                        oneRender.material = m_ZeroMaterial;
+                }
+            }
+
+            //if (i == (int)StaticGlobalDel.ECompleteBuilding.eFerrisWheel)
+            //{
+            //    if (lTempDataHistoryCompleteBuildingShow.m_HistoryMultiplier != CSaveManager.EHistoryMultiplier.eZero)
+            //        lTempTransform.localScale = Vector3.one * (float)lTempDataHistoryCompleteBuildingShow.m_HistoryMultiplier;
+            //}
+            //else
+            lTempTransform.localScale = lTempDataHistoryCompleteBuildingShow.m_Scale;
+
+            lTempShowCurIndex++;
+            if (lTempShowCurIndex == m_ShowModel.Length)
+                lTempShowCurIndex = 0;
+        }
+
+        m_HistoryWindow.SetHistoryHighScore(lTempTotleCount);
+
+        if (SaveFlag)
+            CSaveManager.Save();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        m_HistoryWindow.AddLeftBtnListener(LeftMove);
+        m_HistoryWindow.AddRightBtnListener(RightMove);
+        m_HistoryWindow.SetCompleteBuildingCount(m_AllModel[m_CurCentralIndex].m_ScoreText.text, false); 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        m_StateTime += Time.deltaTime;
+
+        switch (m_eCurState)
+        {
+            case EState.eNull:
+                {
+                    //  UsePlayTick();
+                }
+                break;
+            case EState.eMove:
+                {
+                    float lTempRatio = m_StateTime / CFMoveMaxTime;
+
+                    if (lTempRatio < 1.0f)
+                    {
+                        int lTempCurShowIndex = 0;
+                        int lTempNextShowIndex = 0;
+
+                        Vector3 lTemplerppos = Vector3.zero;
+                        for (int i = 0; i < m_AllModel.Length; i++)
+                        {
+                            lTempCurShowIndex = m_AllModel[i].m_CurShowIndex;
+                            lTempNextShowIndex = m_AllModel[i].m_NextShowIndex;
+
+                            if (lTempNextShowIndex == -1)
+                                continue;
+
+                            lTemplerppos = Vector3.Lerp(m_ShowModel[lTempCurShowIndex].transform.position, m_ShowModel[lTempNextShowIndex].transform.position, lTempRatio);
+                            m_AllModel[i].m_Model.transform.position = lTemplerppos;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < m_AllModel.Length; i++)
+                        {
+                            if (m_AllModel[i].m_NextShowIndex == -1)
+                                continue;
+
+                            m_AllModel[i].m_Model.transform.position = m_ShowModel[m_AllModel[i].m_NextShowIndex].transform.position;
+                            m_AllModel[i].m_CurShowIndex = m_AllModel[i].m_NextShowIndex;
+                            m_AllModel[i].m_NextShowIndex = -1;
+                        }
+
+                        SetState(EState.eNull);
+                    }
+
+                    
+                }
+                break;
+        }
+    }
+
+    public void SetState(EState lsetState)
+    {
+        //if (lsetState == m_eCurState)
+        //    return;
+
+        EState lOldState = m_eCurState;
+        m_StateTime = 0.0f;
+        m_eCurState = lsetState;
+
+        switch (m_eCurState)
+        {
+            case EState.eNull:
+                {
+                    m_HistoryWindow.SetCompleteBuildingCount(m_AllModel[m_CurCentralIndex].m_ScoreText.text);
+                }
+                break;
+            case EState.eMove:
+                {
+                   
+                }
+                break;
+        }
+    }
+
+    public void LeftMove()
+    {
+        if (m_eCurState != EState.eNull)
+            return;
+
+        for (int i = 0; i < m_AllModel.Length; i++)
+        {
+            m_AllModel[i].m_NextShowIndex = m_AllModel[i].m_CurShowIndex + 1;
+            if (m_AllModel[i].m_NextShowIndex >= m_AllModel.Length)
+            {
+                m_AllModel[i].m_CurShowIndex = 0;
+                m_AllModel[i].m_NextShowIndex = -1;
+                m_AllModel[i].m_Model.transform.position = m_ShowModel[0].transform.position;
+            }
+        }
+
+        m_CurCentralIndex--;
+        if (m_CurCentralIndex < 0)
+            m_CurCentralIndex = m_AllModel.Length - 1;
+
+        SetState(EState.eMove);
+    }
+
+    public void RightMove()
+    {
+        if (m_eCurState != EState.eNull)
+            return;
+
+
+        for (int i = 0; i < m_AllModel.Length; i++)
+        {
+            m_AllModel[i].m_NextShowIndex = m_AllModel[i].m_CurShowIndex - 1;
+            if (m_AllModel[i].m_NextShowIndex < 0)
+            {
+                m_AllModel[i].m_CurShowIndex = m_AllModel.Length - 1;
+                m_AllModel[i].m_NextShowIndex = -1;
+                m_AllModel[i].m_Model.transform.position = m_ShowModel[m_ShowModel.Length - 1].transform.position;
+            }
+        }
+
+        m_CurCentralIndex++;
+        if (m_CurCentralIndex >= m_AllModel.Length)
+            m_CurCentralIndex = 0;
+
+        SetState(EState.eMove);
+    }
+
+
+}
