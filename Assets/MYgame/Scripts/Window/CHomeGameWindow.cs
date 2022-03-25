@@ -56,14 +56,6 @@ public class CHomeGameWindow : CSingletonMonoBehaviour<CHomeGameWindow>
 
         m_StageCurLevelText.SetNumber(CSaveManager.m_status.m_LevelIndex + 1);
 
-        int lTempCount = 0;
-        for (int i = 0; i < (int)StaticGlobalDel.EBrickColor.eMax; i++)
-        {
-            m_AllAccumulationNumberBricks[i].m_AccumulationNumberBricks.SetSprite(m_AllAccumulationNumberBricks[i].m_Sprite);
-            lTempCount = CSaveManager.m_status.m_AllBrickColorObj[i].count;
-            m_AllAccumulationNumberBricks[i].m_Coumt = lTempCount;
-            m_AllAccumulationNumberBricks[i].m_AccumulationNumberBricks.SetNumber(lTempCount);
-        }
     }
 
     public void ShowWindow()

@@ -67,7 +67,6 @@ public class CChangeScenes
         //    lTempNextLevelIndex = 0;
 
         CSaveManager.m_status.LevelIndex.Value = lTempNextLevelIndex;
-        CSaveManager.HistoryCompleteOldModel();
         CSaveManager.Save();
     }
 
@@ -75,7 +74,6 @@ public class CChangeScenes
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        CSaveManager.HistoryCompleteOldModel();
         CSaveManager.Save();
     }
 
