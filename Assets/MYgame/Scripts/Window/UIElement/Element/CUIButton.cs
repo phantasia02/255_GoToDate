@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class CUIButton : CUIElementBase, IPointerDownHandler
+public class CUIButton : CUIElementBase
 {
     public override EUIElementType UIElementType() { return EUIElementType.eUIButton; }
 
@@ -25,15 +25,6 @@ public class CUIButton : CUIElementBase, IPointerDownHandler
 
         if (m_Image == null)
             m_Image = m_Button.GetComponent<Image>();
-    }
-
-    public void OnPointerDown(PointerEventData pointerEventData)
-    {
-        if (!m_Button.interactable)
-            return;
-
-        CAudioManager lTempAudioManager = CAudioManager.SharedInstance;
-        lTempAudioManager.PlaySE(CSEPlayObj.ESE.eButton);
     }
 
     public void SetSpriteState(SpriteState parSpriteState)

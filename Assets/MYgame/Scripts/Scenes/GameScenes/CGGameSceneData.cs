@@ -87,14 +87,12 @@ public class CGGameSceneData : CSingletonMonoBehaviour<CGGameSceneData>
     [VarRename(CGGameSceneData.EOtherObj.eMax)]
     [SerializeField]  public    GameObject[]               m_AllOtherObj               = null;
     [SerializeField]  public    GameObject[]               m_UIObj                     = null;
+    [SerializeField]  public    CDataRole[]                m_AllDataRole               = null;
 
     [SerializeField]  public    StageData[]                m_AllStageData              = null;
     [SerializeField]  public    GameObject                 m_PrefabEventSystem         = null;
     [SerializeField]  public    GameObject                 m_SaveManager               = null;
     [SerializeField]  public    GameObject                 m_AudioManager              = null;
-    
-    [VarRename(new string[] { "Red", "Yellow", "Green", "Blue", "White" })]
-    [SerializeField]  public CDateBrick[]    m_AllDateBrick         = new CDateBrick[(int)StaticGlobalDel.EBrickColor.eMax];
     
     private void Awake()
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using MYgame.Scripts.Scenes.GameScenes.Data;
 
 [System.Serializable]
 public class DataBrickObj
@@ -39,6 +40,8 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
         public int                                  m_Money                         = 0;
         public int                                  m_SceneIndex                    = 0;
         public int                                  m_Coin                          = 0;
+        public CDataRole                            m_MyRole                        = null;
+        public string                               m_MyName                        = "";
         public bool m_InitGameOK = false;
         // =================== UniRx =====================
 
