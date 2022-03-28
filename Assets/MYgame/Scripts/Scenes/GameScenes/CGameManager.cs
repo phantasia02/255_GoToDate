@@ -64,9 +64,6 @@ public class CGameManager : MonoBehaviour
     // ==================== All ObjData ===========================================
 
 
-
-    protected Dictionary<int, DataLevelAllColor> m_DictionaryDataLevelAllColor = new Dictionary<int, DataLevelAllColor>();
-
     // ==================== SerializeField ===========================================
 
     protected CountdownWindow m_CountdownWindow = null;
@@ -105,23 +102,6 @@ public class CGameManager : MonoBehaviour
     public Transform StartPosition => m_StartPosition;
 
     protected int m_BuildingProgressOKCount = -1;
-    public int BuildingProgressOKCount
-    {
-        get
-        {
-            if (m_BuildingProgressOKCount == -1)
-            {
-
-//#if DEBUGPC
-//                m_BuildingProgressOKCount = MyTargetBuilding.TargetBuilding + 80;
-//#else
-                m_BuildingProgressOKCount = MyTargetBuilding.TargetBuilding;
-//#endif
-            }
-
-            return m_BuildingProgressOKCount;
-        }
-    }
 
     void Awake()
     {
@@ -326,17 +306,6 @@ public class CGameManager : MonoBehaviour
     //{
     //    SetState(EState.eGameOver);
     //}
-    
-
-    public DataLevelAllColor GetIDToRandomColor(int ID)
-    {
-        DataLevelAllColor lReturnData = null;
-        if (m_DictionaryDataLevelAllColor.TryGetValue(ID, out lReturnData))
-            return lReturnData;
-
-        return lReturnData;
-    }
-
 
     // ==================== All ObjData  ===========================================
 
