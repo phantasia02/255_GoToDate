@@ -5,27 +5,6 @@ using UnityEngine.UI;
 
 public class CHistoryScenes : MonoBehaviour
 {
-    public class DataHistoryCompleteBuildingShow
-    {
-        public DataHistoryCompleteBuildingShow(Vector3 scale, int MinDemand, CSaveManager.EHistoryMultiplier setHistoryMultiplier)
-        {
-            m_Scale             = scale;
-            m_MinDemand         = MinDemand;
-            m_HistoryMultiplier = setHistoryMultiplier;
-        }
-
-        public void Copy(DataHistoryCompleteBuildingShow lTempCompleteBuilding)
-        {
-            m_Scale             = lTempCompleteBuilding.m_Scale;
-            m_MinDemand         = lTempCompleteBuilding.m_MinDemand;
-            m_HistoryMultiplier = lTempCompleteBuilding.m_HistoryMultiplier;
-        }
-
-        public Vector3                          m_Scale             = Vector3.one;
-        public int                              m_MinDemand         = 0;
-        public CSaveManager.EHistoryMultiplier  m_HistoryMultiplier = CSaveManager.EHistoryMultiplier.eZero;
-    }
-
 
     public class CShowModel
     {

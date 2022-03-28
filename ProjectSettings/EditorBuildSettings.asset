@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MYgame/Scenes/SelectRole.unity
     guid: 71932fada561ae641a1b35deff98080e
+  - enabled: 1
+    path: Assets/MYgame/Scenes/SelectObject.unity
+    guid: ed74f07faa084c24fa8ffbf43e543ebe
   m_configObjects: {}

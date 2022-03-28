@@ -16,15 +16,6 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
     const int CHistoryModelMaxCount = 200;
     public static readonly Vector3 CHistoryModelMaxSize = Vector3.one * 40.0f; 
 
-    public enum EHistoryMultiplier
-    {
-        eZero = 0,
-        e1000 = 1,
-        e2000 = 2,
-        e3000 = 3,
-        e4000 = 4,
-        eMax = 5,
-    };
 
     [System.Serializable]
     public class SeveDataCompleteBuilding
@@ -40,7 +31,7 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
         public int                                  m_Money                         = 0;
         public int                                  m_SceneIndex                    = 0;
         public int                                  m_Coin                          = 0;
-        public CDataRole                            m_MyRole                        = null;
+        public int                                  m_MyRoleIndex                   = 0;
         public string                               m_MyName                        = "nINA";
         public bool m_InitGameOK = false;
         // =================== UniRx =====================

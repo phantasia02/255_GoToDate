@@ -20,10 +20,6 @@ public class GlobalData : CSingletonMonoBehaviour<GlobalData>
     //public const float g_fPlayerSlowDownSpeed   = 180.0f;
     //public const float g_PlayerToCameraMax      = -25.0f;
 
-
-
-
-    static public string   g_CurSceneName    = "Boot";
     static public int      g_CurSceneIndex   = -1;
     // static public int      g_LevelIndex      = 0;
 

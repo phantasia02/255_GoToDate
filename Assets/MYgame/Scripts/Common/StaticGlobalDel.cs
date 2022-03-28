@@ -90,6 +90,10 @@ public static class StaticGlobalDel
     static public string g_CurSceneName             = "Boot_";
 
     public const string g_GameScenesName            = "GameScenes";
+
+    public const string g_ScenesNameSelectRole      = "SelectRole";
+    public const string g_ScenesNameSelectObject    = "SelectObject";
+
     public const string g_testScenesName            = "test";
     public const string g_ShowCurLevelNamePrefix    = "STAGE ";
     public const string g_HistorvWindowScenes       = "HistorvWindowScenes";

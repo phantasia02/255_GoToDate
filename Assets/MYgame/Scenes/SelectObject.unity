@@ -487,6 +487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 419475546}
+  - component: {fileID: 419475547}
   m_Layer: 5
   m_Name: TopObj
   m_TagString: Untagged
@@ -515,6 +516,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 738}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &419475547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419475545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4a9b31505e23048bd4c0b9abe1721f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Text: {fileID: 1444045804}
+  m_Image: {fileID: 1007633987}
 --- !u!1 &725389483
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabGameSceneData: {fileID: 1509596396949040922, guid: 05e7b6e00344118419787de0fc01772d, type: 3}
+  m_SelectRoleData: {fileID: 419475547}
   m_ShoObjChar: {fileID: 1774705143}
   m_OK: {fileID: 1918068519}
   m_No_X: {fileID: 346973969}

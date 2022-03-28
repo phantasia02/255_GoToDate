@@ -9,6 +9,7 @@ public class CSelectObjectChar : MonoBehaviour
     // ==================== SerializeField ===========================================
     [SerializeField] protected GameObject PrefabGameSceneData = null;
 
+    [SerializeField] protected CUITextImage m_SelectRoleData = null;
     [SerializeField] protected CUITextImage m_ShoObjChar = null;
 
     [SerializeField] protected CUIButton m_OK = null;
@@ -54,9 +55,20 @@ public class CSelectObjectChar : MonoBehaviour
 
     private void Awake()
     {
+
         StaticGlobalDel.CreateSingletonObj(PrefabGameSceneData);
 
+
+
         UpdateCurDataObjChar(0);
+    }
+
+    public void Start()
+    {
+        CDataRole lTempMyRole = CGGameSceneData.SharedInstance.m_AllDataRole[CSaveManager.m_status.m_MyRoleIndex];
+
+        m_SelectRoleData.SetSprite(lTempMyRole.MugShot);
+        m_SelectRoleData.SetText(CSaveManager.m_status.m_MyName);
 
         m_No_X.AddListener(() => {
             UpdateCurDataObjChar(m_CurShowDataObjCharIndex + 1);

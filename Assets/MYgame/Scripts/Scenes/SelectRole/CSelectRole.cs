@@ -7,6 +7,8 @@ using MYgame.Scripts.Scenes.GameScenes.Data;
 
 public class CSelectRole : MonoBehaviour
 {
+    CChangeScenes m_ChangeScenes = new CChangeScenes();
+
     // ==================== SerializeField ===========================================
     [SerializeField] protected GameObject PrefabGameSceneData = null;
 
@@ -39,8 +41,10 @@ public class CSelectRole : MonoBehaviour
             if (m_InputName.text.Length == 0)
                 return;
 
-            CSaveManager.m_status.m_MyRole = m_TempAllDataRole[m_CurIndexDataRole];
-            CSaveManager.m_status.m_MyName = m_InputName.text;
+            CSaveManager.m_status.m_MyRoleIndex = m_CurIndexDataRole;
+            CSaveManager.m_status.m_MyName      = m_InputName.text;
+            
+            m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
         });
     }
 

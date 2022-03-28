@@ -16,14 +16,9 @@ public class CChangeScenes
 
     public void ChangeScenes(string lScenesName)
     {
-        //SceneManager.LoadScene(lScenesName);
+        SceneManager.LoadScene(lScenesName);
 
-        //GlobalData.g_CurSceneName = lScenesName;
-
-        //string[] sArray = lScenesName.Split(new string[] { GlobalData.g_scLevelPrefix }, StringSplitOptions.RemoveEmptyEntries);
-
-        //if (sArray.Length == 1)
-        //    GlobalData.g_LevelIndex = int.Parse(sArray[0]);
+        StaticGlobalDel.g_CurSceneName = lScenesName;
     }
 
     public void LoadGameScenes()
