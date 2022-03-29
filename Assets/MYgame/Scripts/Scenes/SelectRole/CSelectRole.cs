@@ -5,12 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using MYgame.Scripts.Scenes.GameScenes.Data;
 
-public class CSelectRole : MonoBehaviour
+public class CSelectRole : CScenesCtrlBase
 {
     CChangeScenes m_ChangeScenes = new CChangeScenes();
 
     // ==================== SerializeField ===========================================
-    [SerializeField] protected GameObject PrefabGameSceneData = null;
 
     [SerializeField] protected Image            m_MugShot               = null;
     [SerializeField] protected Image            m_FullBigPicture        = null;
@@ -43,7 +42,7 @@ public class CSelectRole : MonoBehaviour
 
             CSaveManager.m_status.m_MyRoleIndex = m_CurIndexDataRole;
             CSaveManager.m_status.m_MyName      = m_InputName.text;
-            
+
             m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
         });
     }

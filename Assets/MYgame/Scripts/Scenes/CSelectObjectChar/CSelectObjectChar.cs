@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using MYgame.Scripts.Scenes.GameScenes.Data;
 
-public class CSelectObjectChar : MonoBehaviour
+public class CSelectObjectChar : CScenesCtrlBase
 {
     // ==================== SerializeField ===========================================
-    [SerializeField] protected GameObject PrefabGameSceneData = null;
 
     [SerializeField] protected CUITextImage m_SelectRoleData = null;
     [SerializeField] protected CUITextImage m_ShoObjChar = null;
@@ -17,21 +16,6 @@ public class CSelectObjectChar : MonoBehaviour
 
     // ==================== SerializeField ===========================================
 
-    protected StageData m_CurStageData = null;
-    public StageData MyCurStageData
-    {
-        get
-        {
-            if (m_CurStageData == null)
-            {
-                CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
-                m_CurStageData = lTempGameSceneData.LevelToStageData(CSaveManager.m_status.m_LevelIndex);
-            }
-
-            return m_CurStageData;
-        }
-    }
-
     protected CDataObjChar m_CurShowDataObjChar = null;
     protected int m_CurShowDataObjCharIndex = 0;
     public CDataObjChar CurShowDataObjChar
@@ -40,13 +24,10 @@ public class CSelectObjectChar : MonoBehaviour
         {
             if (m_CurShowDataObjChar == null)
             {
-                if (MyCurStageData == null)
+                if (0 > m_CurShowDataObjCharIndex || m_CurShowDataObjCharIndex >= StaticGlobalDel.StageData.AllDataObjChar.Count)
                     return null;
 
-                if (0 > m_CurShowDataObjCharIndex || m_CurShowDataObjCharIndex >= MyCurStageData.AllDataObjChar.Count)
-                    return null;
-
-                m_CurShowDataObjChar = MyCurStageData.AllDataObjChar[m_CurShowDataObjCharIndex];
+                m_CurShowDataObjChar = StaticGlobalDel.StageData.AllDataObjChar[m_CurShowDataObjCharIndex];
             }
 
             return m_CurShowDataObjChar;
@@ -65,7 +46,7 @@ public class CSelectObjectChar : MonoBehaviour
 
     public void Start()
     {
-        CDataRole lTempMyRole = CGGameSceneData.SharedInstance.m_AllDataRole[CSaveManager.m_status.m_MyRoleIndex];
+        CDataRole lTempMyRole = StaticGlobalDel.BuffMyRoleData;
 
         m_SelectRoleData.SetSprite(lTempMyRole.MugShot);
         m_SelectRoleData.SetText(CSaveManager.m_status.m_MyName);
@@ -75,13 +56,16 @@ public class CSelectObjectChar : MonoBehaviour
         });
 
         m_OK.AddListener(() => {
+            CSaveManager.m_status.m_ObjTargetIndex = m_CurShowDataObjCharIndex;
+            //BuffTargetObj
+
             Debug.Log("OKOK");
         });
     }
 
     public void UpdateCurDataObjChar(int lNextIndex)
     {
-        if (lNextIndex >= MyCurStageData.AllDataObjChar.Count)
+        if (lNextIndex >= StaticGlobalDel.StageData.AllDataObjChar.Count)
             lNextIndex = 0;
 
         m_CurShowDataObjCharIndex = lNextIndex;

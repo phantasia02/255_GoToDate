@@ -32,6 +32,7 @@ public class CSaveManager : CSingletonMonoBehaviour<CSaveManager>
         public int                                  m_SceneIndex                    = 0;
         public int                                  m_Coin                          = 0;
         public int                                  m_MyRoleIndex                   = 0;
+        public int                                  m_ObjTargetIndex                = -1;
         public string                               m_MyName                        = "nINA";
         public bool m_InitGameOK = false;
         // =================== UniRx =====================

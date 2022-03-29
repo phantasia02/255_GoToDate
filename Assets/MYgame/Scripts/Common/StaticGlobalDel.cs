@@ -136,6 +136,65 @@ public static class StaticGlobalDel
     // ============= Speed ====================
     public const float g_DefMovableTotleSpeed = 15.0f;
 
+    private static CDataRole g_BuffMyRoleData = null;
+    public static CDataRole BuffMyRoleData
+    {
+        get
+        {
+            if (g_BuffMyRoleData == null)
+                g_BuffMyRoleData =  CGGameSceneData.SharedInstance.m_AllDataRole[CSaveManager.m_status.m_MyRoleIndex];
+
+            return g_BuffMyRoleData;
+        }
+    }
+
+    private static CDataObjChar g_BuffTargetObj = null;
+    public static CDataObjChar BuffTargetObj
+    {
+        set => g_BuffTargetObj = value;
+        get => g_BuffTargetObj;
+    }
+
+
+    private static StageData g_StageData = null;
+    public static StageData StageData
+    {
+        set => g_StageData = value;
+        get
+        {
+            if (g_StageData == null)
+            {
+                CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
+                g_StageData = lTempGameSceneData.LevelToStageData(CSaveManager.m_status.m_LevelIndex);
+            }
+
+            return g_StageData;
+        }
+    }
+
+    private static CDataObjChar g_TargetDataObj = null;
+    public static CDataObjChar TargetDataObj
+    {
+        set => g_TargetDataObj = value;
+        get
+        {
+            if (g_TargetDataObj == null)
+            {
+                // ========= Debug ===========
+                if (CSaveManager.m_status.m_ObjTargetIndex < 0)
+                    CSaveManager.m_status.m_ObjTargetIndex = 0;
+                // ========= Debug ===========
+
+                if (0 > CSaveManager.m_status.m_ObjTargetIndex || CSaveManager.m_status.m_ObjTargetIndex >= StageData.AllDataObjChar.Count)
+                    return null;
+
+                g_TargetDataObj = StageData.AllDataObjChar[CSaveManager.m_status.m_ObjTargetIndex];
+            }
+
+            return g_TargetDataObj;
+        }
+    }
+
 
     public static Transform NewFxAddParentShow(this Transform ParentTransform, CGGameSceneData.EAllFXType Fxtype, Vector3 offsetPos)
     {
