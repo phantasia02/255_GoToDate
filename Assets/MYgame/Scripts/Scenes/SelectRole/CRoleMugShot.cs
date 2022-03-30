@@ -41,6 +41,7 @@ public class CRoleMugShot : MonoBehaviour
         {
             m_MyRectTransform.localScale = Vector3.one;
             Tween lTempTween = m_MyRectTransform.DOShakeScale(1.0f, 0.2f, 1, 2, false).SetEase( Ease.Linear);
+            //Tween lTempTween = m_MyRectTransform.DOPunchScale(Vector3.one * 0.2f, 1.0f, 1, 1.0f).SetEase(Ease.Linear); ;
             lTempTween.SetLoops(-1);
             lTempTween.SetId(m_MyRectTransform);
         }
