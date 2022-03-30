@@ -148,14 +148,6 @@ public static class StaticGlobalDel
         }
     }
 
-    private static CDataObjChar g_BuffTargetObj = null;
-    public static CDataObjChar BuffTargetObj
-    {
-        set => g_BuffTargetObj = value;
-        get => g_BuffTargetObj;
-    }
-
-
     private static StageData g_StageData = null;
     public static StageData StageData
     {

@@ -16,3 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8497c997b96bfc448a9a9f432a234c4a, type: 2}
   - {fileID: 11400000, guid: 9a0bbbfddc3ec5a45b63a58f10d4f42a, type: 2}
   - {fileID: 11400000, guid: 3b36b90dc1324f24fa42b98cf610a543, type: 2}
+  _StartMessageList: {fileID: 11400000, guid: f65ec11a600322442a4c09b4d52dbc8f, type: 2}

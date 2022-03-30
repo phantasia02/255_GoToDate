@@ -1,15 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MYgame.Scripts.Scenes.GameScenes.Data;
 
 public class CChatroomCentrMessage : MonoBehaviour
 {
-    public enum EMessageType
-    {
-        eMyMessage      = 0,
-        eOtherMessage   = 1,
-        eMax
-    }
+
 
 
     // ==================== SerializeField ===========================================
