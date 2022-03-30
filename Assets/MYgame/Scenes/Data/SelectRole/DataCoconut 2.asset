@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ad0ffeb5dd87e041b6cd4ca13122959, type: 3}
-  m_Name: DataBeauty
+  m_Name: DataCoconut 2
   m_EditorClassIdentifier: 
-  _FullBigPicture: {fileID: 21300000, guid: fa8fe8d8b40945a4798018c6961c1816, type: 3}
-  _MugShot: {fileID: 21300000, guid: 70e255c209a37374d9fe9c8958966794, type: 3}
+  _MugShot: {fileID: 21300000, guid: 41fbbd4f84038574589bd0666324db6a, type: 3}

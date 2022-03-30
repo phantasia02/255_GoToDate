@@ -47,8 +47,10 @@ MonoBehaviour:
   m_AllOtherObj: []
   m_UIObj: []
   m_AllDataRole:
-  - {fileID: 11400000, guid: dae6a523fde672b40a2aebb0ecf9b07e, type: 2}
+  - {fileID: 11400000, guid: 8827c5a6a6ba9c64d910a407888d42d1, type: 2}
+  - {fileID: 11400000, guid: a0a3ef88a3c2eee41a345dec74347a83, type: 2}
   - {fileID: 11400000, guid: 891009dd29eecbc4fae22b0af81565cf, type: 2}
+  - {fileID: 11400000, guid: dae6a523fde672b40a2aebb0ecf9b07e, type: 2}
   m_AllStageData:
   - {fileID: 11400000, guid: 75de9dbf9c85f1c40bdfe6076f33e840, type: 2}
   m_PrefabEventSystem: {fileID: 1792202897340608778, guid: e66c430660b85334ca70bd0fec000779, type: 3}

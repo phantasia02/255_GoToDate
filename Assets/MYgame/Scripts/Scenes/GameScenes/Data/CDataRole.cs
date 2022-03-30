@@ -9,10 +9,8 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         fileName = "Role Data")]
     public class CDataRole : ScriptableObject
     {
-        [SerializeField] protected Sprite _FullBigPicture   = null;
         [SerializeField] protected Sprite _MugShot          = null;
         
-        public Sprite FullBigPicture => _FullBigPicture;
         public Sprite MugShot => _MugShot;
     }
 }

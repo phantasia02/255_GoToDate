@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ad0ffeb5dd87e041b6cd4ca13122959, type: 3}
-  m_Name: DataCoconut
+  m_Name: DataCoconut 4
   m_EditorClassIdentifier: 
-  _FullBigPicture: {fileID: 21300000, guid: 80a949428412e45408ea59ba4f25f187, type: 3}
   _MugShot: {fileID: 21300000, guid: 8c486e0c7ecb3ac43aba991ced3c079a, type: 3}
