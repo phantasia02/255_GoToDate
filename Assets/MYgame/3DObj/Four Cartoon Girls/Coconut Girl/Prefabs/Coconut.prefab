@@ -46,6 +46,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -130,6 +131,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -327,6 +329,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -629,6 +632,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1207,7 +1211,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400060}
-  - component: {fileID: 11100000}
   m_Layer: 0
   m_Name: Coconut
   m_TagString: Untagged
@@ -1242,42 +1245,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100060}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 1a0c725a5b0bc1744abcf9cd09e4e283, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: 1a0c725a5b0bc1744abcf9cd09e4e283, type: 3}
-  - {fileID: 7400000, guid: 5618740de1348bb4bba3b53dbe68744b, type: 3}
-  - {fileID: 7400000, guid: 52c76464286c88c438e19b4ad61e88ec, type: 3}
-  - {fileID: 7400000, guid: 8a42a709233ac5c4f87507b260943753, type: 3}
-  - {fileID: 7400000, guid: c320cf7bb5fa5b748b17cf4ca33c608e, type: 3}
-  - {fileID: 7400000, guid: 3f365eb95bfa8ab46b8ac905133515fb, type: 3}
-  - {fileID: 7400000, guid: 7147305133e086044929277733363735, type: 3}
-  - {fileID: 7400000, guid: 4b572b066a3975a4093e90e56aa39c48, type: 3}
-  - {fileID: 7400000, guid: e154fb73a256a1a48a5155bb2214924e, type: 3}
-  - {fileID: 7400000, guid: 16362001ba5584a44aea48ed91f6857f, type: 3}
-  - {fileID: 7400000, guid: f5bef2604fdb47740b33cdaedbc2929c, type: 3}
-  - {fileID: 7400000, guid: fc6e63adeccdc1d468e04e3d05801014, type: 3}
-  - {fileID: 7400000, guid: 9a8c0a9adad22524894c4433c03105ce, type: 3}
-  - {fileID: 7400006, guid: 8a42a709233ac5c4f87507b260943753, type: 3}
-  - {fileID: 7400008, guid: 8a42a709233ac5c4f87507b260943753, type: 3}
-  - {fileID: 7400002, guid: 8a42a709233ac5c4f87507b260943753, type: 3}
-  - {fileID: 7400004, guid: 8a42a709233ac5c4f87507b260943753, type: 3}
-  - {fileID: 7400000, guid: 907c97a5eecab844f891d7757bed5b97, type: 3}
-  - {fileID: 7400000, guid: 4c2df0830c719a1468f1d0adf6cff87e, type: 3}
-  - {fileID: 7400000, guid: f0568289a5d7a0d4c8b4e10e17feb176, type: 3}
-  - {fileID: 7400000, guid: 406e845b501695e4b8057be0d72487ef, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
 --- !u!1 &100062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,8 +1645,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100086}
-  m_LocalRotation: {x: 0.0000000018626451, y: 0.0000000039581214, z: -7.372576e-18,
-    w: 1}
+  m_LocalRotation: {x: 0.0000000018626451, y: 0.0000000039581214, z: -7.372576e-18, w: 1}
   m_LocalPosition: {x: -0.5790138, y: 0.0000038146973, z: 0.00000011920929}
   m_LocalScale: {x: 0.99999994, y: 1, z: 1}
   m_Children: []
@@ -2105,6 +2071,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2224,6 +2191,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2401,6 +2369,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2577,6 +2546,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2660,6 +2630,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3162,6 +3133,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3429,6 +3401,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3512,6 +3485,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3760,8 +3734,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100194}
-  m_LocalRotation: {x: -0.0000000018626449, y: -0.0000000027939677, z: 0.0000000037252903,
-    w: 1}
+  m_LocalRotation: {x: -0.0000000018626449, y: -0.0000000027939677, z: 0.0000000037252903, w: 1}
   m_LocalPosition: {x: -0.50359726, y: 0.0000038146973, z: 0}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_Children: []
