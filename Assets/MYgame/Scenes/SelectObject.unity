@@ -478,6 +478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Button: {fileID: 0}
   m_Image: {fileID: 0}
+  m_Text: {fileID: 0}
 --- !u!1 &419475545
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,8 +699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 425}
-  m_SizeDelta: {x: 800, y: 150}
+  m_AnchoredPosition: {x: 0, y: 484}
+  m_SizeDelta: {x: 800, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &726923890
 MonoBehaviour:
@@ -1431,8 +1432,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 428}
-  m_SizeDelta: {x: 970.6155, y: 100}
+  m_AnchoredPosition: {x: 0, y: 479}
+  m_SizeDelta: {x: 800, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777788170
 MonoBehaviour:
@@ -1666,3 +1667,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Button: {fileID: 0}
   m_Image: {fileID: 0}
+  m_Text: {fileID: 0}
