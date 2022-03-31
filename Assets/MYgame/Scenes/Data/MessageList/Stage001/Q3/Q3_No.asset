@@ -18,12 +18,8 @@ MonoBehaviour:
   - m_Type: 1
     m_Messagestr: "No, it makes me sleepy\u2026"
   m_SelectMessageList:
-  - {fileID: 0}
-  - {fileID: 0}
-  m_LoveMessageList:
-  - {fileID: 0}
-  - {fileID: 0}
-  m_NextQuestion: {fileID: 0}
+  - {fileID: 11400000, guid: bb15f4f55f2fbbf4fb5ab14c405b5b1a, type: 2}
+  - {fileID: 11400000, guid: cfff7ad257a8d664bb8f3cd7369b8a62, type: 2}
+  m_NextQuestion: {fileID: 11400000, guid: bb15f4f55f2fbbf4fb5ab14c405b5b1a, type: 2}
   m_LoveAdd: -1
-  m_End: 0
-  m_LoveJudgment: 1
+  m_Breakpoint: 2

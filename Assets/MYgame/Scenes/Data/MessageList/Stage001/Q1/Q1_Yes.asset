@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 0}
   m_NextQuestion: {fileID: 11400000, guid: 2b7dd8532844744458e21388233192f2, type: 2}
   m_LoveAdd: 1
-  m_End: 0
+  m_Breakpoint: 0

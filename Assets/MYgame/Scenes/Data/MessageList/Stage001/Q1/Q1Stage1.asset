@@ -18,5 +18,6 @@ MonoBehaviour:
   m_SelectMessageList:
   - {fileID: 11400000, guid: 8978f58875084da45bda3aba200320f8, type: 2}
   - {fileID: 11400000, guid: 3fb7bc11dc37a6d4b94b0527c0d89ff9, type: 2}
-  m_End: 0
+  m_NextQuestion: {fileID: 0}
   m_LoveAdd: 0
+  m_Breakpoint: 1

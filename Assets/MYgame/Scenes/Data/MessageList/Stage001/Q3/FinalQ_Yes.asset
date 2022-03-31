@@ -18,10 +18,6 @@ MonoBehaviour:
   m_SelectMessageList:
   - {fileID: 0}
   - {fileID: 0}
-  m_LoveMessageList:
-  - {fileID: 0}
-  - {fileID: 0}
   m_NextQuestion: {fileID: 0}
-  m_LoveAdd: 0
-  m_End: 1
-  m_LoveJudgment: 0
+  m_LoveAdd: 1
+  m_Breakpoint: 4

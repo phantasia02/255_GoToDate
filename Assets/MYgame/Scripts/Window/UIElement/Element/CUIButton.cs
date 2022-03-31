@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class CUIButton : CUIElementBase
 {
@@ -11,8 +12,9 @@ public class CUIButton : CUIElementBase
 
     // ==================== SerializeField ===========================================
 
-    [SerializeField] protected Button m_Button = null;
-    [SerializeField] protected Image m_Image = null;
+    [SerializeField] protected Button           m_Button = null;
+    [SerializeField] protected Image            m_Image = null;
+    [SerializeField] protected TextMeshProUGUI  m_Text = null;
     public Button Button => m_Button;
 
     // ==================== SerializeField ===========================================
@@ -25,6 +27,9 @@ public class CUIButton : CUIElementBase
 
         if (m_Image == null)
             m_Image = m_Button.GetComponent<Image>();
+
+        if (m_Text == null)
+            m_Text = this.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void SetSpriteState(SpriteState parSpriteState)
@@ -35,6 +40,11 @@ public class CUIButton : CUIElementBase
             m_Image = m_Button.GetComponent<Image>();
 
         m_Image.sprite = m_Button.spriteState.highlightedSprite;
+    }
+
+    public void SetText(string text)
+    {
+        m_Text.text = text;
     }
 
     public void AddListener(UnityAction call) { m_Button.onClick.AddListener(call); }

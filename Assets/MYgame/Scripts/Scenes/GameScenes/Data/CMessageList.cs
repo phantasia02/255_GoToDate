@@ -23,7 +23,8 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         eNextMessageList    = 0,
         eQuestion           = 1,
         eLoveJudgment       = 2,
-        eEnd                = 3,
+        eOver               = 3,
+        eWin                = 4,
         eMax
     }
 
