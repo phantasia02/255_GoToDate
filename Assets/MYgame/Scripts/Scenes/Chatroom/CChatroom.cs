@@ -81,8 +81,10 @@ public class CChatroom : CScenesCtrlBase
         }
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eOver)
         {
-            // m_ResultUI.AddLoseCallBackFunc();
-            m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+            m_ResultUI.OverButton.onClick.AddListener(()=> {
+                m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+            });
+            
             m_ResultUI.ShowFailedUI();
         }
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eWin)

@@ -36,11 +36,9 @@ public class CSelectObjectChar : CScenesCtrlBase
 
     private void Awake()
     {
-
         StaticGlobalDel.CreateSingletonObj(PrefabGameSceneData);
-
-
-
+        StaticGlobalDel.TargetDataObj = null;
+        
         UpdateCurDataObjChar(0);
     }
 
@@ -56,10 +54,11 @@ public class CSelectObjectChar : CScenesCtrlBase
         });
 
         m_OK.AddListener(() => {
+            
             CSaveManager.m_status.m_ObjTargetIndex = m_CurShowDataObjCharIndex;
             //BuffTargetObj
 
-            Debug.Log("OKOK");
+            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameChatroom);
         });
 
         m_ShoObjChar.SetText(StaticGlobalDel.StageData.PD);

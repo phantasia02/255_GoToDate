@@ -7,7 +7,7 @@ using MYgame.Scripts.Scenes.GameScenes.Data;
 
 public class CSelectRole : CScenesCtrlBase
 {
-    CChangeScenes m_ChangeScenes = new CChangeScenes();
+   // CChangeScenes m_ChangeScenes = new CChangeScenes();
     
     // ==================== SerializeField ===========================================
 
@@ -46,7 +46,7 @@ public class CSelectRole : CScenesCtrlBase
             CSaveManager.m_status.m_MyRoleIndex = m_CurIndexDataRole;
             CSaveManager.m_status.m_MyName      = m_InputName.text;
 
-            m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
         });
     }
 

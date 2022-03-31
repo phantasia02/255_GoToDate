@@ -87,6 +87,8 @@ public static class StaticGlobalDel
         eMax,
     };
 
+    static public CChangeScenes g_ChangeScenes = new CChangeScenes();
+
     static public string g_CurSceneName             = "Boot_";
 
     public const string g_GameScenesName            = "GameScenes";
@@ -140,6 +142,7 @@ public static class StaticGlobalDel
     private static CDataRole g_BuffMyRoleData = null;
     public static CDataRole BuffMyRoleData
     {
+        set => g_BuffMyRoleData = value;
         get
         {
             if (g_BuffMyRoleData == null)
