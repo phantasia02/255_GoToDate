@@ -16,5 +16,15 @@ public abstract class CUIElementBase : MonoBehaviour
 
     abstract public EUIElementType UIElementType();
 
+    protected RectTransform m_MyRectTransform = null;
+    public RectTransform MyRectTransform
+    {
+        get
+        {
+            if (m_MyRectTransform == null)
+                m_MyRectTransform = this.GetComponent<RectTransform>();
 
+            return m_MyRectTransform;
+        }
+    }
 }
