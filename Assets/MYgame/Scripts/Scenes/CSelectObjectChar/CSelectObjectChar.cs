@@ -47,7 +47,6 @@ public class CSelectObjectChar : CScenesCtrlBase
         CDataRole lTempMyRole = StaticGlobalDel.BuffMyRoleData;
 
         m_SelectRoleData.SetSprite(lTempMyRole.MugShot);
-        m_SelectRoleData.SetText(CSaveManager.m_status.m_MyName);
 
         m_No_X.AddListener(() => {
             UpdateCurDataObjChar(m_CurShowDataObjCharIndex + 1);
