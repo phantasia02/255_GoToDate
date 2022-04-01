@@ -53,8 +53,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: -0.0000000018626449, y: -0.0000000027939677, z: 0.0000000037252903,
-    w: 1}
+  m_LocalRotation: {x: -0.0000000018626449, y: -0.0000000027939677, z: 0.0000000037252903, w: 1}
   m_LocalPosition: {x: -0.5035982, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_Children: []
@@ -260,6 +259,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -527,6 +527,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -611,6 +612,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -730,6 +732,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -850,6 +853,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -964,6 +968,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1090,6 +1095,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1231,7 +1237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400054}
-  - component: {fileID: 11100000}
+  - component: {fileID: 9173183130617919683}
   m_Layer: 0
   m_Name: Beauty
   m_TagString: Untagged
@@ -1266,42 +1272,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &11100000
-Animation:
+--- !u!95 &9173183130617919683
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100054}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 7c4e4c09c4c031b44864a55f843557b4, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: 7c4e4c09c4c031b44864a55f843557b4, type: 3}
-  - {fileID: 7400000, guid: 6eddc7c79dc3bf44abe74f1c0032f114, type: 3}
-  - {fileID: 7400000, guid: a5f7e9e2ef2e14547a63080f2b853d9e, type: 3}
-  - {fileID: 7400000, guid: 5eb8620c7e6652c46a6fbc77a9bbf432, type: 3}
-  - {fileID: 7400000, guid: ee6ec2add575a7d448e4f28ad209b509, type: 3}
-  - {fileID: 7400000, guid: 7eed426f713f3494b960fe4cdb66a56e, type: 3}
-  - {fileID: 7400000, guid: 1faf4b4b7fd767f46a23822d5e0dd815, type: 3}
-  - {fileID: 7400000, guid: 4883da2660a801d49a491d880f168295, type: 3}
-  - {fileID: 7400000, guid: 90cf0e3a2b559f748b615c1067e86492, type: 3}
-  - {fileID: 7400000, guid: 6cb20756a46e74f4ea9e805e52985393, type: 3}
-  - {fileID: 7400000, guid: 2427af497781c6f43ad168e2ed0de089, type: 3}
-  - {fileID: 7400000, guid: 0560695bc9abfff40834447eb2ab3c30, type: 3}
-  - {fileID: 7400000, guid: f9d3e4100f37b0b448d874c89d7d5fde, type: 3}
-  - {fileID: 7400006, guid: 5eb8620c7e6652c46a6fbc77a9bbf432, type: 3}
-  - {fileID: 7400008, guid: 5eb8620c7e6652c46a6fbc77a9bbf432, type: 3}
-  - {fileID: 7400002, guid: 5eb8620c7e6652c46a6fbc77a9bbf432, type: 3}
-  - {fileID: 7400004, guid: 5eb8620c7e6652c46a6fbc77a9bbf432, type: 3}
-  - {fileID: 7400000, guid: 0db3fef3c7e5c3944b22c696f049b260, type: 3}
-  - {fileID: 7400000, guid: d98f96d569cbc184585f19c10d3c7aaa, type: 3}
-  - {fileID: 7400000, guid: 1268ec7e55944644da815850c1ff1358, type: 3}
-  - {fileID: 7400000, guid: b5f4eee575fb49a44bedf14174fbb403, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &100056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,6 +1767,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1862,6 +1852,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2733,8 +2724,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100140}
-  m_LocalRotation: {x: 0.0000000018626451, y: 0.0000000039581214, z: -7.372576e-18,
-    w: 1}
+  m_LocalRotation: {x: 0.0000000018626451, y: 0.0000000039581214, z: -7.372576e-18, w: 1}
   m_LocalPosition: {x: -0.5790129, y: 0.0000038146973, z: -0.00000011920929}
   m_LocalScale: {x: 0.99999994, y: 1, z: 1}
   m_Children: []
@@ -3034,6 +3024,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3340,6 +3331,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3474,6 +3466,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
