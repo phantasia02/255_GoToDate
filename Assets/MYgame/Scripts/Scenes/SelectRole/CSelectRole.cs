@@ -40,11 +40,8 @@ public class CSelectRole : CScenesCtrlBase
 
         //m_Next.AddListener(()=> { UpdateCurShowImage(m_CurIndexDataRole + 1); });
         m_Change.AddListener(()=> {
-            if (m_InputName.text.Length == 0)
-                return;
 
             CSaveManager.m_status.m_MyRoleIndex = m_CurIndexDataRole;
-            CSaveManager.m_status.m_MyName      = m_InputName.text;
 
             StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
         });
@@ -65,6 +62,6 @@ public class CSelectRole : CScenesCtrlBase
 
         m_AllMugShot[m_CurIndexDataRole].PlayFoucsAnima(true);
 
-        m_Change.gameObject.SetActive(m_InputName.text.Length != 0);
+        m_Change.gameObject.SetActive(true);
     }
 }
