@@ -24,9 +24,9 @@ public class CChatroom : CScenesCtrlBase
 
     CChangeScenes m_ChangeScenes = new CChangeScenes();
 
-    private void Awake()
+    protected override void Awake()
     {
-        StaticGlobalDel.CreateSingletonObj(PrefabGameSceneData);
+        base.Awake();
 
         m_MyChatroomCentrMessage = this.GetComponentInChildren<CChatroomCentrMessage>();
         m_LoveGroup = this.GetComponentInChildren<CChatroomLoveGroup>();

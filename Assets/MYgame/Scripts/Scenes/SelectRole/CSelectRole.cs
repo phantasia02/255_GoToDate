@@ -21,9 +21,9 @@ public class CSelectRole : CScenesCtrlBase
     protected int           m_CurIndexDataRole = -1;
     protected CDataRole[]   m_TempAllDataRole = null;
 
-    private void Awake()
+    protected override void Awake()
     {
-        StaticGlobalDel.CreateSingletonObj(PrefabGameSceneData);
+        base.Awake();
 
         m_TempAllDataRole = CGGameSceneData.SharedInstance.m_AllDataRole;
 

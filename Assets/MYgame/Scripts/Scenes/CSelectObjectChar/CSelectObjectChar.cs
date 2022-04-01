@@ -34,9 +34,9 @@ public class CSelectObjectChar : CScenesCtrlBase
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        StaticGlobalDel.CreateSingletonObj(PrefabGameSceneData);
+        base.Awake();
         StaticGlobalDel.TargetDataObj = null;
         
         UpdateCurDataObjChar(0);
