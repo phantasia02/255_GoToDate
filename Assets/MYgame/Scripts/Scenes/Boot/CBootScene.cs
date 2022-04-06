@@ -23,7 +23,7 @@ public class CBootScene : MonoBehaviour
 #endif
         CSaveManager.Save();
 
-        m_ChangeScenes.LoadGameScenes();
+      //  m_ChangeScenes.LoadGameScenes();
     }
 
 }
