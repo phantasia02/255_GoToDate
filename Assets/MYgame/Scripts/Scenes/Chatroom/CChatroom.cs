@@ -57,12 +57,16 @@ public class CChatroom : CScenesCtrlBase
         for (int i = 0; i < parMessageList.ListMessage.Count; i++)
         {
             lTempCOneMessage = parMessageList.ListMessage[i];
+
+            if (m_MyChatroomCentrMessage.AllShowMessage.Count != 0)
+                yield return new WaitForSeconds((float)lTempCOneMessage.m_Messagestr.Length * 0.03f);
+
             if (lTempCOneMessage.m_Type == EMessageType.eMyMessage)
                 m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_MyRoleData.MugShot, lTempCOneMessage.m_Messagestr);
             else if (lTempCOneMessage.m_Type == EMessageType.eOtherMessage)
                 m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_TargetObj.MugShot, lTempCOneMessage.m_Messagestr);
 
-            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForSeconds(1.0f);
         }
 
         if (parMessageList.LoveAdd != 0)

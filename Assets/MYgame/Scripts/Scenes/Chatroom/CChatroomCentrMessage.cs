@@ -16,6 +16,8 @@ public class CChatroomCentrMessage : MonoBehaviour
     protected VerticalLayoutGroup m_MyVerticalLayoutGroup = null;
     protected List<CUITextImage> m_AllShowMessage = new List<CUITextImage>();
 
+    public List<CUITextImage> AllShowMessage => m_AllShowMessage;
+
     private void Awake()
     {
         m_MyVerticalLayoutGroup = this.GetComponent<VerticalLayoutGroup>();
