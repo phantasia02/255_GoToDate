@@ -58,14 +58,22 @@ public class CChatroom : CScenesCtrlBase
         {
             lTempCOneMessage = parMessageList.ListMessage[i];
 
-            if (m_MyChatroomCentrMessage.AllShowMessage.Count != 0)
-                yield return new WaitForSeconds((float)lTempCOneMessage.m_Messagestr.Length * 0.03f);
+
 
             if (lTempCOneMessage.m_Type == EMessageType.eMyMessage)
-                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_MyRoleData.MugShot, lTempCOneMessage.m_Messagestr);
-            else if (lTempCOneMessage.m_Type == EMessageType.eOtherMessage)
-                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_TargetObj.MugShot, lTempCOneMessage.m_Messagestr);
+            {
+                if (i > 0)
+                    yield return new WaitForSeconds(1.0f);
 
+                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_MyRoleData.MugShot, lTempCOneMessage.m_Messagestr);
+            }
+            else if (lTempCOneMessage.m_Type == EMessageType.eOtherMessage)
+            {
+                if (m_MyChatroomCentrMessage.AllShowMessage.Count != 0)
+                    yield return new WaitForSeconds(1.0f);
+
+                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_TargetObj.MugShot, lTempCOneMessage.m_Messagestr);
+            }
             //yield return new WaitForSeconds(1.0f);
         }
 
@@ -75,32 +83,40 @@ public class CChatroom : CScenesCtrlBase
         if (parMessageList.Breakpoint == EDialogueBreakpoint.eNextMessageList)
             StartCoroutine(SetMessageList(m_CurMessageList.NextQuestion));
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eQuestion)
+        {
+            yield return new WaitForSeconds(0.5f);
             ShowSeletUI();
+        }
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eLoveJudgment)
         {
-            if (m_LoveGroup.LoveCount >= 3)
+            if (m_LoveGroup.LoveCount > 3)
                 StartCoroutine(SetMessageList(m_CurMessageList.SelectMessageList[(int)ESelectType.eYes]));
             else
                 StartCoroutine(SetMessageList(m_CurMessageList.SelectMessageList[(int)ESelectType.eNo]));
         }
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eOver)
         {
-            m_ResultUI.OverButton.onClick.AddListener(()=> {
+            m_ResultUI.OverButton.onClick.AddListener(() =>
+            {
                 m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
             });
-            
+
             m_ResultUI.ShowFailedUI();
         }
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eWin)
         {
-            Debug.Log("OKOK");
+            m_ResultUI.NextButton.onClick.AddListener(() =>
+            {
+                m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectRole);
+            });
+
+            m_ResultUI.ShowSuccessUI();
         }
     }
 
     public void ShowSeletUI()
     {
         m_BottomObj.SetActive(true);
-
         m_Yes.SetText(m_CurMessageList.SelectMessageList[(int)ESelectType.eYes].ListMessage[0].m_Messagestr);
         m_No.SetText(m_CurMessageList.SelectMessageList[(int)ESelectType.eNo].ListMessage[0].m_Messagestr);
     }

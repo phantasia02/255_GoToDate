@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.53333336, g: 0.73333335, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1045,6 +1045,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1103366788}
     m_Modifications:
+    - target: {fileID: 3806784945646141489, guid: 49bb2c5b2c274af44b876498bb8427a9, type: 3}
+      propertyPath: m_text
+      value: Go To Date!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392863494955585599, guid: 49bb2c5b2c274af44b876498bb8427a9, type: 3}
+      propertyPath: m_text
+      value: Go To Date!
+      objectReference: {fileID: 0}
     - target: {fileID: 6392863495268091849, guid: 49bb2c5b2c274af44b876498bb8427a9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1429,7 +1437,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1598,7 +1606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.53333336, g: 0.73333335, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2061,7 +2069,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
