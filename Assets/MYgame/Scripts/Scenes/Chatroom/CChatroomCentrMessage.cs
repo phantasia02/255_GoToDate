@@ -43,8 +43,8 @@ public class CChatroomCentrMessage : MonoBehaviour
         m_AllShowMessage.Add(lTempUITextImage);
 
 
-        const float CHight = 1450.0f;
-        const float CMessageObjHight = 240.0f;
+        const float CHight = 1200.0f;
+        const float CMessageObjHight = 285.0f;
         const float CMinusHeight = CHight - CMessageObjHight;
 
         float lTempTotalHight = (m_MyRectTransform.sizeDelta.y + CMessageObjHight + Mathf.Abs(m_MyVerticalLayoutGroup.padding.top));

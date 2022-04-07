@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f07f4d4fb30c64fbe16d27a5cbfde6, type: 3}
   m_Name: FinalQ_No
   m_EditorClassIdentifier: 
-  m_ListMessage:
-  - m_Type: 0
-    m_Messagestr: "I can\u2019t. "
+  m_ListMessage: []
   m_SelectMessageList:
   - {fileID: 0}
   - {fileID: 0}

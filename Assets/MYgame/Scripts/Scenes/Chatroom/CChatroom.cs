@@ -45,8 +45,9 @@ public class CChatroom : CScenesCtrlBase
         m_Yes.AddListener(onClickYes);
         m_No.AddListener(onClickNo);
 
-        m_ObjectStickers.sprite = m_TargetObj.MugShot;
+        m_ObjectStickers.sprite = m_TargetObj.ChatMugShot;
         // m_MyChatroomCentrMessage.AddMessage( CChatroomCentrMessage.EMessageType.eOtherMessage,  );
+        m_LoveGroup.AddLove(3);
 
         DOTween.Sequence()
         .AppendInterval(1.0f)
@@ -72,14 +73,14 @@ public class CChatroom : CScenesCtrlBase
                 if (i > 0)
                     yield return new WaitForSeconds(1.0f);
 
-                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_MyRoleData.MugShot, lTempCOneMessage.m_Messagestr);
+                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_MyRoleData.ChatMugShot, lTempCOneMessage.m_Messagestr);
             }
             else if (lTempCOneMessage.m_Type == EMessageType.eOtherMessage)
             {
                 if (m_MyChatroomCentrMessage.AllShowMessage.Count != 0)
                     yield return new WaitForSeconds(1.0f);
 
-                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_TargetObj.MugShot, lTempCOneMessage.m_Messagestr);
+                m_MyChatroomCentrMessage.AddMessage(lTempCOneMessage.m_Type, m_TargetObj.ChatMugShot, lTempCOneMessage.m_Messagestr);
             }
             //yield return new WaitForSeconds(1.0f);
         }

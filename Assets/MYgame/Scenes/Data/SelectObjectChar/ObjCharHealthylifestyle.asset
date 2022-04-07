@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ObjCharHealthylifestyle
   m_EditorClassIdentifier: 
   _MugShot: {fileID: 21300000, guid: 41fbbd4f84038574589bd0666324db6a, type: 3}
-  _PersonalityDescription: healthylifestyle
+  _ChatMugShot: {fileID: 21300000, guid: 41fbbd4f84038574589bd0666324db6a, type: 3}

@@ -10,7 +10,9 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
     public class CDataRole : ScriptableObject
     {
         [SerializeField] protected Sprite _MugShot          = null;
+        [SerializeField] protected Sprite _ChatMugShot      = null;
         
         public Sprite MugShot => _MugShot;
+        public Sprite ChatMugShot => _ChatMugShot;
     }
 }

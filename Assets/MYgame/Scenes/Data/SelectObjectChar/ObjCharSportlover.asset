@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ObjCharSportlover
   m_EditorClassIdentifier: 
   _MugShot: {fileID: 21300000, guid: b2a2fcfd64638344a941a478c6d2005b, type: 3}
-  _PersonalityDescription: sportlover
+  _ChatMugShot: {fileID: 21300000, guid: b2a2fcfd64638344a941a478c6d2005b, type: 3}

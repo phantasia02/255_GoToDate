@@ -18,8 +18,8 @@ MonoBehaviour:
   - m_Type: 1
     m_Messagestr: "That\u2019s convenient. "
   m_SelectMessageList:
-  - {fileID: 11400000, guid: 9ced605985e349a489f24b3fb2f20c40, type: 2}
-  - {fileID: 11400000, guid: 22125c7311bda3d428feb160e5d785aa, type: 2}
-  m_NextQuestion: {fileID: 0}
+  - {fileID: 11400000, guid: bb15f4f55f2fbbf4fb5ab14c405b5b1a, type: 2}
+  - {fileID: 11400000, guid: cfff7ad257a8d664bb8f3cd7369b8a62, type: 2}
+  m_NextQuestion: {fileID: 11400000, guid: bb15f4f55f2fbbf4fb5ab14c405b5b1a, type: 2}
   m_LoveAdd: -1
-  m_Breakpoint: 1
+  m_Breakpoint: 2

@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f07f4d4fb30c64fbe16d27a5cbfde6, type: 3}
   m_Name: Over
   m_EditorClassIdentifier: 
-  m_ListMessage:
-  - m_Type: 1
-    m_Messagestr: "It\u2019s late. Good Night!"
+  m_ListMessage: []
   m_SelectMessageList:
   - {fileID: 0}
   - {fileID: 0}

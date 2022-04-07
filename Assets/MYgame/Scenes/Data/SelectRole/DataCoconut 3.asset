@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DataCoconut 3
   m_EditorClassIdentifier: 
   _MugShot: {fileID: 21300000, guid: f27ea41bb03bc2143a46c3c3c82d0a0f, type: 3}
+  _ChatMugShot: {fileID: 21300000, guid: 2474592903e054a43962aa58ce132064, type: 3}

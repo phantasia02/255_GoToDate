@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ObjCharAnimallover
   m_EditorClassIdentifier: 
   _MugShot: {fileID: 21300000, guid: 72bf60857cc70af40bcf1a3828f12649, type: 3}
+  _ChatMugShot: {fileID: 21300000, guid: 3fc77e81b01ffb04d843e618469c5289, type: 3}
