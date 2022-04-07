@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllFX: []
-  m_AllOtherObj: []
+  m_AllOtherObj:
+  - {fileID: 2563268552295146956, guid: 194e869247bc17f41be0788f916288c4, type: 3}
   m_UIObj: []
   m_AllDataRole:
   - {fileID: 11400000, guid: 8827c5a6a6ba9c64d910a407888d42d1, type: 2}

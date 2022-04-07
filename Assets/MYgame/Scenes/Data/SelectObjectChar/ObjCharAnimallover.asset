@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aa9e29366bc3e4fbd5e8179b41feeb, type: 3}
   m_Name: ObjCharAnimallover
   m_EditorClassIdentifier: 
-  _MugShot: {fileID: 21300000, guid: 70e255c209a37374d9fe9c8958966794, type: 3}
-  _PersonalityDescription: animallover
+  _MugShot: {fileID: 21300000, guid: 72bf60857cc70af40bcf1a3828f12649, type: 3}
