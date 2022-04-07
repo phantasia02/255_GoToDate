@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MYgame.Scripts.Scenes.GameScenes.Data;
+using DG.Tweening;
 
 public class CSelectObjectChar : CScenesCtrlBase
 {
@@ -13,6 +14,7 @@ public class CSelectObjectChar : CScenesCtrlBase
 
     [SerializeField] protected CUIButton m_OK = null;
     [SerializeField] protected CUIButton m_No_X = null;
+    [SerializeField] protected GameObject m_StartUI = null;
 
     // ==================== SerializeField ===========================================
 
@@ -38,7 +40,14 @@ public class CSelectObjectChar : CScenesCtrlBase
     {
         base.Awake();
         StaticGlobalDel.TargetDataObj = null;
-        
+
+
+        DOTween.Sequence()
+        .AppendInterval(1.0f)
+        .AppendCallback(() => {
+            m_StartUI.SetActive(false);
+        });
+
         UpdateCurDataObjChar(0);
     }
 

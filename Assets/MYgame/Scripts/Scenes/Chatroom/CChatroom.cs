@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MYgame.Scripts.Scenes.GameScenes.Data;
+using DG.Tweening;
 
 public class CChatroom : CScenesCtrlBase
 {
@@ -13,7 +14,7 @@ public class CChatroom : CScenesCtrlBase
     [SerializeField] protected CUIButton m_No   = null;
     [SerializeField] protected GameObject m_BottomObj = null;
     [SerializeField] protected Image m_ObjectStickers = null;
-
+    [SerializeField] protected GameObject m_StartUI = null;
     // ==================== SerializeField ===========================================
 
     protected CDataObjChar          m_TargetObj         = null;
@@ -40,13 +41,19 @@ public class CChatroom : CScenesCtrlBase
         m_TargetObj = StaticGlobalDel.TargetDataObj;
 
         StageData lTempStageData = StaticGlobalDel.StageData;
-        StartCoroutine(SetMessageList(lTempStageData.StartMessageList));
 
         m_Yes.AddListener(onClickYes);
         m_No.AddListener(onClickNo);
 
         m_ObjectStickers.sprite = m_TargetObj.MugShot;
         // m_MyChatroomCentrMessage.AddMessage( CChatroomCentrMessage.EMessageType.eOtherMessage,  );
+
+        DOTween.Sequence()
+        .AppendInterval(1.0f)
+        .AppendCallback(() => {
+            m_StartUI.SetActive(false);
+            StartCoroutine(SetMessageList(lTempStageData.StartMessageList));
+        });
     }
 
     public IEnumerator SetMessageList(CMessageList parMessageList)
