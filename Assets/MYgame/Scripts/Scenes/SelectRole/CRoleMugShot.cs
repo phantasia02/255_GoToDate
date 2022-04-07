@@ -14,6 +14,7 @@ public class CRoleMugShot : MonoBehaviour
 
      protected CSelectRole m_MySelectRole = null;
      protected RectTransform m_MyRectTransform = null;
+     public RectTransform MyRectTransform => m_MyRectTransform;
 
     private void Awake()
     {

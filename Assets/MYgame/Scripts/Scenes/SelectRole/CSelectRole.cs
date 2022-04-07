@@ -11,11 +11,11 @@ public class CSelectRole : CScenesCtrlBase
     
     // ==================== SerializeField ===========================================
 
-    // [SerializeField] protected Image            m_MugShot               = null;
-    [SerializeField] protected CRoleMugShot[]      m_AllMugShot            = null;
-    [SerializeField] protected TMP_InputField   m_InputName             = null;
+    [SerializeField] protected Image                m_focus                 = null;
+    [SerializeField] protected CRoleMugShot[]       m_AllMugShot            = null;
+    [SerializeField] protected TMP_InputField       m_InputName             = null;
     //[SerializeField] protected CUIButton        m_Next                  = null;
-    [SerializeField] protected CUIButton        m_Change                = null;
+    [SerializeField] protected CUIButton            m_Change                = null;
 
     // ==================== SerializeField ===========================================
     protected int           m_CurIndexDataRole = -1;
@@ -57,11 +57,14 @@ public class CSelectRole : CScenesCtrlBase
 
         m_CurIndexDataRole = lSetIndex;
 
-        foreach (var item in m_AllMugShot)
-            item.PlayFoucsAnima(false);
+        //foreach (var item in m_AllMugShot)
+        //    item.PlayFoucsAnima(false);
 
-        m_AllMugShot[m_CurIndexDataRole].PlayFoucsAnima(true);
+        //m_AllMugShot[m_CurIndexDataRole].PlayFoucsAnima(true);
 
         m_Change.gameObject.SetActive(true);
+
+        m_focus.gameObject.SetActive(true);
+        m_focus.rectTransform.anchoredPosition = m_AllMugShot[m_CurIndexDataRole].MyRectTransform.anchoredPosition;
     }
 }
