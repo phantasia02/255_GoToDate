@@ -29,7 +29,7 @@ public class CSelectRole : CScenesCtrlBase
 
       //  UpdateCurShowImage(0);
 
-        m_Change.gameObject.SetActive(false);
+        m_Change.EnableButton(false);
 
         m_InputName.onEndEdit.AddListener((string EndEdit) => {
 
@@ -62,7 +62,7 @@ public class CSelectRole : CScenesCtrlBase
 
         //m_AllMugShot[m_CurIndexDataRole].PlayFoucsAnima(true);
 
-        m_Change.gameObject.SetActive(true);
+        m_Change.EnableButton(true);
 
         m_focus.gameObject.SetActive(true);
         m_focus.rectTransform.anchoredPosition = m_AllMugShot[m_CurIndexDataRole].MyRectTransform.anchoredPosition;

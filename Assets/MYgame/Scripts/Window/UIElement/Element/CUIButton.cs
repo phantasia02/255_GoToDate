@@ -47,6 +47,11 @@ public class CUIButton : CUIElementBase
         m_Text.text = text;
     }
 
+    public void EnableButton(bool Enable)
+    {
+        m_Button.interactable = Enable;
+    }
+
     public void AddListener(UnityAction call) { m_Button.onClick.AddListener(call); }
     public void RemoveListener(UnityAction call) { m_Button.onClick.RemoveListener(call); }
     public void RemoveAllListener() { m_Button.onClick.RemoveAllListeners(); }
