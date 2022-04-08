@@ -8,10 +8,23 @@ using UnityEngine.Events;
 
 public class CDatingMeet : CScenesCtrlBase
 {
+    [System.Serializable]
+    public class DataTimeLine
+    {
+        public GameObject       m_TimelineObj = null;
+        public PlayableAsset    m_TimelinePlayableAsset = null;
+        public PlayableDirector m_TimelinePlayableDirector = null;
+    }
+
+
     // ==================== SerializeField ===========================================
 
-    [SerializeField] protected GameObject m_WinTimeline = null;
-    [SerializeField] protected GameObject m_OverTimeline = null;
+    [SerializeField] protected DataTimeLine m_LoveDataTimeLine = null;
+    [SerializeField] protected DataTimeLine m_OverDataTimeLine = null;
+ 
+    [SerializeField] protected GameObject m_PlayerObj = null;
+
+
     [SerializeField] protected bool m_Love = true;
 
     // ==================== SerializeField ===========================================
@@ -25,11 +38,27 @@ public class CDatingMeet : CScenesCtrlBase
 
         m_ResultUI = this.GetComponentInChildren<ResultUI>();
 
-        if (m_Love)
-            m_WinTimeline.SetActive(true);
-        else
-            m_OverTimeline.SetActive(true);
+        DataTimeLine lTempDataTimeLine = null;
+
+        lTempDataTimeLine = m_Love ? m_LoveDataTimeLine : m_OverDataTimeLine;
+        lTempDataTimeLine.m_TimelineObj.SetActive(true);
+        ChangeActor(lTempDataTimeLine);
     }
+
+    public void ChangeActor(DataTimeLine updateActor)
+    {
+        var outputs = updateActor.m_TimelinePlayableAsset.outputs;
+        foreach (var itm in outputs)
+        {
+            if (itm.streamName == "PlayerTrack")
+            {
+                Debug.Log("aaaaaaaaaaaaaaaaaa");
+                updateActor.m_TimelinePlayableDirector.SetGenericBinding(itm.sourceObject, m_PlayerObj);
+            }
+
+        }
+    }
+
 
     public void EndFunc()
     {
