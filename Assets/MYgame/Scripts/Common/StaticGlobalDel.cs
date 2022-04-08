@@ -139,6 +139,9 @@ public static class StaticGlobalDel
     // ============= Speed ====================
     public const float g_DefMovableTotleSpeed = 15.0f;
 
+    private static GameObject g_PlayerObj = null;
+    public static GameObject PlayerObj => g_PlayerObj;
+
     private static CDataRole g_BuffMyRoleData = null;
     public static CDataRole BuffMyRoleData
     {

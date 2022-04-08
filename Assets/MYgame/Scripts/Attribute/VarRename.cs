@@ -85,6 +85,15 @@ public class VarRename : PropertyAttribute
             g_StrList[i] = ((CReadyGameWindow.EChildGroup)i).ToString();
     }
 
+    public VarRename(CActorSetSkin.ESlinType Max)
+    {
+        Init();
+        int lTempCount = (int)Max;
+        g_StrList = new string[lTempCount];
+        for (int i = 0; i < lTempCount; i++)
+            g_StrList[i] = ((CActorSetSkin.ESlinType)i).ToString();
+    }
+
     private void Init()
     {
         g_VarName = "";

@@ -13,6 +13,9 @@ public class CCompleteBuilding
 }
 
 
+
+
+
 [System.Serializable]
 public class TweenColorEaseCurve
 {
@@ -90,6 +93,7 @@ public class CGGameSceneData : CSingletonMonoBehaviour<CGGameSceneData>
     [SerializeField]  public    GameObject                 m_PrefabEventSystem         = null;
     [SerializeField]  public    GameObject                 m_SaveManager               = null;
     [SerializeField]  public    GameObject                 m_AudioManager              = null;
+    [SerializeField]  public    GameObject                 m_PlayerModle               = null;
     
     private void Awake()
     {

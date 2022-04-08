@@ -15,7 +15,7 @@ public class CSelectRole : CScenesCtrlBase
     [SerializeField] protected CRoleMugShot[]       m_AllMugShot            = null;
     [SerializeField] protected TMP_InputField       m_InputName             = null;
     //[SerializeField] protected CUIButton        m_Next                  = null;
-    [SerializeField] protected CUIButton            m_Change                = null;
+    [SerializeField] protected CUIButton            m_Confirn                = null;
 
     // ==================== SerializeField ===========================================
     protected int           m_CurIndexDataRole = -1;
@@ -27,19 +27,19 @@ public class CSelectRole : CScenesCtrlBase
 
         m_TempAllDataRole = CGGameSceneData.SharedInstance.m_AllDataRole;
 
-      //  UpdateCurShowImage(0);
+        //  UpdateCurShowImage(0);
 
-        m_Change.EnableButton(false);
+        m_Confirn.EnableButton(false);
 
         m_InputName.onEndEdit.AddListener((string EndEdit) => {
 
             bool lTemp = m_InputName.text.Length != 0 && m_CurIndexDataRole != -1;
 
-            m_Change.gameObject.SetActive(lTemp);
+            m_Confirn.gameObject.SetActive(lTemp);
         });
 
         //m_Next.AddListener(()=> { UpdateCurShowImage(m_CurIndexDataRole + 1); });
-        m_Change.AddListener(()=> {
+        m_Confirn.AddListener(()=> {
 
             CSaveManager.m_status.m_MyRoleIndex = m_CurIndexDataRole;
 
@@ -62,7 +62,7 @@ public class CSelectRole : CScenesCtrlBase
 
         //m_AllMugShot[m_CurIndexDataRole].PlayFoucsAnima(true);
 
-        m_Change.EnableButton(true);
+        m_Confirn.EnableButton(true);
 
         m_focus.gameObject.SetActive(true);
         m_focus.rectTransform.anchoredPosition = m_AllMugShot[m_CurIndexDataRole].MyRectTransform.anchoredPosition;

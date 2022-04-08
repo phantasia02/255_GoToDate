@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MugShot: {fileID: 21300000, guid: e93bfcb33188b984ca966ec9207c9f3b, type: 3}
   _ChatMugShot: {fileID: 21300000, guid: b6ed1aa37504b3542a2c4ee26c67b90d, type: 3}
+  _DataSkinMat:
+    m_AllSkinMat:
+    - {fileID: 2100000, guid: ad123d0ddc6b636448d7704260b17fbf, type: 2}
+    - {fileID: 2100000, guid: 5fd666dd1e0fdc849a6bdcda54fa0730, type: 2}
+    - {fileID: 2100000, guid: 5fd666dd1e0fdc849a6bdcda54fa0730, type: 2}
+    - {fileID: 2100000, guid: eab3f1cd825fcfe4794ff8f185c868df, type: 2}
+    - {fileID: 2100000, guid: eab3f1cd825fcfe4794ff8f185c868df, type: 2}

@@ -57,3 +57,4 @@ MonoBehaviour:
   m_PrefabEventSystem: {fileID: 1792202897340608778, guid: e66c430660b85334ca70bd0fec000779, type: 3}
   m_SaveManager: {fileID: 1842041293832986182, guid: c70ec8a811342bd48815a2f11379fcda, type: 3}
   m_AudioManager: {fileID: 3287756920535608787, guid: dbe633d67f6e0bc45a49546c39ba8ad5, type: 3}
+  m_PlayerModle: {fileID: 3489556105111282694, guid: 0b78ed38983f61445bde19d377f337e6, type: 3}

@@ -11,8 +11,10 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
     {
         [SerializeField] protected Sprite _MugShot          = null;
         [SerializeField] protected Sprite _ChatMugShot      = null;
+        [SerializeField] protected CActorSetSkin.DataMatSet _DataSkinMat = null;
         
         public Sprite MugShot => _MugShot;
         public Sprite ChatMugShot => _ChatMugShot;
+        public CActorSetSkin.DataMatSet DataSkinMat => _DataSkinMat;
     }
 }
