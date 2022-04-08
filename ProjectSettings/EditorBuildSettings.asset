@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MYgame/Scenes/Chatroom.unity
     guid: b2d0ada20e37fb54a9fd93c29ba088f5
+  - enabled: 1
+    path: Assets/MYgame/Scenes/DatingDress.unity
+    guid: 3f07e8e95ac6e32478f533143a4ec36c
   m_configObjects: {}

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MYgame.Scripts.Scenes.GameScenes.Data;
-
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 
 [System.Serializable]
@@ -13,7 +14,23 @@ public class CCompleteBuilding
 }
 
 
+[System.Serializable]
+public class DataTimeLine
+{
+    public GameObject m_TimelineObj = null;
+    public PlayableAsset m_TimelinePlayableAsset = null;
+    public PlayableDirector m_TimelinePlayableDirector = null;
 
+    public void ChangeTrackObj(string TrackStrName, GameObject ChangObj)
+    {
+        var outputs = m_TimelinePlayableAsset.outputs;
+        foreach (var itm in outputs)
+        {
+            if (itm.streamName == TrackStrName)
+                m_TimelinePlayableDirector.SetGenericBinding(itm.sourceObject, ChangObj);
+        }
+    }
+}
 
 
 [System.Serializable]

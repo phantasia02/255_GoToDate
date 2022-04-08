@@ -6,7 +6,9 @@ public class CDatingDress : CScenesCtrlBase
 {
     [SerializeField] protected CUIButton[] m_AllChangeDatingDress = null;
     [SerializeField] protected CUIButton m_ApplyBtn            = null;
-
+    [SerializeField] protected GameObject m_PlayerPosRef            = null;
+    [SerializeField] protected DataTimeLine m_DataTimeLine = null;
+    [SerializeField] protected CActorSetSkin m_PlayerSkin = null;
 
     protected override void Awake()
     {
@@ -19,7 +21,7 @@ public class CDatingDress : CScenesCtrlBase
         for (int i = 0; i < m_AllChangeDatingDress.Length; i++)
             InitButtonCall(i);
 
-
+        m_PlayerSkin.SetUpdateSkinMat(StaticGlobalDel.BuffMyRoleData.DataSkinMat);
         m_ApplyBtn.AddListener(() => { Debug.Log("OKOK"); });
     }
 

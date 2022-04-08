@@ -115,7 +115,7 @@ public class CChatroom : CScenesCtrlBase
         {
             m_ResultUI.NextButton.onClick.AddListener(() =>
             {
-                m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectRole);
+                m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingDress);
             });
 
             m_ResultUI.ShowSuccessUI();

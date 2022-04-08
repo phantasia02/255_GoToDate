@@ -8,13 +8,7 @@ using UnityEngine.Events;
 
 public class CDatingMeet : CScenesCtrlBase
 {
-    [System.Serializable]
-    public class DataTimeLine
-    {
-        public GameObject       m_TimelineObj = null;
-        public PlayableAsset    m_TimelinePlayableAsset = null;
-        public PlayableDirector m_TimelinePlayableDirector = null;
-    }
+
 
 
     // ==================== SerializeField ===========================================
@@ -42,20 +36,20 @@ public class CDatingMeet : CScenesCtrlBase
 
         lTempDataTimeLine = m_Love ? m_LoveDataTimeLine : m_OverDataTimeLine;
         lTempDataTimeLine.m_TimelineObj.SetActive(true);
-        ChangeActor(lTempDataTimeLine);
+       // ChangeActor(lTempDataTimeLine);
+        lTempDataTimeLine.ChangeTrackObj("PlayerTrack", m_PlayerObj);
     }
 
-    public void ChangeActor(DataTimeLine updateActor)
-    {
-        var outputs = updateActor.m_TimelinePlayableAsset.outputs;
-        foreach (var itm in outputs)
-        {
-            if (itm.streamName == "PlayerTrack")
-                updateActor.m_TimelinePlayableDirector.SetGenericBinding(itm.sourceObject, m_PlayerObj);
+    //public void ChangeActor(DataTimeLine updateActor)
+    //{
+    //    var outputs = updateActor.m_TimelinePlayableAsset.outputs;
+    //    foreach (var itm in outputs)
+    //    {
+    //        if (itm.streamName == "PlayerTrack")
+    //            updateActor.m_TimelinePlayableDirector.SetGenericBinding(itm.sourceObject, m_PlayerObj);
 
-        }
-    }
-
+    //    }
+    //}
 
     public void EndFunc()
     {
