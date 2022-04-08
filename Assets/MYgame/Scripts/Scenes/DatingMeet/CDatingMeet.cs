@@ -51,10 +51,7 @@ public class CDatingMeet : CScenesCtrlBase
         foreach (var itm in outputs)
         {
             if (itm.streamName == "PlayerTrack")
-            {
-                Debug.Log("aaaaaaaaaaaaaaaaaa");
                 updateActor.m_TimelinePlayableDirector.SetGenericBinding(itm.sourceObject, m_PlayerObj);
-            }
 
         }
     }
