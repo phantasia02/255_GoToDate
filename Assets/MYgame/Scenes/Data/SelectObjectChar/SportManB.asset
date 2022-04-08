@@ -15,3 +15,4 @@ MonoBehaviour:
   _MugShot: {fileID: 21300000, guid: 72bf60857cc70af40bcf1a3828f12649, type: 3}
   _ChatMugShot: {fileID: 21300000, guid: 3fc77e81b01ffb04d843e618469c5289, type: 3}
   _PersonalityDescription: '#sportlover #healthylifestyle #animallover '
+  _Model: {fileID: 3363992544420120847, guid: 3eea9d26ab277774f8e45cd0c30c1014, type: 3}
