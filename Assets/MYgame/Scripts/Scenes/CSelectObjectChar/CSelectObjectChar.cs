@@ -69,7 +69,7 @@ public class CSelectObjectChar : CScenesCtrlBase
             StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameChatroom);
         });
 
-        m_ShoObjChar.SetText(StaticGlobalDel.StageData.PD);
+        
     }
 
     public void UpdateCurDataObjChar(int lNextIndex)
@@ -81,6 +81,6 @@ public class CSelectObjectChar : CScenesCtrlBase
         m_CurShowDataObjChar = null;
 
         m_ShoObjChar.SetSprite(CurShowDataObjChar.MugShot);
-
+        m_ShoObjChar.SetText(CurShowDataObjChar.PD);
     }
 }

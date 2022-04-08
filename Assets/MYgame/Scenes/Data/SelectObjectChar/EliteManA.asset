@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5aa9e29366bc3e4fbd5e8179b41feeb, type: 3}
-  m_Name: ObjCharAnimallover
+  m_Name: EliteManA
   m_EditorClassIdentifier: 
-  _MugShot: {fileID: 21300000, guid: 72bf60857cc70af40bcf1a3828f12649, type: 3}
-  _ChatMugShot: {fileID: 21300000, guid: 3fc77e81b01ffb04d843e618469c5289, type: 3}
+  _MugShot: {fileID: 21300000, guid: 2cffb486a63c4d64c8ee52896cf52660, type: 3}
+  _ChatMugShot: {fileID: 21300000, guid: 92ee71c374fa9dc4a9d36e46580a4049, type: 3}
+  _PersonalityDescription: '#CEO         #classy #winelover'
