@@ -23,7 +23,7 @@ public class CChatroom : CScenesCtrlBase
     protected CChatroomLoveGroup    m_LoveGroup         = null;
     protected ResultUI              m_ResultUI          = null;
 
-    CChangeScenes m_ChangeScenes = new CChangeScenes();
+   
 
     protected override void Awake()
     {
@@ -106,7 +106,7 @@ public class CChatroom : CScenesCtrlBase
         {
             m_ResultUI.OverButton.onClick.AddListener(() =>
             {
-                m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+                StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
             });
 
             m_ResultUI.ShowFailedUI();
@@ -115,7 +115,7 @@ public class CChatroom : CScenesCtrlBase
         {
             m_ResultUI.NextButton.onClick.AddListener(() =>
             {
-                m_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingDress);
+                StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingDress);
             });
 
             m_ResultUI.ShowSuccessUI();

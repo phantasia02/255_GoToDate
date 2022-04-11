@@ -60,6 +60,9 @@ public class CDatingDress : CScenesCtrlBase
         m_PlayerSkin.SetUpdateSkinMat(StaticGlobalDel.BuffMyRoleData.DataSkinMat);
         m_ApplyBtn.AddListener(() => {
 
+            //SelectSkin
+            StaticGlobalDel.SelectSkin = m_CurSelectSkinChange;
+            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingMeet);
             Debug.Log("OKOK");
 
         });

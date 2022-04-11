@@ -97,6 +97,7 @@ public static class StaticGlobalDel
     public const string g_ScenesNameSelectObject    = "SelectObject";
     public const string g_ScenesNameChatroom        = "Chatroom";
     public const string g_ScenesNameDatingDress     = "DatingDress";
+    public const string g_ScenesNameDatingMeet      = "DatingMeet";
 
     public const string g_testScenesName            = "test";
     public const string g_ShowCurLevelNamePrefix    = "STAGE ";
@@ -195,6 +196,12 @@ public static class StaticGlobalDel
         }
     }
 
+    private static CDataSkinChange g_SelectSkin = null;
+    public static CDataSkinChange SelectSkin
+    {
+        get => g_SelectSkin;
+        set => g_SelectSkin = value;
+    }
 
     public static Transform NewFxAddParentShow(this Transform ParentTransform, CGGameSceneData.EAllFXType Fxtype, Vector3 offsetPos)
     {

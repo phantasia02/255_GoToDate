@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MYgame/Scenes/DatingDress.unity
     guid: 3f07e8e95ac6e32478f533143a4ec36c
+  - enabled: 1
+    path: Assets/MYgame/Scenes/DatingMeet.unity
+    guid: 85d8fd6f44f3e3a40bbf65ae562d23d5
   m_configObjects: {}
