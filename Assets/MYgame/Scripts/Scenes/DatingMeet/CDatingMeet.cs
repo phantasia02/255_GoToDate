@@ -64,11 +64,19 @@ public class CDatingMeet : CScenesCtrlBase
 
     public void EndFunc()
     {
+        Debug.Log("EndFunc !!!!!!!!!!");
         if (m_Love)
-            Debug.Log("OKOK~~~");
+        {
+            m_ResultUI.NextButton.onClick.AddListener(() =>
+            {
+                StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+            });
+            m_ResultUI.ShowSuccessUI();
+        }
         else
         {
-            m_ResultUI.OverButton.onClick.AddListener(() => {
+            m_ResultUI.OverButton.onClick.AddListener(() =>
+            {
                 StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
             });
             m_ResultUI.ShowFailedUI();
