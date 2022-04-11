@@ -2388,6 +2388,7 @@ MonoBehaviour:
   - {fileID: 720484619}
   m_InputName: {fileID: 646848174}
   m_Confirn: {fileID: 1009583209}
+  m_StartUI: {fileID: 1499570301}
 --- !u!1001 &7979146261701578374
 PrefabInstance:
   m_ObjectHideFlags: 0

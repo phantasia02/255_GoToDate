@@ -52,6 +52,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0a3ef88a3c2eee41a345dec74347a83, type: 2}
   - {fileID: 11400000, guid: 891009dd29eecbc4fae22b0af81565cf, type: 2}
   - {fileID: 11400000, guid: dae6a523fde672b40a2aebb0ecf9b07e, type: 2}
+  m_AllSuitSkin:
+  - {fileID: 11400000, guid: 771dd137d5107324bbc3d26d5c5932ad, type: 2}
+  - {fileID: 11400000, guid: 9b897570f6e10cf43869017031750c74, type: 2}
+  - {fileID: 11400000, guid: e562d9b1f19f1b749bad7c80629d6c86, type: 2}
+  - {fileID: 11400000, guid: 46056a7bff1cc2d4bbbe8a945d8e9a98, type: 2}
   m_AllStageData:
   - {fileID: 11400000, guid: 75de9dbf9c85f1c40bdfe6076f33e840, type: 2}
   m_PrefabEventSystem: {fileID: 1792202897340608778, guid: e66c430660b85334ca70bd0fec000779, type: 3}

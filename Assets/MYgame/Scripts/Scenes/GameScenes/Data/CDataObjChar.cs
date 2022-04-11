@@ -15,11 +15,13 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         [SerializeField] protected Sprite _ChatMugShot = null;
         [SerializeField] protected string _PersonalityDescription = null;
         [SerializeField] protected GameObject _Model = null;
+        [SerializeField] protected CDataSkinChange _LoveSkin = null;
 
         public Sprite MugShot => _MugShot;
         public Sprite ChatMugShot => _ChatMugShot;
         public string PD => _PersonalityDescription;
         public GameObject Model => _Model;
+        public CDataSkinChange LoveSkin => _LoveSkin;
 
     }
 }

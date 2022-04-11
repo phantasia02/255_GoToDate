@@ -105,6 +105,7 @@ public class CGGameSceneData : CSingletonMonoBehaviour<CGGameSceneData>
     [SerializeField]  public    GameObject[]               m_AllOtherObj               = null;
     [SerializeField]  public    GameObject[]               m_UIObj                     = null;
     [SerializeField]  public    CDataRole[]                m_AllDataRole               = null;
+    [SerializeField]  public    List<CDataSkinChange>      m_AllSuitSkin               = null;
 
     [SerializeField]  public    StageData[]                m_AllStageData              = null;
     [SerializeField]  public    GameObject                 m_PrefabEventSystem         = null;

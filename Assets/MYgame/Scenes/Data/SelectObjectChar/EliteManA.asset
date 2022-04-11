@@ -16,3 +16,4 @@ MonoBehaviour:
   _ChatMugShot: {fileID: 21300000, guid: 92ee71c374fa9dc4a9d36e46580a4049, type: 3}
   _PersonalityDescription: '#CEO         #classy #winelover'
   _Model: {fileID: 6724266531212341621, guid: a2dcfe83bcdfeab44a5fa22f2af4ce80, type: 3}
+  _LoveSkin: {fileID: 11400000, guid: 771dd137d5107324bbc3d26d5c5932ad, type: 2}
