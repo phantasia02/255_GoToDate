@@ -47,24 +47,11 @@ public class CDatingMeet : CScenesCtrlBase
         DataTimeLine lTempDataTimeLine = null;
         lTempDataTimeLine = m_Love ? m_LoveDataTimeLine : m_OverDataTimeLine;
         lTempDataTimeLine.m_TimelineObj.SetActive(true);
-       // ChangeActor(lTempDataTimeLine);
         lTempDataTimeLine.ChangeTrackObj("Target_Obj", lTempManObj);
     }
 
-    //public void ChangeActor(DataTimeLine updateActor)
-    //{
-    //    var outputs = updateActor.m_TimelinePlayableAsset.outputs;
-    //    foreach (var itm in outputs)
-    //    {
-    //        if (itm.streamName == "PlayerTrack")
-    //            updateActor.m_TimelinePlayableDirector.SetGenericBinding(itm.sourceObject, m_PlayerObj);
-
-    //    }
-    //}
-
     public void EndFunc()
     {
-        Debug.Log("EndFunc !!!!!!!!!!");
         if (m_Love)
         {
             m_ResultUI.NextButton.onClick.AddListener(() =>
