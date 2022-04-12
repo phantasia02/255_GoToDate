@@ -66,9 +66,7 @@ public class CDatingDress : CScenesCtrlBase
 
             //SelectSkin
             StaticGlobalDel.SelectSkin = m_CurSelectSkinChange;
-            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectRole);
-            Debug.Log("OKOK");
-
+            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingMeet);
         });
     }
 
