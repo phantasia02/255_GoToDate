@@ -8,6 +8,7 @@ TagManager:
   - AudioManager
   - EventSystem
   - SaveManager
+  - HitSphere
   layers:
   - Default
   - TransparentFX
