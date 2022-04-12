@@ -42,6 +42,15 @@ public class CUIButton : CUIElementBase
         m_Image.sprite = m_Button.spriteState.highlightedSprite;
     }
 
+    public void SetSprite(Sprite parSprite)
+    {
+        if (m_Image == null)
+            m_Image = m_Button.GetComponent<Image>();
+
+        m_Image.sprite = parSprite;
+    }
+
+
     public void SetText(string text)
     {
         m_Text.text = text;

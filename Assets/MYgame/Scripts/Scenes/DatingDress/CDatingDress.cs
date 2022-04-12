@@ -21,33 +21,37 @@ public class CDatingDress : CScenesCtrlBase
         base.Awake();
 
         CGGameSceneData lTempCGGameSceneData = CGGameSceneData.SharedInstance;
-        List<CDataSkinChange> lTempAllSuitSkin = lTempCGGameSceneData.m_AllSuitSkin;
+        List<CDataSkinChange> lTempAllSuitSkin = StaticGlobalDel.TargetDataObj.AllSelectSkin;
 
-        //StaticGlobalDel.TargetDataObj;
 
         var rnd = new System.Random();
-        List <CDataSkinChange> lTempRandomList = lTempAllSuitSkin.OrderBy(item => rnd.Next()).ToList();
+        m_AllDataSkin = lTempAllSuitSkin.OrderBy(item => rnd.Next()).ToList();
 
 
-        m_AllDataSkin.Clear();
-        int LoveSkinID = StaticGlobalDel.TargetDataObj.LoveSkin.DataID;
-        int randoID = -10;
+        // int LoveSkinID = StaticGlobalDel.TargetDataObj.LoveSkin.DataID;
+        //int randoID = -10;
 
-        for (int i = 0; i < lTempRandomList.Count; i++)
+        //for (int i = 0; i < lTempRandomList.Count; i++)
+        //{
+        //    randoID = lTempRandomList[i].DataID;
+        //    if (LoveSkinID != randoID)
+        //    {
+        //        int ltempindex = m_AllDataSkin.Count;
+        //        m_AllDataSkin.Add(lTempRandomList[i]);
+        //        if (m_AllDataSkin.Count == 2)
+        //            break;
+        //    }
+        //}
+
+
+        //        m_AllDataSkin.Add(StaticGlobalDel.TargetDataObj.LoveSkin);
+        //   rnd = new System.Random();
+        //  List<CDataSkinChange> randomized2 = m_AllDataSkin.OrderBy(item => rnd.Next()).ToList();
+
+        for (int i = 0; i < m_AllChangeDatingDress.Length; i++)
         {
-            randoID = lTempRandomList[i].DataID;
-            if (LoveSkinID != randoID)
-            {
-                int ltempindex = m_AllDataSkin.Count;
-                m_AllDataSkin.Add(lTempRandomList[i]);
-                if (m_AllDataSkin.Count == 2)
-                    break;
-            }
+            m_AllChangeDatingDress[i].SetSprite(m_AllDataSkin[i].PreviewPhoto);
         }
-
-        m_AllDataSkin.Add(StaticGlobalDel.TargetDataObj.LoveSkin);
-        rnd = new System.Random();
-        List<CDataSkinChange> randomized2 = m_AllDataSkin.OrderBy(item => rnd.Next()).ToList();
     }
 
     // Start is called before the first frame update
@@ -62,7 +66,7 @@ public class CDatingDress : CScenesCtrlBase
 
             //SelectSkin
             StaticGlobalDel.SelectSkin = m_CurSelectSkinChange;
-            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingMeet);
+            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectRole);
             Debug.Log("OKOK");
 
         });

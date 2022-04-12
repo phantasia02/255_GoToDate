@@ -11,6 +11,8 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
     public class CDataSkinChange : ScriptableObject
     {
         [SerializeField]
+        protected Sprite _PreviewPhoto = null;
+        [SerializeField]
         protected string m_ShoesObj = null;
         [SerializeField]
         protected string m_PantsObj = null;
@@ -21,10 +23,12 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         [SerializeField]
         protected int m_DataID = -1;
 
+
         public string ShoesObj => m_ShoesObj;
         public string PantsObj => m_PantsObj;
         public string ClothesObj => m_ClothesObj;
         public bool bShowFoot => m_bShowFoot;
         public int DataID => m_DataID;
+        public Sprite PreviewPhoto => _PreviewPhoto;
     }
 }

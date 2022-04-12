@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a5e07cf5a7bd740a3c41df7a2ae89a, type: 3}
   m_Name: Swimsuit
   m_EditorClassIdentifier: 
+  _PreviewPhoto: {fileID: 21300000, guid: 9714d02a51c39e4418b4b48d64160cd6, type: 3}
   m_ShoesObj: Duck Feet
   m_PantsObj: 
   m_ClothesObj: suit
