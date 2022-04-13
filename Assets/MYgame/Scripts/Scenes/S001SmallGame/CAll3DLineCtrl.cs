@@ -11,13 +11,15 @@ public class CAll3DLineCtrl : MonoBehaviour
     {
         eNull           = 0,
         eMouseDrag      = 1,
+        eEnd            = 2,
         eMax
     }
 
     public class DataPointInfo
     {
-        public Vector3 m_2DPoint    = Vector3.zero;
-        public Vector3 m_2DDir      = Vector3.zero;
+        public Vector3 m_ScreenPoint    = Vector3.zero;
+        public Vector3 m_2DPoint        = Vector3.zero;
+        public Vector3 m_2DDir          = Vector3.zero;
     }
 
 
@@ -28,6 +30,11 @@ public class CAll3DLineCtrl : MonoBehaviour
     protected CCamGLDraw m_CamGLDraw = null;
     protected List<DataPointInfo> m_All2DDataPointInfo = new List<DataPointInfo>();
     protected DataPointInfo m_CurPointData = null;
+    protected DataPointInfo m_NextPointData = null;
+    //protected DataPointInfo m_PreviousPointData = null;
+    protected int m_CurIndex = 0;
+    protected float m_NextOKRange = 0.0f;
+
 
     private void Awake()
     {
@@ -41,6 +48,7 @@ public class CAll3DLineCtrl : MonoBehaviour
 
         //   }).AddTo(this);
         m_CamGLDraw = Camera.main.gameObject.GetComponent<CCamGLDraw>();
+        m_NextOKRange = Screen.dpi * 0.5f;
 
     }
 
@@ -49,7 +57,8 @@ public class CAll3DLineCtrl : MonoBehaviour
         CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
 
         GameObject lTempHitUI = null;
-        Vector3[] lTempArrPos = new Vector3[20]; ;
+        Vector3[] lTempArrPos = new Vector3[20];
+        Vector3 lTempHitPos = Vector3.zero;
         int lTempposCount  = m_3DLine.GetPositions(lTempArrPos);
 
         DataPointInfo lTempCurDataPoint   = null;
@@ -57,23 +66,25 @@ public class CAll3DLineCtrl : MonoBehaviour
 
         for (int i = 0; i < lTempposCount; i++)
         {
+            lTempHitPos = Camera.main.WorldToScreenPoint(lTempArrPos[i]);
+
             lTempHitUI = null;
             lTempHitUI = GameObject.Instantiate(lTempGameSceneData.m_AllOtherObj[(int)CGGameSceneData.EOtherObj.eHitUIObj], m_UIParent.transform);
-            lTempHitUI.transform.position = Camera.main.WorldToScreenPoint(lTempArrPos[i]);
+            lTempHitUI.transform.position = lTempHitPos;
 
             lTempCurDataPoint = new DataPointInfo();
-            lTempCurDataPoint.m_2DPoint = lTempArrPos[i];
           
-            lTempCurDataPoint.m_2DPoint.x = lTempHitUI.transform.position.x / (float)Screen.width;
-            lTempCurDataPoint.m_2DPoint.y = lTempHitUI.transform.position.y / (float)Screen.height;
-            lTempCurDataPoint.m_2DPoint.z = 0.0f;
-            Debug.Log($"lTempCurDataPoint.m_2DPoin = {lTempCurDataPoint.m_2DPoint}");
-            //lTempCurDataPoint.m_2DPoint = lTempArrPos[i];
+            lTempCurDataPoint.m_2DPoint.x = lTempHitPos.x;
+            lTempCurDataPoint.m_2DPoint.y = lTempHitPos.y;
+            lTempCurDataPoint.m_ScreenPoint.x = lTempHitPos.x / (float)Screen.width;
+            lTempCurDataPoint.m_ScreenPoint.y = lTempHitPos.y / (float)Screen.height;
+            lTempCurDataPoint.m_2DPoint.z = lTempHitPos.z = 0.0f;
+           // Debug.Log($"lTempCurDataPoint.m_2DPoin = {lTempCurDataPoint.m_2DPoint}");
             m_All2DDataPointInfo.Add(lTempCurDataPoint);
 
             if (i != 0)
             {
-                lTempPreviousDataPoint.m_2DDir = lTempCurDataPoint.m_2DPoint - lTempPreviousDataPoint.m_2DPoint;
+                lTempPreviousDataPoint.m_2DDir = lTempCurDataPoint.m_ScreenPoint - lTempPreviousDataPoint.m_ScreenPoint;
                 lTempPreviousDataPoint.m_2DDir.Normalize();
             }
 
@@ -101,38 +112,87 @@ public class CAll3DLineCtrl : MonoBehaviour
     {
         Debug.Log("OnMouseDown");
 
-        if (m_All2DDataPointInfo.Count == 0)
+        if (m_All2DDataPointInfo.Count <= m_CurIndex)
             return;
         
         m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eMouseDrag;
-        m_CurPointData = m_All2DDataPointInfo[0];
+        m_CurPointData = m_All2DDataPointInfo[m_CurIndex];
+        UpdateNextPointData();
 
-        m_CamGLDraw.startVertex = m_CurPointData.m_2DPoint;
-        m_CamGLDraw.OpenDrewGL = true;
+        if (m_CamGLDraw != null)
+        {
+            m_CamGLDraw.startVertex = m_CurPointData.m_ScreenPoint;
+            m_CamGLDraw.OpenDrewGL = true;
+        }
+    }
+
+    public void UpdateNextCurPointData()
+    {
+        if (m_NextPointData != null)
+        {
+            m_CurIndex = m_CurIndex + 1;
+            m_CurPointData = m_NextPointData;
+            UpdateNextPointData();
+        }
+    }
+
+    public void UpdateNextPointData()
+    {
+        if (m_CurIndex + 1 >= m_All2DDataPointInfo.Count)
+        {
+            m_NextPointData = null;
+            Debug.Log("Win!!!!!!!!!!");
+            m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eEnd;
+        }
+        else
+            m_NextPointData = m_All2DDataPointInfo[m_CurIndex + 1];
     }
 
     public void OnMouseDrag()
     {
-        Debug.Log("OnMouseDrag");
-
-
-
         if (OBE3DLineCtrlStateVal().Value == E3DLineCtrlState.eMouseDrag)
         {
             if (m_CurPointData == null)
                 return;
 
-            m_CamGLDraw.startVertex = m_CurPointData.m_2DPoint;
+            Vector3 lInputMousePoint = Input.mousePosition;
+            Vector3 lScreenInputMouseNormal = Input.mousePosition;
+            lScreenInputMouseNormal.x = lScreenInputMouseNormal.x / Screen.width;
+            lScreenInputMouseNormal.y = lScreenInputMouseNormal.y / Screen.height;
+            lScreenInputMouseNormal = lScreenInputMouseNormal - m_CurPointData.m_ScreenPoint;
+            lInputMousePoint.z = lScreenInputMouseNormal.z = 0.0f;
+
+            Vector3 lTempCross = Vector3.Cross(m_CurPointData.m_2DDir, lScreenInputMouseNormal);
+            float lTempDotVal = Vector3.Dot(m_CurPointData.m_2DDir, lScreenInputMouseNormal);
+           // Debug.Log($"lTempCross = {lTempCross}");
+
+            float lTempDis = Vector3.Distance(lInputMousePoint, m_NextPointData.m_2DPoint);
+
+            if (lTempDis < m_NextOKRange)
+                UpdateNextCurPointData();
+                
+
+
+
+            //if (lTempCross.z > 0.15f)
+            //{
+            //    Debug.Log("Error");
+            //}
+            //
+            // m_CurPointData.m_2DDir
+
+            if (m_CamGLDraw != null)
+                m_CamGLDraw.startVertex = m_CurPointData.m_ScreenPoint;
         }
     }
 
     public void OnMouseUp()
     {
         Debug.Log("OnMouseUp");
-        m_CamGLDraw.OpenDrewGL = false;
+
+        if (m_CamGLDraw != null)
+            m_CamGLDraw.OpenDrewGL = false;
     }
-
-
 
     // ===================== UniRx ======================
 

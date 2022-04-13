@@ -48,11 +48,11 @@ public class CCamGLDraw : MonoBehaviour
         GL.PushMatrix();
         m_2DLineMat.SetPass(0);
         GL.LoadOrtho();
-
+   
         GL.Begin(GL.LINES);
         GL.Color(Color.red);
         GL.Vertex(startVertex);
-        Debug.Log($"startVertex = {startVertex}");
+
         //GL.Vertex(Vector3.zero);
         GL.Vertex(new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, 0));
         //GL.Vertex(Vector3.one * 200.0f);
