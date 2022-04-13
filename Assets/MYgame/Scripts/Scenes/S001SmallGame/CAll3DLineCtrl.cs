@@ -73,7 +73,6 @@ public class CAll3DLineCtrl : MonoBehaviour
     {
         CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
 
-        GameObject lTempHitUI = null;
         Vector3[] lTempArrPos = new Vector3[20];
         Vector3 lTempHitPos = Vector3.zero;
         int lTempposCount  = m_3DLine.GetPositions(lTempArrPos);
@@ -86,9 +85,9 @@ public class CAll3DLineCtrl : MonoBehaviour
         {
             lTempHitPos = Camera.main.WorldToScreenPoint(lTempArrPos[i]);
 
-            lTempHitUI = null;
-            lTempHitUI = GameObject.Instantiate(lTempGameSceneData.m_AllOtherObj[(int)CGGameSceneData.EOtherObj.eHitUIObj], m_UIParent.transform);
-            lTempHitUI.transform.position = lTempHitPos;
+            //GameObject lTempHitUI = null;
+            //lTempHitUI = GameObject.Instantiate(lTempGameSceneData.m_AllOtherObj[(int)CGGameSceneData.EOtherObj.eHitUIObj], m_UIParent.transform);
+            //lTempHitUI.transform.position = lTempHitPos;
 
             lTempCurDataPoint = new DataPointInfo();
           
@@ -104,7 +103,6 @@ public class CAll3DLineCtrl : MonoBehaviour
             {
                 lTempPreviousDataPoint.m_2DDir = lTempCurDataPoint.m_ScreenPoint - lTempPreviousDataPoint.m_ScreenPoint;
                 lTempPreviousDataPoint.m_Dis = (lTempCurDataPoint.m_2DPoint - lTempPreviousDataPoint.m_2DPoint).magnitude;
-                Debug.Log($" i = [{i}] lTempPreviousDataPoint.m_Dis = { lTempPreviousDataPoint.m_Dis}");
                 m_TotalDis += lTempPreviousDataPoint.m_Dis;
                 lTempPreviousDataPoint.m_2DDir.Normalize();
             }
@@ -112,7 +110,6 @@ public class CAll3DLineCtrl : MonoBehaviour
             lTempPreviousDataPoint = lTempCurDataPoint;
         }
 
-        Debug.Log($"m_TotalDis = {m_TotalDis}");
         m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eReady;
     }
 
@@ -237,7 +234,7 @@ public class CAll3DLineCtrl : MonoBehaviour
     public void OnMouseUp()
     {
         Debug.Log("OnMouseUp");
-
+        m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eEnd;
         if (m_CamGLDraw != null)
             m_CamGLDraw.OpenDrewGL = false;
     }
