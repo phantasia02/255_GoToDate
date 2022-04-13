@@ -203,6 +203,8 @@ public static class StaticGlobalDel
         set => g_SelectSkin = value;
     }
 
+    public static void SetAnimatorFloat(Animator AnimatorObj, int iStringHash, float fnumber){AnimatorObj.SetFloat(iStringHash, fnumber);}
+
     public static Transform NewFxAddParentShow(this Transform ParentTransform, CGGameSceneData.EAllFXType Fxtype, Vector3 offsetPos)
     {
         CGGameSceneData lTempGGameSceneData = CGGameSceneData.SharedInstance;
