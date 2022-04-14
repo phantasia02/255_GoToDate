@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: -4252962459575529130
     second: Stage2_Pose
+  - first:
+      74: -7727016206116116440
+    second: Stage3_Pose
   externalObjects: {}
   materials:
     materialImportMode: 2
