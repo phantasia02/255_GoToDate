@@ -120,6 +120,7 @@ public class CS001SmallGame : CScenesChangChar
                      m_All3DLineCtrl[m_QuestionsIndex].m_CamObj.SetActive(true);
 
                      m_ManAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
+                     m_GirlAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
                      m_OBState.Value = EState.eManAct;
                  });
                  //.Append(lTempActorTween2)
