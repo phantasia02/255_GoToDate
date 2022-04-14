@@ -5,6 +5,7 @@ using UnityEngine;
 public class CScenesChangChar : CScenesCtrlBase
 {
     [SerializeField] protected Transform m_TargetManObj = null;
+    [SerializeField] protected Transform m_PlayerObj = null;
 
     protected GameObject m_ManObj = null;
     protected CActorSetSkin m_PlayerSkin = null;

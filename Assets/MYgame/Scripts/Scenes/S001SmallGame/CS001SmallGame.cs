@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class CS001SmallGame : CScenesChangChar
 {
-    public int ReadBlendHash = 0;
+    //public int ReadBlendHash = 0;
 
     public enum EState
     {
@@ -24,7 +24,9 @@ public class CS001SmallGame : CScenesChangChar
     {
         public CAll3DLineCtrl m_PlayLineCtrl = null;
         public GameObject m_CamObj = null;
-        public int m_PoseHashID = 0;
+        [HideInInspector] public int m_PoseHashID = 0;
+        public Transform m_ManRefTransform = null;
+        public Transform m_PlayerRefTransform = null;
     }
 
 
@@ -32,6 +34,8 @@ public class CS001SmallGame : CScenesChangChar
 
     [SerializeField] protected RuntimeAnimatorController m_SetManAnimator = null;
     [SerializeField] protected List<DataPlayPose> m_All3DLineCtrl = new List<DataPlayPose>();
+    [SerializeField] protected Transform m_ManNormalTransform = null;
+    [SerializeField] protected Transform m_PlayerNormalTransform = null;
 
     // ==================== SerializeField ===========================================
 
@@ -49,14 +53,19 @@ public class CS001SmallGame : CScenesChangChar
 
         m_ManAnimator.runtimeAnimatorController = m_SetManAnimator;
 
-        ReadBlendHash = Animator.StringToHash("Blend");
-
+        
         foreach (var item in m_All3DLineCtrl)
             item.m_PlayLineCtrl.MyCtrlAnimator = m_GirlAnimator;
 
         m_All3DLineCtrl[0].m_PoseHashID = Animator.StringToHash("Pose1");
         m_All3DLineCtrl[1].m_PoseHashID = Animator.StringToHash("Pose2");
         m_All3DLineCtrl[2].m_PoseHashID = Animator.StringToHash("Pose3");
+
+        SetTasRefPos(m_TargetManObj, m_ManNormalTransform, true);
+        SetTasRefPos(m_PlayerObj, m_PlayerNormalTransform, true);
+        //m_TargetManObj.position = m_ManNormalTransform.transform.position;
+        //m_TargetManObj.rotation = m_ManNormalTransform.transform.rotation;
+        //m_PlayerObj = null;
     }
 
     private void Start()
@@ -67,15 +76,16 @@ public class CS001SmallGame : CScenesChangChar
             m_OBState.Value = EState.eManAct;
         });
 
-       
-
         OBStateVal().Where(_ => _ == EState.eManAct)
         .Subscribe(X => {
+
+            SetTasRefPos(m_TargetManObj, m_All3DLineCtrl[m_QuestionsIndex].m_ManRefTransform);
+            SetTasRefPos(m_PlayerObj, m_All3DLineCtrl[m_QuestionsIndex].m_PlayerRefTransform);
 
             float lTempBlendVal = 0.0f;
             DOTween.To(() => lTempBlendVal, x => lTempBlendVal = x, 1.0f, 1.0f)
             .SetEase(Ease.Linear)
-            .OnUpdate(()=> { StaticGlobalDel.SetAnimatorFloat(m_ManAnimator, ReadBlendHash, lTempBlendVal); })
+            .OnUpdate(()=> { StaticGlobalDel.SetAnimatorFloat(m_ManAnimator, CGGameSceneData.g_AnimatorHashReadBlend, lTempBlendVal); })
             .OnComplete(() => {
                 m_OBState.Value = EState.ePlayGame;
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.gameObject.SetActive(true);
@@ -90,32 +100,44 @@ public class CS001SmallGame : CScenesChangChar
             .Subscribe(X =>{
 
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.gameObject.SetActive(false);
+                int lTempQuestionsIndex = m_QuestionsIndex + 1;
+                if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
+                {
+                    m_QuestionsIndex = lTempQuestionsIndex;
+                    m_OBState.Value = EState.eAllEnd;
+                    return;
+                }
 
-                float lTempBlendVal2 = m_GirlAnimator.GetFloat(ReadBlendHash);
+                
+
+                float lTempBlendVal2 = m_GirlAnimator.GetFloat(CGGameSceneData.g_AnimatorHashReadBlend);
                 float lTempBlendVal = 1.0f;
 
                 Tween lTempActorTween = DOTween.To(() => lTempBlendVal, x => lTempBlendVal = x, 0.0f, 1.0f)
                 .SetEase(Ease.Linear)
                 .OnUpdate(() => {
-                    StaticGlobalDel.SetAnimatorFloat(m_ManAnimator, ReadBlendHash, lTempBlendVal);
-                    StaticGlobalDel.SetAnimatorFloat(m_GirlAnimator, ReadBlendHash, lTempBlendVal * lTempBlendVal2);
+                    StaticGlobalDel.SetAnimatorFloat(m_ManAnimator, CGGameSceneData.g_AnimatorHashReadBlend, lTempBlendVal);
+                    StaticGlobalDel.SetAnimatorFloat(m_GirlAnimator, CGGameSceneData.g_AnimatorHashReadBlend, lTempBlendVal * lTempBlendVal2);
                 });
                 lTempActorTween.Pause();
 
 
                 Sequence lTempSequence = DOTween.Sequence()
                  .AppendInterval(0.5f)
+                 .AppendCallback(() => {
+                     SetTasRefPos(m_TargetManObj, m_ManNormalTransform);
+                     SetTasRefPos(m_PlayerObj, m_PlayerNormalTransform);
+                 })
                  .Append(lTempActorTween)
                  .AppendInterval(0.5f)
                  .AppendCallback(() =>
                  {
-                     int lTempQuestionsIndex = m_QuestionsIndex + 1;
-                     if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
-                     {
-                         m_QuestionsIndex = lTempQuestionsIndex;
-                         m_OBState.Value = EState.ePlayGameEnd;
-                         return;
-                     }
+                     //if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
+                     //{
+                     //    m_QuestionsIndex = lTempQuestionsIndex;
+                     //    m_OBState.Value = EState.ePlayGameEnd;
+                     //    return;
+                     //}
                      m_QuestionsIndex = lTempQuestionsIndex;
                      m_All3DLineCtrl[m_QuestionsIndex].m_CamObj.SetActive(true);
 
@@ -135,6 +157,21 @@ public class CS001SmallGame : CScenesChangChar
                  
             }).AddTo(this);
 
+    }
+
+
+    public void SetTasRefPos(Transform SetTas, Transform RefTas, bool update = false, float duration = 0.45f)
+    {
+        if (update)
+        {
+            SetTas.position = RefTas.position;
+            SetTas.rotation = RefTas.rotation;
+        }
+        else
+        {
+            SetTas.DOMove(RefTas.position, duration);
+            SetTas.DORotateQuaternion(RefTas.rotation, duration);
+        }
     }
 
 

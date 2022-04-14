@@ -8,14 +8,14 @@ using DG.Tweening;
 
 public class CAll3DLineCtrl : MonoBehaviour
 {
-    public int ReadBlendHash = 0;
 
     public enum E3DLineCtrlState
     {
         eNull           = 0,
         eReady          = 1,
         eMouseDrag      = 2,
-        eEnd            = 3,
+        eReadyEnd       = 3,
+        eEnd            = 4,
         eMax
     }
 
@@ -33,6 +33,7 @@ public class CAll3DLineCtrl : MonoBehaviour
     [SerializeField] protected Material         m_2DLineMat = null;
     [SerializeField] protected GameObject       m_UIParent  = null;
     [SerializeField] protected float            m_MaxBlendVal = 1.0f;
+    [SerializeField] protected float            m_CrossConfirm = 1.0f;
 
     // ==================== SerializeField ===========================================
 
@@ -63,21 +64,31 @@ public class CAll3DLineCtrl : MonoBehaviour
     
         float CMinPix = Screen.dpi * 0.05f;
 
-        lTempUpdateAs.Where(X => OBE3DLineCtrlStateVal().Value == E3DLineCtrlState.eMouseDrag)
+        lTempUpdateAs.Where(X => OBE3DLineCtrlStateVal().Value == E3DLineCtrlState.eMouseDrag || OBE3DLineCtrlStateVal().Value == E3DLineCtrlState.eReadyEnd)
            .Subscribe(framcount =>
            {
-               if (Mathf.Abs(m_TargetDis - m_CurDis) < CMinPix)
+               bool lTempb = Mathf.Abs(m_TargetDis - m_CurDis) < CMinPix;
+
+               if (lTempb)
                    m_CurDis = m_TargetDis;
                else
                    m_CurDis = Mathf.Lerp(m_CurDis, m_TargetDis, Time.deltaTime * 10.0f);
 
-               StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, ReadBlendHash, m_MaxBlendVal * (m_CurDis / m_TotalDis));
+
+               if (lTempb && OBE3DLineCtrlStateVal().Value == E3DLineCtrlState.eReadyEnd)
+               {
+                   StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, CGGameSceneData.g_AnimatorHashReadBlend,   m_MaxBlendVal * (Mathf.Abs(m_TargetDis) / m_TotalDis));
+                   OBE3DLineCtrlStateVal().Value = E3DLineCtrlState.eEnd;
+               }
+               else
+                   StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, CGGameSceneData.g_AnimatorHashReadBlend, m_MaxBlendVal * (Mathf.Abs(m_CurDis) / m_TotalDis));
+
            }).AddTo(this);
 
         m_CamGLDraw = Camera.main.gameObject.GetComponent<CCamGLDraw>();
         m_NextOKRange = Screen.dpi * 0.5f;
         m_NextOKRange = m_NextOKRange * m_NextOKRange;
-        ReadBlendHash = Animator.StringToHash("Blend");
+        m_CrossConfirm = Screen.dpi * 1.0f;
     }
 
     private void Start()
@@ -114,7 +125,7 @@ public class CAll3DLineCtrl : MonoBehaviour
 
             if (i != 0)
             {
-                lTempPreviousDataPoint.m_2DDir = lTempCurDataPoint.m_ScreenPoint - lTempPreviousDataPoint.m_ScreenPoint;
+                lTempPreviousDataPoint.m_2DDir = lTempCurDataPoint.m_2DPoint - lTempPreviousDataPoint.m_2DPoint;
                 lTempPreviousDataPoint.m_Dis = (lTempCurDataPoint.m_2DPoint - lTempPreviousDataPoint.m_2DPoint).magnitude;
                 m_TotalDis += lTempPreviousDataPoint.m_Dis;
                // Debug.Log($"lTempPreviousDataPoint.m_Dis = {lTempPreviousDataPoint.m_Dis}");
@@ -126,9 +137,7 @@ public class CAll3DLineCtrl : MonoBehaviour
             //Debug.Log($"m_All2DDataPointInfo[{i}] = {m_All2DDataPointInfo[i].m_CurAccumulationDis}");
             lTempPreviousDataPoint = lTempCurDataPoint;
         }
-
-
-
+       // Debug.Log($"m_TotalDis = {m_TotalDis}");
         m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eReady;
         m_All2DDataPointInfo[m_All2DDataPointInfo.Count - 1].m_CurAccumulationDis = m_TotalDis;
     }
@@ -168,7 +177,7 @@ public class CAll3DLineCtrl : MonoBehaviour
         {
             m_NextPointData = null;
             Debug.Log("Win!!!!!!!!!!");
-            m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eEnd;
+            m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eReadyEnd;
         }
         else
             m_NextPointData = m_All2DDataPointInfo[m_CurIndex + 1];
@@ -179,7 +188,7 @@ public class CAll3DLineCtrl : MonoBehaviour
         if (m_OBE3DLineCtrlState.Value != E3DLineCtrlState.eReady)
             return;
 
-        Debug.Log("OnMouseDown");
+        //Debug.Log("OnMouseDown");
 
         if (m_All2DDataPointInfo.Count <= m_CurIndex)
             return;
@@ -205,25 +214,27 @@ public class CAll3DLineCtrl : MonoBehaviour
 
             Vector3 lInputMousePoint = Input.mousePosition;
             Vector3 lScreenInputMousePos = Vector3.zero;
-            Vector3 lScreenInputMouseNormal = Input.mousePosition;
-            lScreenInputMouseNormal.x = lScreenInputMouseNormal.x / Screen.width;
-            lScreenInputMouseNormal.y = lScreenInputMouseNormal.y / Screen.height;
-            lScreenInputMousePos = lScreenInputMouseNormal;
-            lScreenInputMouseNormal = lScreenInputMouseNormal - m_CurPointData.m_ScreenPoint;
+            Vector3 lScreenInputMouseDir = Input.mousePosition;
+            //lScreenInputMouseNormal.x = lScreenInputMouseNormal.x / Screen.width;
+            //lScreenInputMouseNormal.y = lScreenInputMouseNormal.y / Screen.height;
+            lScreenInputMousePos = lScreenInputMouseDir;
+            lScreenInputMouseDir = lScreenInputMouseDir - m_CurPointData.m_2DPoint;
             
-            lScreenInputMousePos.z = lInputMousePoint.z = lScreenInputMouseNormal.z = 0.0f;
+            lScreenInputMousePos.z = lInputMousePoint.z = lScreenInputMouseDir.z = 0.0f;
 
 
-            Vector3 lTempCross = Vector3.Cross(m_CurPointData.m_2DDir, lScreenInputMouseNormal);
-            
+            Vector3 lTempCross = Vector3.Cross(m_CurPointData.m_2DDir, lScreenInputMouseDir);
+
             //Debug.Log($"========================");
-            //Debug.Log($"lTempCross = {lTempCross}");
+            //Debug.Log($"lTempCross = {Mathf.Abs(lTempCross.z)}");
             //Debug.Log($"m_CurPointData.m_2DDir = {m_CurPointData.m_2DDir}");
-            //Debug.Log($"lScreenInputMouseNormal = {lScreenInputMouseNormal}");
+            //Debug.Log($"lScreenInputMouseNormal = {lScreenInputMouseDir}");
 
-            if (Mathf.Abs(lTempCross.z) > 0.3f)
-                m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eEnd;
-
+            if (Mathf.Abs(lTempCross.z) >= m_CrossConfirm)
+            {
+                m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eReadyEnd;
+                return;
+            }
             //float lTempDis = Vector3.Distance(lInputMousePoint, m_NextPointData.m_2DPoint);
 
             if ((lInputMousePoint - m_NextPointData.m_2DPoint).sqrMagnitude < m_NextOKRange)
@@ -236,8 +247,8 @@ public class CAll3DLineCtrl : MonoBehaviour
             {
                 float lTempMouseDisVal = Vector3.Distance(lInputMousePoint, m_CurPointData.m_2DPoint);
                 lTempMouseDisVal = Mathf.Min(m_CurPointData.m_Dis * 0.9f, lTempMouseDisVal);
-                
-                float lTempDotVal = Vector3.Dot(m_CurPointData.m_2DDir, lScreenInputMouseNormal.normalized);
+
+                float lTempDotVal = Vector3.Dot(m_CurPointData.m_2DDir, lScreenInputMouseDir.normalized);
                 if (lTempDotVal > 0.0f)
                     lTempCurDis = m_CurPointData.m_CurAccumulationDis + lTempMouseDisVal;
                 else
@@ -247,13 +258,8 @@ public class CAll3DLineCtrl : MonoBehaviour
                 lTempCurDis = m_TotalDis;
 
            
-            //Debug.Log($"m_TargetDis = {m_TargetDis}");
             m_TargetDis = lTempCurDis;
            
-
-
-            //
-            // m_CurPointData.m_2DDir
 
             if (m_CamGLDraw != null && m_CurPointData != null)
                 m_CamGLDraw.startVertex = m_CurPointData.m_ScreenPoint;
@@ -263,7 +269,7 @@ public class CAll3DLineCtrl : MonoBehaviour
     public void OnMouseUp()
     {
         Debug.Log("OnMouseUp");
-        m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eEnd;
+        m_OBE3DLineCtrlState.Value = E3DLineCtrlState.eReadyEnd;
         if (m_CamGLDraw != null)
             m_CamGLDraw.OpenDrewGL = false;
     }

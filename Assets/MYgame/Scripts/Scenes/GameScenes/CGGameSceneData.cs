@@ -112,9 +112,13 @@ public class CGGameSceneData : CSingletonMonoBehaviour<CGGameSceneData>
     [SerializeField]  public    GameObject                 m_SaveManager               = null;
     [SerializeField]  public    GameObject                 m_AudioManager              = null;
     [SerializeField]  public    GameObject                 m_PlayerModle               = null;
-    
+
+    public static int g_AnimatorHashReadBlend = 0;
+
+
     private void Awake()
     {
+        g_AnimatorHashReadBlend = Animator.StringToHash("Blend");
 
     }
 
