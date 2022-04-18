@@ -11,18 +11,18 @@ public class CUIText : CUIElementBase
     // ==================== SerializeField ===========================================
 
     [SerializeField] protected TextMeshProUGUI m_Text = null;
-    protected RectTransform m_TextRectTransform = null;
     public TextMeshProUGUI Text => m_Text;
-    public RectTransform TextRectTransform
-    {
-        get
-        {
-            if (m_TextRectTransform == null)
-                m_TextRectTransform = m_Text.GetComponent<RectTransform>();
+    //protected RectTransform m_TextRectTransform = null;
+    //public RectTransform TextRectTransform
+    //{
+    //    get
+    //    {
+    //        if (m_TextRectTransform == null)
+    //            m_TextRectTransform = m_Text.GetComponent<RectTransform>();
 
-            return m_TextRectTransform;
-        }
-    }
+    //        return m_TextRectTransform;
+    //    }
+    //}
         
 
     // ==================== SerializeField ===========================================

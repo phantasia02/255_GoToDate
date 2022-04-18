@@ -9,8 +9,9 @@ public abstract class CUIElementBase : MonoBehaviour
     {
         eUIText             = 0,
         eUITextImage        = 1,
-        eUIButton           = 2,
-        eUITextShowCurMax   = 3,
+        eUIImage            = 2,
+        eUIButton           = 3,
+        eUITextShowCurMax   = 4,
         eMax
     }
 

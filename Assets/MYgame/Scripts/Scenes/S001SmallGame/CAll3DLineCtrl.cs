@@ -33,7 +33,8 @@ public class CAll3DLineCtrl : MonoBehaviour
     [SerializeField] protected Material         m_2DLineMat = null;
     [SerializeField] protected GameObject       m_UIParent  = null;
     [SerializeField] protected float            m_MaxBlendVal = 1.0f;
-    [SerializeField] protected float            m_CrossConfirm = 1.0f;
+    [SerializeField] protected float            m_AddLoveRefVal = 1.0f;
+    [SerializeField] protected float            m_MaxLoveVal = 100.0f;
 
     // ==================== SerializeField ===========================================
 
@@ -47,7 +48,7 @@ public class CAll3DLineCtrl : MonoBehaviour
     protected float m_TotalDis = 1.0f;
     protected float m_CurDis = 0.0f;
     protected float m_TargetDis = 0.0f;
-
+    protected float m_CrossConfirm = 1.0f;
 
     protected Animator m_MyCtrlAnimator = null;
     public Animator MyCtrlAnimator
@@ -75,14 +76,21 @@ public class CAll3DLineCtrl : MonoBehaviour
                    m_CurDis = Mathf.Lerp(m_CurDis, m_TargetDis, Time.deltaTime * 10.0f);
 
 
+               float lTempBlendRatio = 0.0f;
                if (lTempb && OBE3DLineCtrlStateVal().Value == E3DLineCtrlState.eReadyEnd)
                {
-                   StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, CGGameSceneData.g_AnimatorHashReadBlend,   m_MaxBlendVal * (Mathf.Abs(m_TargetDis) / m_TotalDis));
+                   lTempBlendRatio = (Mathf.Abs(m_TargetDis) / m_TotalDis);
+                   StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, CGGameSceneData.g_AnimatorHashReadBlend, m_MaxBlendVal * lTempBlendRatio);
                    OBE3DLineCtrlStateVal().Value = E3DLineCtrlState.eEnd;
                }
                else
-                   StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, CGGameSceneData.g_AnimatorHashReadBlend, m_MaxBlendVal * (Mathf.Abs(m_CurDis) / m_TotalDis));
+               {
+                   lTempBlendRatio = (Mathf.Abs(m_CurDis) / m_TotalDis);
+                   StaticGlobalDel.SetAnimatorFloat(MyCtrlAnimator, CGGameSceneData.g_AnimatorHashReadBlend, m_MaxBlendVal * lTempBlendRatio);
+               }
 
+
+               OBCurLoveVal().Value = Mathf.CeilToInt((float)m_MaxLoveVal * lTempBlendRatio);
            }).AddTo(this);
 
         m_CamGLDraw = Camera.main.gameObject.GetComponent<CCamGLDraw>();
@@ -277,10 +285,16 @@ public class CAll3DLineCtrl : MonoBehaviour
     // ===================== UniRx ======================
 
     protected UniRx.ReactiveProperty<E3DLineCtrlState> m_OBE3DLineCtrlState = new ReactiveProperty<E3DLineCtrlState>(E3DLineCtrlState.eNull);
+    protected UniRx.ReactiveProperty<int> m_CurLoveVal = new ReactiveProperty<int>(0);
 
     public UniRx.ReactiveProperty<E3DLineCtrlState> OBE3DLineCtrlStateVal()
     {
         return m_OBE3DLineCtrlState ?? (m_OBE3DLineCtrlState = new ReactiveProperty<E3DLineCtrlState>(E3DLineCtrlState.eNull));
+    }
+
+    public UniRx.ReactiveProperty<int> OBCurLoveVal()
+    {
+        return m_CurLoveVal ?? (m_CurLoveVal = new ReactiveProperty<int>(0));
     }
 
     // ===================== UniRx ======================

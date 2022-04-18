@@ -149,7 +149,7 @@ public class CGameSceneWindow : CSingletonMonoBehaviour<CGameSceneWindow>
         if (m_AddSpeedTextRectTransform != null)
             m_AddSpeedTextRectTransform.Kill();
 
-        RectTransform lTempTextRectTransform = m_SpeedIcon.TextRectTransform;
+        RectTransform lTempTextRectTransform = m_SpeedIcon.MyRectTransform;
         lTempTextRectTransform.localScale = Vector3.one;
         m_AddSpeedTextRectTransform = lTempTextRectTransform.DOShakeScale(1.0f);
         m_AddSpeedTextRectTransform.onKill = () => {

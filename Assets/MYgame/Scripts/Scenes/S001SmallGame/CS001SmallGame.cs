@@ -4,6 +4,8 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 using DG.Tweening;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CS001SmallGame : CScenesChangChar
 {
@@ -15,7 +17,9 @@ public class CS001SmallGame : CScenesChangChar
         eManAct         = 1,
         ePlayGame       = 2,
         ePlayGameEnd    = 3,
-        eAllEnd         = 4,
+        eKissGameStart  = 4,
+        eKissGame       = 5,
+        eKissGameWin    = 6,
         eMax
     }
 
@@ -32,22 +36,39 @@ public class CS001SmallGame : CScenesChangChar
 
     // ==================== SerializeField ===========================================
 
-    [SerializeField] protected RuntimeAnimatorController m_SetManAnimator = null;
-    [SerializeField] protected List<DataPlayPose> m_All3DLineCtrl = new List<DataPlayPose>();
-    [SerializeField] protected Transform m_ManNormalTransform = null;
-    [SerializeField] protected Transform m_PlayerNormalTransform = null;
+    [SerializeField] protected RuntimeAnimatorController    m_SetManAnimator = null;
+    [SerializeField] protected List<DataPlayPose>           m_All3DLineCtrl = new List<DataPlayPose>();
+    [SerializeField] protected Transform                    m_ManNormalTransform = null;
+    [SerializeField] protected Transform                    m_PlayerNormalTransform = null;
+    [SerializeField] protected CLoveUIDegreeCompletion      m_UIPlayGameLove = null;
+    [Header("Love Game Ctrl Obj")]
+    [SerializeField] protected GameObject                   m_KissPos   = null;
+    [SerializeField] protected CLoveUIDegreeCompletion      m_UIKGLove  = null;
+    [SerializeField] protected CanvasGroup                  m_UIKGAll   = null;
+    [SerializeField] protected CUIButton                    m_UIKGLovePressButton = null;
+    [SerializeField] protected CUIImage                     m_UIKGShowImage = null;
+
 
     // ==================== SerializeField ===========================================
 
+    protected ResultUI m_ResultUI = null;
     protected Animator m_ManAnimator = null;
     protected Animator m_GirlAnimator = null;
     protected int m_QuestionsIndex = 0;
+    protected int m_BuffAccumulationLoveVal = 0;
+    protected int m_CurLoveVal = 0;
+    protected int m_MaxLoveVal = 300;
+
+    readonly public float m_UIKGLoveMaxTime = 3.0f;
+    protected float m_UIKGLoveCurTime = 0.0f;
+    protected bool m_KGPress= false;
    
 
     protected override void Awake()
     {
         base.Awake();
 
+        m_ResultUI = this.GetComponentInChildren<ResultUI>();
         m_ManAnimator = m_ManObj.GetComponent<Animator>();
         m_GirlAnimator = m_PlayerSkin.GetComponent<Animator>();
 
@@ -70,6 +91,38 @@ public class CS001SmallGame : CScenesChangChar
 
     private void Start()
     {
+        if (m_ResultUI != null)
+        {
+            m_ResultUI.OverButton.onClick.AddListener(() =>
+            {
+                StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+            });
+
+            m_ResultUI.NextButton.onClick.AddListener(() =>
+            {
+                StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+            });
+        }
+        // ================== Update =========================
+        var lTempUpdateAs = this.UpdateAsObservable();
+        lTempUpdateAs.Where(X => OBStateVal().Value == EState.eKissGame)
+           .Subscribe(framcount =>
+           {
+               float lTempUIKGLoveCurTime = m_KGPress ? m_UIKGLoveCurTime + Time.deltaTime : m_UIKGLoveCurTime - Time.deltaTime;
+               if (lTempUIKGLoveCurTime > m_UIKGLoveMaxTime)
+               {
+                   lTempUIKGLoveCurTime = m_UIKGLoveMaxTime;
+                   m_OBState.Value = EState.eKissGameWin;
+               }
+               else if (lTempUIKGLoveCurTime < 0.0f)
+                   lTempUIKGLoveCurTime = 0.0f;
+
+               m_UIKGLoveCurTime = lTempUIKGLoveCurTime;
+               m_UIKGLove.SetLoveProgressionVal(m_UIKGLoveCurTime / m_UIKGLoveMaxTime);
+           }).AddTo(this);
+
+
+        // ==============================
         DOTween.Sequence()
         .AppendInterval(1.0f)
         .AppendCallback(() => {
@@ -92,6 +145,14 @@ public class CS001SmallGame : CScenesChangChar
 
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBE3DLineCtrlStateVal().Where(Val => Val == CAll3DLineCtrl.E3DLineCtrlState.eEnd)
                 .Subscribe(Val => {m_OBState.Value = EState.ePlayGameEnd;});
+
+                m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBCurLoveVal()
+                .Subscribe(Val => 
+                {
+                    m_BuffAccumulationLoveVal = Val;
+                    int lTempval = m_BuffAccumulationLoveVal + m_CurLoveVal;
+                    m_UIPlayGameLove.SetLoveProgressionVal((float)lTempval / (float)m_MaxLoveVal);
+                });
             });
 
         }).AddTo(this);
@@ -99,16 +160,15 @@ public class CS001SmallGame : CScenesChangChar
         OBStateVal().Where(_ => _ == EState.ePlayGameEnd)
             .Subscribe(X =>{
 
+                m_CurLoveVal += m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBCurLoveVal().Value;
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.gameObject.SetActive(false);
                 int lTempQuestionsIndex = m_QuestionsIndex + 1;
                 if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
                 {
                     m_QuestionsIndex = lTempQuestionsIndex;
-                    m_OBState.Value = EState.eAllEnd;
+                    m_OBState.Value = EState.eKissGameStart;
                     return;
                 }
-
-                
 
                 float lTempBlendVal2 = m_GirlAnimator.GetFloat(CGGameSceneData.g_AnimatorHashReadBlend);
                 float lTempBlendVal = 1.0f;
@@ -127,17 +187,12 @@ public class CS001SmallGame : CScenesChangChar
                  .AppendCallback(() => {
                      SetTasRefPos(m_TargetManObj, m_ManNormalTransform);
                      SetTasRefPos(m_PlayerObj, m_PlayerNormalTransform);
+                     
                  })
                  .Append(lTempActorTween)
                  .AppendInterval(0.5f)
                  .AppendCallback(() =>
                  {
-                     //if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
-                     //{
-                     //    m_QuestionsIndex = lTempQuestionsIndex;
-                     //    m_OBState.Value = EState.ePlayGameEnd;
-                     //    return;
-                     //}
                      m_QuestionsIndex = lTempQuestionsIndex;
                      m_All3DLineCtrl[m_QuestionsIndex].m_CamObj.SetActive(true);
 
@@ -145,20 +200,43 @@ public class CS001SmallGame : CScenesChangChar
                      m_GirlAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
                      m_OBState.Value = EState.eManAct;
                  });
-                 //.Append(lTempActorTween2)
-                 //.AppendCallback(() => {
-
-                 //    //int lTempQuestionsIndex = m_QuestionsIndex + 1;
-                 //    //if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
-                 //    //    m_OBState.Value = EState.ePlayGameEnd;
-                 //    //else
-                 //    //   m_OBState.Value = EState.eManAct;
-                 //})
                  
             }).AddTo(this);
 
-    }
 
+        OBStateVal().Where(_ => _ == EState.eKissGameStart)
+        .Subscribe(X => {
+            // On Nyo!!!!show
+            if (m_CurLoveVal != m_MaxLoveVal)
+            {
+                m_ResultUI.ShowFailedUI(0.5f);
+                return;
+            }
+            else
+            {
+                Sequence lTempSequence = DOTween.Sequence()
+                     .AppendCallback(() =>{
+                         m_UIKGAll.DOFade(1.0f, 0.4f);
+                     })
+                     .AppendInterval(0.5f)
+                     .AppendCallback(() =>
+                     {
+                         Vector3 lTempUIKissPos = Camera.main.WorldToScreenPoint(m_KissPos.transform.position);
+                         m_UIKGLovePressButton.MyRectTransform.position = lTempUIKissPos;
+                         m_UIKGShowImage.MyRectTransform.position = lTempUIKissPos;
+                         m_OBState.Value = EState.eKissGame;
+                     });
+            }
+
+        }).AddTo(this);
+
+        OBStateVal().Where(_ => _ == EState.eKissGameWin)
+       .Subscribe(X => {
+           m_ResultUI.ShowSuccessUI(0.5f);
+       }).AddTo(this);
+
+    }
+    
 
     public void SetTasRefPos(Transform SetTas, Transform RefTas, bool update = false, float duration = 0.45f)
     {
@@ -172,6 +250,13 @@ public class CS001SmallGame : CScenesChangChar
             SetTas.DOMove(RefTas.position, duration);
             SetTas.DORotateQuaternion(RefTas.rotation, duration);
         }
+    }
+
+
+    public void KissPress(bool press)
+    {
+        m_KGPress = press;
+        Debug.Log($"m_KGPress = {m_KGPress}");
     }
 
 
