@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MYgame/Scenes/DatingMeet.unity
     guid: 85d8fd6f44f3e3a40bbf65ae562d23d5
+  - enabled: 1
+    path: Assets/MYgame/Scenes/S001SmallGame.unity
+    guid: 6e57ba85016718547b2747257d521bfa
   m_configObjects: {}

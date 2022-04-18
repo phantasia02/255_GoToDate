@@ -16,5 +16,5 @@ MonoBehaviour:
   m_ShoesObj: Shoes0
   m_PantsObj: Belt
   m_ClothesObj: Shirt
-  m_bShowFoot: 0
+  m_bShowFoot: 1
   m_DataID: 3
