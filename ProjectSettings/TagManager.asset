@@ -9,6 +9,7 @@ TagManager:
   - EventSystem
   - SaveManager
   - HitSphere
+  - ManSpine2
   layers:
   - Default
   - TransparentFX

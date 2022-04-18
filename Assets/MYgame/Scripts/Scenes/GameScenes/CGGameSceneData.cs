@@ -66,11 +66,7 @@ public class CGGameSceneData : CSingletonMonoBehaviour<CGGameSceneData>
 
     public enum EAllFXType
     {
-        eSplash             = 0,
-        eSpark              = 1,
-        eMainFire           = 2,
-        eChargeSkillMainFx  = 3,
-
+        eEmojiNoLoop = 0,
         eMax,
     };
 

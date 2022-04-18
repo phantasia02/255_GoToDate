@@ -1,11 +1,8 @@
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
-using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
-using DG.Tweening;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using UnityEngine;
 
 public class CS001SmallGame : CScenesChangChar
 {
@@ -41,6 +38,10 @@ public class CS001SmallGame : CScenesChangChar
     [SerializeField] protected Transform                    m_ManNormalTransform = null;
     [SerializeField] protected Transform                    m_PlayerNormalTransform = null;
     [SerializeField] protected CLoveUIDegreeCompletion      m_UIPlayGameLove = null;
+    [SerializeField] protected Transform                    m_ManHeadTransform = null;
+    [SerializeField] protected GameObject                   m_LoveFxLoopObj = null;
+
+
     [Header("Love Game Ctrl Obj")]
     [SerializeField] protected GameObject                   m_KissPos   = null;
     [SerializeField] protected CLoveUIDegreeCompletion      m_UIKGLove  = null;
@@ -87,10 +88,16 @@ public class CS001SmallGame : CScenesChangChar
         //m_TargetManObj.position = m_ManNormalTransform.transform.position;
         //m_TargetManObj.rotation = m_ManNormalTransform.transform.rotation;
         //m_PlayerObj = null;
+
+
     }
 
     private void Start()
     {
+
+        GameObject lTempGameObject = GameObject.FindWithTag(StaticGlobalDel.TagManSpine2);
+        m_ManHeadTransform = lTempGameObject.transform;
+
         if (m_ResultUI != null)
         {
             m_ResultUI.OverButton.onClick.AddListener(() =>
@@ -144,12 +151,22 @@ public class CS001SmallGame : CScenesChangChar
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.gameObject.SetActive(true);
 
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBE3DLineCtrlStateVal().Where(Val => Val == CAll3DLineCtrl.E3DLineCtrlState.eEnd)
-                .Subscribe(Val => {m_OBState.Value = EState.ePlayGameEnd;});
+                .Subscribe(Val => {
+                    m_OBState.Value = EState.ePlayGameEnd;
+                });
 
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBCurLoveVal()
                 .Subscribe(Val => 
                 {
+                    
+
                     m_BuffAccumulationLoveVal = Val;
+                    if (m_BuffAccumulationLoveVal == 100)
+                    {
+                        CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
+                        StaticGlobalDel.NewFxAddParentShow(m_ManHeadTransform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
+                    }
+
                     int lTempval = m_BuffAccumulationLoveVal + m_CurLoveVal;
                     m_UIPlayGameLove.SetLoveProgressionVal((float)lTempval / (float)m_MaxLoveVal);
                 });
@@ -198,6 +215,7 @@ public class CS001SmallGame : CScenesChangChar
 
                      m_ManAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
                      m_GirlAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
+                     m_UIPlayGameLove.gameObject.SetActive(false);
                      m_OBState.Value = EState.eManAct;
                  });
                  
@@ -224,6 +242,7 @@ public class CS001SmallGame : CScenesChangChar
                          Vector3 lTempUIKissPos = Camera.main.WorldToScreenPoint(m_KissPos.transform.position);
                          m_UIKGLovePressButton.MyRectTransform.position = lTempUIKissPos;
                          m_UIKGShowImage.MyRectTransform.position = lTempUIKissPos;
+                         m_LoveFxLoopObj.transform.position = m_KissPos.transform.position;
                          m_OBState.Value = EState.eKissGame;
                      });
             }
@@ -232,6 +251,10 @@ public class CS001SmallGame : CScenesChangChar
 
         OBStateVal().Where(_ => _ == EState.eKissGameWin)
        .Subscribe(X => {
+
+           m_LoveFxLoopObj.SetActive(true);
+           m_UIKGLovePressButton.gameObject.SetActive(false);
+           m_UIKGShowImage.gameObject.SetActive(false);
            m_ResultUI.ShowSuccessUI(0.5f);
        }).AddTo(this);
 

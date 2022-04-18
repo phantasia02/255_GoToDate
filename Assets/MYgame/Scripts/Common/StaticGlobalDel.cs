@@ -114,6 +114,7 @@ public static class StaticGlobalDel
     public const string TagGameSceneData    = "CGGameSceneData";
     public const string TagSaveManager      = "SaveManager";
     public const string TagAudioManager     = "AudioManager";
+    public const string TagManSpine2        = "ManSpine2";
 
 
 

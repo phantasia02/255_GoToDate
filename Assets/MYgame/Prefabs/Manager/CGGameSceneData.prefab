@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354a63f2da176f84380871f546f07075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllFX: []
+  m_AllFX:
+  - {fileID: 5004537445772219778, guid: a3cea68fa863ecf40b2660c5e8e595f9, type: 3}
   m_AllOtherObj:
   - {fileID: 2563268552295146956, guid: 194e869247bc17f41be0788f916288c4, type: 3}
   m_UIObj: []
