@@ -66,7 +66,7 @@ public class CDatingDress : CScenesCtrlBase
 
             //SelectSkin
             StaticGlobalDel.SelectSkin = m_CurSelectSkinChange;
-            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingMeet);
+            StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.TargetDataObj.DatingMeetScreenStr);
         });
     }
 
