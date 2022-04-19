@@ -215,7 +215,7 @@ public class CS001SmallGame : CScenesChangChar
 
                      m_ManAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
                      m_GirlAnimator.SetTrigger(m_All3DLineCtrl[m_QuestionsIndex].m_PoseHashID);
-                     m_UIPlayGameLove.gameObject.SetActive(false);
+                     
                      m_OBState.Value = EState.eManAct;
                  });
                  
@@ -232,6 +232,8 @@ public class CS001SmallGame : CScenesChangChar
             }
             else
             {
+
+                m_UIPlayGameLove.gameObject.SetActive(false);
                 Sequence lTempSequence = DOTween.Sequence()
                      .AppendCallback(() =>{
                          m_UIKGAll.DOFade(1.0f, 0.4f);
