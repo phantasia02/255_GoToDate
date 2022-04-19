@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aa9e29366bc3e4fbd5e8179b41feeb, type: 3}
   m_Name: SportManB
   m_EditorClassIdentifier: 
+  _StartMessageList: {fileID: 11400000, guid: f65ec11a600322442a4c09b4d52dbc8f, type: 2}
   _MugShot: {fileID: 21300000, guid: 72bf60857cc70af40bcf1a3828f12649, type: 3}
   _ChatMugShot: {fileID: 21300000, guid: 3fc77e81b01ffb04d843e618469c5289, type: 3}
   _PersonalityDescription: '#sportlover #healthylifestyle #animallover '
