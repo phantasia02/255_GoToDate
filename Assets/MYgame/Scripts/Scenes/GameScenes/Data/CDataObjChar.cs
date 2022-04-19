@@ -12,7 +12,7 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
     fileName = "Object Char Data")]
     public class CDataObjChar : ScriptableObject
     {
-
+        [SerializeField] protected CMessageList _StartMessageList = null;
         [SerializeField] protected Sprite _MugShot = null;
         [SerializeField] protected Sprite _ChatMugShot = null;
         [SerializeField] protected string _PersonalityDescription = null;
@@ -20,7 +20,9 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         [SerializeField] protected CDataSkinChange _LoveSkin = null;
         [SerializeField] protected List<CDataSkinChange> _AllSelectSkin = null;
         [SerializeField] protected string _EndSmallGameScreenStr = null;
-        
+  
+
+        public CMessageList StartMessageList => _StartMessageList;
         public Sprite MugShot => _MugShot;
         public Sprite ChatMugShot => _ChatMugShot;
         public string PD => _PersonalityDescription;
