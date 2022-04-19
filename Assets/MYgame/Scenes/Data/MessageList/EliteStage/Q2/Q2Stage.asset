@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ListMessage:
   - m_Type: 1
-    m_Messagestr: "I love my work. It\u2019s my life meaning. "
+    m_Messagestr: What music do you like?
   m_SelectMessageList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b75260c5d9c1e0348ad1eeb5d1f7a4a3, type: 2}
+  - {fileID: 11400000, guid: 9ba9ad632c8074848afd8dd0d31034bf, type: 2}
   m_NextQuestion: {fileID: 0}
   m_LoveAdd: 0
   m_Breakpoint: 1

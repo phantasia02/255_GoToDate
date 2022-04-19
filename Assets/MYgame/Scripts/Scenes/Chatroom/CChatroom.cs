@@ -40,8 +40,6 @@ public class CChatroom : CScenesCtrlBase
         m_MyRoleData = StaticGlobalDel.BuffMyRoleData;
         m_TargetObj = StaticGlobalDel.TargetDataObj;
 
-        StageData lTempStageData = StaticGlobalDel.StageData;
-
         m_Yes.AddListener(onClickYes);
         m_No.AddListener(onClickNo);
 
@@ -53,7 +51,7 @@ public class CChatroom : CScenesCtrlBase
         .AppendInterval(1.0f)
         .AppendCallback(() => {
             m_StartUI.SetActive(false);
-            StartCoroutine(SetMessageList(lTempStageData.StartMessageList));
+            StartCoroutine(SetMessageList(m_TargetObj.StartMessageList));
         });
     }
 

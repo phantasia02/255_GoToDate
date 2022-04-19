@@ -15,9 +15,11 @@ MonoBehaviour:
   m_ListMessage:
   - m_Type: 0
     m_Messagestr: "That\u2019s boring. "
+  - m_Type: 1
+    m_Messagestr: "\u2026I don\u2019t think so."
   m_SelectMessageList:
   - {fileID: 0}
   - {fileID: 0}
-  m_NextQuestion: {fileID: 0}
+  m_NextQuestion: {fileID: 11400000, guid: 4f61732d79f5ad241a4d8f405bfa3597, type: 2}
   m_LoveAdd: -1
-  m_Breakpoint: 5
+  m_Breakpoint: 0

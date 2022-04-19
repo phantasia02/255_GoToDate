@@ -16,8 +16,8 @@ MonoBehaviour:
   - m_Type: 1
     m_Messagestr: "I love my work. It\u2019s my life meaning. "
   m_SelectMessageList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 3bd1c217b1495634ea47a83f226487b9, type: 2}
+  - {fileID: 11400000, guid: c25e2d6d2f6d8dc43a21415a6b6c57d4, type: 2}
   m_NextQuestion: {fileID: 0}
   m_LoveAdd: 0
   m_Breakpoint: 1
