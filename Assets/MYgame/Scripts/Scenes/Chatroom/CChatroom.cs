@@ -113,7 +113,7 @@ public class CChatroom : CScenesCtrlBase
         {
             m_ResultUI.NextButton.onClick.AddListener(() =>
             {
-                StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingDress);
+                StaticGlobalDel.g_ChangeScenes.ChangeScenes(m_TargetObj.DatingMeetScreenStr);
             });
 
             m_ResultUI.ShowSuccessUI();

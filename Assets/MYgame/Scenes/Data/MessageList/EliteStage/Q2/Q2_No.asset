@@ -18,8 +18,8 @@ MonoBehaviour:
   - m_Type: 1
     m_Messagestr: "You have a good taste \u2665"
   m_SelectMessageList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 09eb73dd665cfdb4b8ed790fa9b06a3e, type: 2}
+  - {fileID: 11400000, guid: f91769416e935fb4b8ec61e23284787c, type: 2}
   m_NextQuestion: {fileID: 0}
   m_LoveAdd: 2
   m_Breakpoint: 2
