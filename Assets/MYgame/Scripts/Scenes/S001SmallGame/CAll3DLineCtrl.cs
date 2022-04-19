@@ -35,6 +35,8 @@ public class CAll3DLineCtrl : MonoBehaviour
     [SerializeField] protected float            m_MaxBlendVal = 1.0f;
     [SerializeField] protected float            m_AddLoveRefVal = 1.0f;
     [SerializeField] protected float            m_MaxLoveVal = 100.0f;
+    public float MaxLoveVal => m_MaxLoveVal;
+
     [SerializeField] protected SplineFollower m_CurRatioLoveVal = null;
     [SerializeField] protected GameObject       m_ShowLineCollider = null;
 

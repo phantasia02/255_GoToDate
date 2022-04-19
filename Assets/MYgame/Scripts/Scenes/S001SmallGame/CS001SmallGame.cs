@@ -155,13 +155,12 @@ public class CS001SmallGame : CScenesChangChar
                     m_OBState.Value = EState.ePlayGameEnd;
                 });
 
+                float lTenoMaxVal = m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.MaxLoveVal;
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBCurLoveVal()
                 .Subscribe(Val => 
                 {
-                    
-
                     m_BuffAccumulationLoveVal = Val;
-                    if (m_BuffAccumulationLoveVal == 100)
+                    if (m_BuffAccumulationLoveVal >= (int)lTenoMaxVal)
                     {
                         CGGameSceneData lTempGameSceneData = CGGameSceneData.SharedInstance;
                         StaticGlobalDel.NewFxAddParentShow(m_ManHeadTransform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
@@ -177,18 +176,23 @@ public class CS001SmallGame : CScenesChangChar
         OBStateVal().Where(_ => _ == EState.ePlayGameEnd)
             .Subscribe(X =>{
 
+                float lTempBlendVal = 1.0f;
                 m_CurLoveVal += m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.OBCurLoveVal().Value;
                 m_All3DLineCtrl[m_QuestionsIndex].m_PlayLineCtrl.gameObject.SetActive(false);
                 int lTempQuestionsIndex = m_QuestionsIndex + 1;
                 if (lTempQuestionsIndex == m_All3DLineCtrl.Count)
                 {
+                    
+
+                    //m_All3DLineCtrl[m_QuestionsIndex].
+
                     m_QuestionsIndex = lTempQuestionsIndex;
                     m_OBState.Value = EState.eKissGameStart;
                     return;
                 }
 
                 float lTempBlendVal2 = m_GirlAnimator.GetFloat(CGGameSceneData.g_AnimatorHashReadBlend);
-                float lTempBlendVal = 1.0f;
+                lTempBlendVal = 1.0f;
 
                 Tween lTempActorTween = DOTween.To(() => lTempBlendVal, x => lTempBlendVal = x, 0.0f, 1.0f)
                 .SetEase(Ease.Linear)
@@ -225,20 +229,28 @@ public class CS001SmallGame : CScenesChangChar
         OBStateVal().Where(_ => _ == EState.eKissGameStart)
         .Subscribe(X => {
             // On Nyo!!!!show
-            if (m_CurLoveVal != m_MaxLoveVal)
+            if (m_CurLoveVal < m_MaxLoveVal)
             {
                 m_ResultUI.ShowFailedUI(0.5f);
                 return;
             }
             else
             {
+                float lTempBlendVal = m_GirlAnimator.GetFloat(CGGameSceneData.g_AnimatorHashReadBlend);
+                if (lTempBlendVal < 1.0f)
+                {
+                    DOTween.To(() => lTempBlendVal, x => lTempBlendVal = x, 1.0f, 0.5f)
+                    .SetEase(Ease.Linear)
+                    .OnUpdate(() => { StaticGlobalDel.SetAnimatorFloat(m_GirlAnimator, CGGameSceneData.g_AnimatorHashReadBlend, lTempBlendVal); });
+                }
+
 
                 m_UIPlayGameLove.gameObject.SetActive(false);
                 Sequence lTempSequence = DOTween.Sequence()
                      .AppendCallback(() =>{
                          m_UIKGAll.DOFade(1.0f, 0.4f);
                      })
-                     .AppendInterval(0.5f)
+                     .AppendInterval(0.7f)
                      .AppendCallback(() =>
                      {
                          Vector3 lTempUIKissPos = Camera.main.WorldToScreenPoint(m_KissPos.transform.position);

@@ -7339,7 +7339,7 @@ MonoBehaviour:
   m_UIParent: {fileID: 1511113058}
   m_MaxBlendVal: 1
   m_AddLoveRefVal: 1
-  m_MaxLoveVal: 100
+  m_MaxLoveVal: 134
   m_CurRatioLoveVal: {fileID: 1260101036}
   m_ShowLineCollider: {fileID: 350647472}
 --- !u!1001 &1259616326
@@ -7808,7 +7808,7 @@ MonoBehaviour:
   m_UIParent: {fileID: 1511113058}
   m_MaxBlendVal: 1
   m_AddLoveRefVal: 1
-  m_MaxLoveVal: 100
+  m_MaxLoveVal: 134
   m_CurRatioLoveVal: {fileID: 1404386364}
   m_ShowLineCollider: {fileID: 415823218}
 --- !u!1 &1359745075
@@ -13015,7 +13015,7 @@ MonoBehaviour:
   m_UIParent: {fileID: 1511113058}
   m_MaxBlendVal: 0.8
   m_AddLoveRefVal: 1
-  m_MaxLoveVal: 100
+  m_MaxLoveVal: 134
   m_CurRatioLoveVal: {fileID: 1883011109}
   m_ShowLineCollider: {fileID: 1858681345}
 --- !u!1 &1955132282
