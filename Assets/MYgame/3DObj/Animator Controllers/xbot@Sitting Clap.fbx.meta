@@ -71,13 +71,13 @@ ModelImporter:
       takeName: mixamo.com
       internalID: 0
       firstFrame: 7
-      lastFrame: 7
+      lastFrame: 8
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
+      hasAdditiveReferencePose: 1
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
@@ -94,7 +94,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 7
     isReadable: 0
   meshes:
     lODScreenPercentages: []

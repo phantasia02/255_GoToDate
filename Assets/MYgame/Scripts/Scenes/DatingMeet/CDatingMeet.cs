@@ -35,6 +35,11 @@ public class CDatingMeet : CScenesChangChar
         m_ResultUI = this.GetComponentInChildren<ResultUI>();
     }
 
+    public void Start()
+    {
+
+    }
+
     public void EndFunc()
     {
         if (m_Love)
