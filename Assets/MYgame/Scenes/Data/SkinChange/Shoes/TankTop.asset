@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07a5e07cf5a7bd740a3c41df7a2ae89a, type: 3}
-  m_Name: Elite
+  m_Name: TankTop
   m_EditorClassIdentifier: 
-  _PreviewPhoto: {fileID: 21300000, guid: 7b659e6cc03e4bc4092a2ce923a1846c, type: 3}
-  m_ShoesObj: Shoes1
-  m_PantsObj: 
-  m_ClothesObj: Dress
-  m_bShowFoot: 1
-  m_DataID: 1
+  _PreviewPhoto: {fileID: 21300000, guid: 627f2c922bc7db54fa65db544580d969, type: 3}
+  m_ShoesObj: Shoes3
+  m_PantsObj: Jeans
+  m_ClothesObj: TankTop
+  m_bShowFoot: 0
+  m_DataID: 5

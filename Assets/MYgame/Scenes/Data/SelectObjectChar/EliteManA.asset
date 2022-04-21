@@ -23,4 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 771dd137d5107324bbc3d26d5c5932ad, type: 2}
   - {fileID: 11400000, guid: 46056a7bff1cc2d4bbbe8a945d8e9a98, type: 2}
   _DatingMeetScreenStr: DatingMeetEliteMan
-  _EndSmallGameScreenStr: 
+  _EndSmallGameScreenStr: SelectObject
