@@ -28,6 +28,8 @@ public class CEliteManSmallGame : CScenesChangChar
 
     // ==================== SerializeField ===========================================
 
+   // protected CEMSGfood[] m_AllEMSGfood = 
+
     protected override void Awake()
     {
         base.Awake();

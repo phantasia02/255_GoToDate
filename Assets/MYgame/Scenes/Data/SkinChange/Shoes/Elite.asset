@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Elite
   m_EditorClassIdentifier: 
   _PreviewPhoto: {fileID: 21300000, guid: 7b659e6cc03e4bc4092a2ce923a1846c, type: 3}
-  m_ShoesObj: Shoes1
+  m_ShoesObj: Shoes6
   m_PantsObj: 
-  m_ClothesObj: Dress
-  m_bShowFoot: 1
+  m_ClothesObj: Dress2
+  m_bShowFoot: 0
   m_DataID: 1
