@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class CChangeScenes
 {
@@ -16,6 +17,8 @@ public class CChangeScenes
 
     public void ChangeScenes(string lScenesName)
     {
+        DOTween.PauseAll();
+
         SceneManager.LoadScene(lScenesName);
 
         StaticGlobalDel.g_CurSceneName = lScenesName;
@@ -43,15 +46,10 @@ public class CChangeScenes
         //}
 
         StaticGlobalDel.g_CurSceneName = StaticGlobalDel.g_GameScenesName;
-
+        DOTween.PauseAll();
         SceneManager.LoadScene(lTempIndex);
     }
 
-    public void LoadTestScenes()
-    {
-        StaticGlobalDel.g_CurSceneName = StaticGlobalDel.g_testScenesName;
-        SceneManager.LoadScene(StaticGlobalDel.g_CurSceneName);
-    }
 
     public void SetNextLevel()
     {
@@ -68,6 +66,7 @@ public class CChangeScenes
 
     public void ResetScene()
     {
+        DOTween.PauseAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         CSaveManager.Save();
     }
