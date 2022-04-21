@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a5e07cf5a7bd740a3c41df7a2ae89a, type: 3}
   m_Name: Recreational
   m_EditorClassIdentifier: 
-  _PreviewPhoto: {fileID: 0}
+  _PreviewPhoto: {fileID: 21300000, guid: f83d0cde8a34fe14ba9506ee88d4c551, type: 3}
   m_ShoesObj: Shoes5
   m_PantsObj: Jeans
   m_ClothesObj: Pajama
