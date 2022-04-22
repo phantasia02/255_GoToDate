@@ -10,6 +10,7 @@ TagManager:
   - SaveManager
   - HitSphere
   - ManSpine2
+  - ManMouth
   layers:
   - Default
   - TransparentFX

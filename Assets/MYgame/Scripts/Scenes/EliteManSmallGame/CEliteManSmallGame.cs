@@ -4,7 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
-
+using UnityEngine.Playables;
+using MYgame.Scripts.Scenes.GameScenes.Data;
+using System.Linq;
 
 public class CEliteManSmallGame : CScenesChangChar
 {
@@ -25,14 +27,48 @@ public class CEliteManSmallGame : CScenesChangChar
     [SerializeField] protected GameObject m_ViewManCam = null;
     [Header("Play Game")]
     [SerializeField] protected CLoveUIDegreeCompletion m_UIPlayGameLove = null;
+    [Header("Fork")]
+    [SerializeField] protected Transform m_ForkObj = null;
+    [SerializeField] protected Transform m_ForkStartTrans = null;
+    [SerializeField] protected Transform m_ForkMiddlePos = null;
+    [SerializeField] protected Transform m_ForkEndTrans = null;
+    [Header("Food")]
+    [SerializeField] protected List<CDataEliteManSmallGameFood> m_DataDesiredFoodList = null;
+    [Header("UI Food")]
+    [SerializeField] protected CEMSGUIDesiredFood m_MyCEMSGUIDesiredFood = null;
+    [Header("Time Line")]
+    [SerializeField] protected PlayableDirector m_DesiredFoodTimeLine = null;
 
     // ==================== SerializeField ===========================================
 
-   // protected CEMSGfood[] m_AllEMSGfood = 
+    protected CEMSGfood[] m_AllEMSGfood = null;
+    protected CEMSGfood m_PlayGameAnimation = null;
+    protected GameObject m_ManMouth = null;
+    protected List<CDataEliteManSmallGameFood> m_CurDataDesiredFoodList = null;
+    protected CDataEliteManSmallGameFood m_CurDataDesiredFood = null;
+
 
     protected override void Awake()
     {
         base.Awake();
+
+        m_AllEMSGfood = this.GetComponentsInChildren<CEMSGfood>();
+
+        foreach (var item in m_AllEMSGfood)
+        {
+            item.OBClickReturnVal()
+                .Where(Val => OBStateVal().Value == EState.ePlayGame)
+                .Subscribe(val => {
+                    m_PlayGameAnimation = val;
+                    OBStateVal().Value = EState.ePlayGameAnimation;
+                }).AddTo(this); ;
+        }
+
+        m_ManMouth = GameObject.FindWithTag(StaticGlobalDel.TagManMouth);
+
+        var rnd = new System.Random();
+        m_CurDataDesiredFoodList = m_DataDesiredFoodList.OrderBy(item => rnd.Next()).ToList();
+        Debug.Log($"m_CurDataDesiredFoodList.Count  = {m_CurDataDesiredFoodList.Count}");
     }
 
     private void Start()
@@ -42,10 +78,61 @@ public class CEliteManSmallGame : CScenesChangChar
         .AppendCallback(() => {
             m_ViewManCam.SetActive(true);
         })
-        .AppendInterval(1.0f);
+        .AppendInterval(1.0f)
+        .AppendCallback(() =>{
+            OBStateVal().Value = EState.ePlayGame;
+         });
 
+        // ================= ePlayGame =======================
+        OBStateVal().Where(val => val == EState.ePlayGame)
+        .Subscribe(X => {
+            m_PlayGameAnimation = null;
+            m_DesiredFoodTimeLine.time = 0.0f;
+            m_DesiredFoodTimeLine.Play();
+            m_CurDataDesiredFood = m_CurDataDesiredFoodList[0];
+            m_MyCEMSGUIDesiredFood.SetData(m_CurDataDesiredFood);
+           // m_CurDataDesiredFood.Remove(m_CurDataDesiredFood[0]);
+        }).AddTo(this);
 
-        OBStateVal().Value = EState.ePlayGame;
+        // ================= ePlayGameAnimation =======================
+        OBStateVal().Where(val => val == EState.ePlayGameAnimation)
+       .Subscribe(X => {
+
+           m_CurDataDesiredFoodList.Remove(m_CurDataDesiredFood);
+
+           const float lTempMoveForkStartTime = 0.5f;
+           const float lTempMoveForkEndTime = 1.0f;
+           Sequence lTempSequence = DOTween.Sequence();
+
+           lTempSequence.AppendCallback(() =>{
+               m_ForkObj.DOMove(m_ForkMiddlePos.position, lTempMoveForkStartTime).SetEase(Ease.Linear);
+               m_ForkObj.DORotateQuaternion(m_ForkMiddlePos.rotation, lTempMoveForkStartTime).SetEase(Ease.Linear);
+           });
+           lTempSequence.AppendInterval(lTempMoveForkStartTime);
+           lTempSequence.Append(m_ForkObj.DOMove(m_PlayGameAnimation.gameObject.transform.position, lTempMoveForkStartTime));
+
+           lTempSequence.AppendCallback(() =>{
+               m_PlayGameAnimation.gameObject.transform.SetParent(m_ForkObj.transform);
+               m_ForkEndTrans.transform.position = m_ManMouth.transform.position;
+               m_ForkObj.DOMove(m_ForkEndTrans.position - (m_ForkEndTrans.forward * 0.1f), lTempMoveForkEndTime).SetEase(Ease.Linear);
+               m_ForkObj.DORotateQuaternion(m_ForkEndTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear);
+           });
+
+           if (m_PlayGameAnimation.FoodData == m_CurDataDesiredFood)
+           {
+               lTempSequence.AppendInterval(lTempMoveForkEndTime / 2.0f);
+               lTempSequence.Append(m_PlayGameAnimation.gameObject.transform.DOScale(Vector3.zero, 0.5f)
+               .OnComplete(() => {m_PlayGameAnimation.gameObject.SetActive(false);}));
+           }
+           else
+               lTempSequence.AppendInterval(lTempMoveForkEndTime);
+
+           lTempSequence.AppendCallback(() => {
+               m_ForkObj.DOMove(m_ForkStartTrans.position, lTempMoveForkEndTime).SetEase(Ease.Linear);
+               m_ForkObj.DORotateQuaternion(m_ForkStartTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear)
+               .OnComplete(()=> {OBStateVal().Value = EState.ePlayGame;});
+           });
+       }).AddTo(this);
     }
 
 
