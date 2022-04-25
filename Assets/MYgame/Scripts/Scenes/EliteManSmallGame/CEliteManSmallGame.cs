@@ -50,7 +50,9 @@ public class CEliteManSmallGame : CScenesChangChar
     protected List<CDataEliteManSmallGameFood> m_CurDataDesiredFoodList = null;
     protected int m_CurDataDesiredFoodIndex = 0;
     protected int m_MaxScore = 100;
+    protected int m_CurScore = 0;
     protected CDataEliteManSmallGameFood m_CurDataDesiredFood = null;
+    protected CAllLoveCtrl m_LoveCtrl = null;
 
 
     protected override void Awake()
@@ -70,8 +72,8 @@ public class CEliteManSmallGame : CScenesChangChar
         }
 
         m_ManMouth = GameObject.FindWithTag(StaticGlobalDel.TagManMouth);
+        m_LoveCtrl = this.GetComponentInChildren<CAllLoveCtrl>();
 
-      
 
 
         var rnd = new System.Random();
@@ -141,6 +143,7 @@ public class CEliteManSmallGame : CScenesChangChar
                    m_PlayGameAnimation.gameObject.SetActive(false);
                    Transform lTempFx = StaticGlobalDel.NewFxAddParentShow(m_ManMouth.transform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
                    lTempFx.localScale = Vector3.one * 0.3f;
+                   AddScore(30);
                }));
            }
            else
@@ -176,6 +179,12 @@ public class CEliteManSmallGame : CScenesChangChar
        }).AddTo(this);
     }
 
+    public void AddScore(int add)
+    {
+        int lTempScore = m_CurScore + add;
+        m_CurScore = lTempScore > m_MaxScore ? m_MaxScore : lTempScore;
+        m_LoveCtrl.SetTargetLoveVal((float)m_CurScore / (float)m_MaxScore);
+    }
 
     // ===================== UniRx ======================
 
