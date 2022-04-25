@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MugShot: {fileID: 21300000, guid: ae47d32706df001428199f990cff8e8b, type: 3}
   _FoodModel: {fileID: 2768875942227507390, guid: d3251dbab37a43348bc223844a791662, type: 3}
+  _Score: 34

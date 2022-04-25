@@ -55,11 +55,13 @@ public class CEliteManSmallGame : CScenesChangChar
     protected CDataEliteManSmallGameFood m_CurDataDesiredFood = null;
     protected CAllLoveCtrl m_LoveCtrl = null;
     protected Animator m_ManAnimator = null;
+    protected ResultUI m_ResultUI = null;
 
     protected override void Awake()
     {
         base.Awake();
 
+        m_ResultUI = this.GetComponentInChildren<ResultUI>();
         m_ManAnimator = m_ManObj.GetComponent<Animator>();
 
         m_ManAnimator.runtimeAnimatorController = m_SetManAnimator;
@@ -148,7 +150,7 @@ public class CEliteManSmallGame : CScenesChangChar
                    m_PlayGameAnimation.gameObject.SetActive(false);
                    Transform lTempFx = StaticGlobalDel.NewFxAddParentShow(m_ManMouth.transform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
                    lTempFx.localScale = Vector3.one * 0.3f;
-                   AddScore(30);
+                   AddScore(m_CurDataDesiredFood.Score);
                }));
            }
            else
@@ -178,6 +180,21 @@ public class CEliteManSmallGame : CScenesChangChar
                    else
                    {
                        m_CurDataDesiredFoodIndex = lTempFoodindex;
+
+                       m_ResultUI.OverButton.onClick.AddListener(() =>
+                       {
+                           StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+                       });
+
+                       m_ResultUI.NextButton.onClick.AddListener(() =>
+                       {
+                           StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+                       });
+
+                       if (m_MaxScore <= m_CurScore)
+                           m_ResultUI.ShowSuccessUI(0.5f);
+                       else
+                           m_ResultUI.ShowFailedUI(0.5f);
                    }
                });
            });
@@ -188,7 +205,9 @@ public class CEliteManSmallGame : CScenesChangChar
     {
         int lTempScore = m_CurScore + add;
         m_CurScore = lTempScore > m_MaxScore ? m_MaxScore : lTempScore;
-        m_LoveCtrl.SetTargetLoveVal((float)m_CurScore / (float)m_MaxScore);
+
+        float lTempSetval = m_CurScore >= m_MaxScore ? 1.0f : (float)m_CurScore / (float)m_MaxScore;
+        m_LoveCtrl.SetTargetLoveVal(lTempSetval);
     }
 
     // ===================== UniRx ======================
