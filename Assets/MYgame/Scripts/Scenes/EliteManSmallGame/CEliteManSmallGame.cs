@@ -29,6 +29,7 @@ public class CEliteManSmallGame : CScenesChangChar
     [Header("Player")]
     [SerializeField] protected CLoveUIDegreeCompletion m_UIPlayGameLove = null;
     [Header("Man")]
+    [SerializeField] protected RuntimeAnimatorController m_SetManAnimator = null;
     [SerializeField] protected Transform m_ExpressionAngry = null;
     [Header("Fork")]
     [SerializeField] protected Transform m_ForkObj = null;
@@ -53,11 +54,15 @@ public class CEliteManSmallGame : CScenesChangChar
     protected int m_CurScore = 0;
     protected CDataEliteManSmallGameFood m_CurDataDesiredFood = null;
     protected CAllLoveCtrl m_LoveCtrl = null;
-
+    protected Animator m_ManAnimator = null;
 
     protected override void Awake()
     {
         base.Awake();
+
+        m_ManAnimator = m_ManObj.GetComponent<Animator>();
+
+        m_ManAnimator.runtimeAnimatorController = m_SetManAnimator;
 
         m_AllEMSGfood = this.GetComponentsInChildren<CEMSGfood>();
 
