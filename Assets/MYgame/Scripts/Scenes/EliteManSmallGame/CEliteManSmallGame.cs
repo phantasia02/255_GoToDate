@@ -23,10 +23,13 @@ public class CEliteManSmallGame : CScenesChangChar
     }
 
     // ==================== SerializeField ===========================================
+    [SerializeField] protected Transform m_OutFoodTransform = null;
     [Header("Game Cam")]
     [SerializeField] protected GameObject m_ViewManCam = null;
-    [Header("Play Game")]
+    [Header("Player")]
     [SerializeField] protected CLoveUIDegreeCompletion m_UIPlayGameLove = null;
+    [Header("Man")]
+    [SerializeField] protected Transform m_ExpressionAngry = null;
     [Header("Fork")]
     [SerializeField] protected Transform m_ForkObj = null;
     [SerializeField] protected Transform m_ForkStartTrans = null;
@@ -45,6 +48,8 @@ public class CEliteManSmallGame : CScenesChangChar
     protected CEMSGfood m_PlayGameAnimation = null;
     protected GameObject m_ManMouth = null;
     protected List<CDataEliteManSmallGameFood> m_CurDataDesiredFoodList = null;
+    protected int m_CurDataDesiredFoodIndex = 0;
+    protected int m_MaxScore = 100;
     protected CDataEliteManSmallGameFood m_CurDataDesiredFood = null;
 
 
@@ -66,6 +71,9 @@ public class CEliteManSmallGame : CScenesChangChar
 
         m_ManMouth = GameObject.FindWithTag(StaticGlobalDel.TagManMouth);
 
+      
+
+
         var rnd = new System.Random();
         m_CurDataDesiredFoodList = m_DataDesiredFoodList.OrderBy(item => rnd.Next()).ToList();
         Debug.Log($"m_CurDataDesiredFoodList.Count  = {m_CurDataDesiredFoodList.Count}");
@@ -73,6 +81,8 @@ public class CEliteManSmallGame : CScenesChangChar
 
     private void Start()
     {
+
+
         DOTween.Sequence()
         .AppendInterval(0.5f)
         .AppendCallback(() => {
@@ -83,13 +93,19 @@ public class CEliteManSmallGame : CScenesChangChar
             OBStateVal().Value = EState.ePlayGame;
          });
 
+
+
         // ================= ePlayGame =======================
         OBStateVal().Where(val => val == EState.ePlayGame)
         .Subscribe(X => {
+
+            Vector3 lTemppos = m_ManMouth.transform.position;
+            m_ExpressionAngry.position = lTemppos + (m_ExpressionAngry.forward * -0.1f) + (m_ExpressionAngry.right * -0.04f) + (m_ExpressionAngry.up * 0.2f);
+
             m_PlayGameAnimation = null;
             m_DesiredFoodTimeLine.time = 0.0f;
             m_DesiredFoodTimeLine.Play();
-            m_CurDataDesiredFood = m_CurDataDesiredFoodList[0];
+            m_CurDataDesiredFood = m_CurDataDesiredFoodList[m_CurDataDesiredFoodIndex];
             m_MyCEMSGUIDesiredFood.SetData(m_CurDataDesiredFood);
            // m_CurDataDesiredFood.Remove(m_CurDataDesiredFood[0]);
         }).AddTo(this);
@@ -97,8 +113,6 @@ public class CEliteManSmallGame : CScenesChangChar
         // ================= ePlayGameAnimation =======================
         OBStateVal().Where(val => val == EState.ePlayGameAnimation)
        .Subscribe(X => {
-
-           m_CurDataDesiredFoodList.Remove(m_CurDataDesiredFood);
 
            const float lTempMoveForkStartTime = 0.5f;
            const float lTempMoveForkEndTime = 1.0f;
@@ -114,23 +128,50 @@ public class CEliteManSmallGame : CScenesChangChar
            lTempSequence.AppendCallback(() =>{
                m_PlayGameAnimation.gameObject.transform.SetParent(m_ForkObj.transform);
                m_ForkEndTrans.transform.position = m_ManMouth.transform.position;
-               m_ForkObj.DOMove(m_ForkEndTrans.position - (m_ForkEndTrans.forward * 0.1f), lTempMoveForkEndTime).SetEase(Ease.Linear);
+               m_ForkObj.DOMove(m_ForkEndTrans.position - (m_ForkEndTrans.forward * 0.05f), lTempMoveForkEndTime).SetEase(Ease.Linear);
                m_ForkObj.DORotateQuaternion(m_ForkEndTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear);
            });
 
            if (m_PlayGameAnimation.FoodData == m_CurDataDesiredFood)
            {
-               lTempSequence.AppendInterval(lTempMoveForkEndTime / 2.0f);
-               lTempSequence.Append(m_PlayGameAnimation.gameObject.transform.DOScale(Vector3.zero, 0.5f)
-               .OnComplete(() => {m_PlayGameAnimation.gameObject.SetActive(false);}));
+               lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.8f);
+               lTempSequence.Append(m_PlayGameAnimation.gameObject.transform.DOScale(Vector3.zero, lTempMoveForkEndTime * 0.2f)
+               .OnComplete(() => {
+
+                   m_PlayGameAnimation.gameObject.SetActive(false);
+                   Transform lTempFx = StaticGlobalDel.NewFxAddParentShow(m_ManMouth.transform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
+                   lTempFx.localScale = Vector3.one * 0.3f;
+               }));
            }
            else
-               lTempSequence.AppendInterval(lTempMoveForkEndTime);
+           {
+               lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.9f);
+               lTempSequence.AppendCallback(() => {
+                   m_PlayGameAnimation.transform.SetParent(m_OutFoodTransform);
+                   m_PlayGameAnimation.OpewRigidbody(true);
+                   m_ExpressionAngry.gameObject.SetActive(true);
+                   m_ExpressionAngry.DOScale(0.5f, 0.2f).SetLoops(4, LoopType.Yoyo)
+                   .OnComplete(()=> { m_ExpressionAngry.gameObject.SetActive(false); });
+               });
+               lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.1f);
+           }
 
            lTempSequence.AppendCallback(() => {
                m_ForkObj.DOMove(m_ForkStartTrans.position, lTempMoveForkEndTime).SetEase(Ease.Linear);
                m_ForkObj.DORotateQuaternion(m_ForkStartTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear)
-               .OnComplete(()=> {OBStateVal().Value = EState.ePlayGame;});
+               .OnComplete(()=> {
+                   int lTempFoodindex = m_CurDataDesiredFoodIndex + 1;
+                  // Debug.Log($"lTempFoodindex = {lTempFoodindex}");
+                   if (lTempFoodindex < m_CurDataDesiredFoodList.Count)
+                   {
+                       m_CurDataDesiredFoodIndex = lTempFoodindex;
+                       OBStateVal().Value = EState.ePlayGame;
+                   }
+                   else
+                   {
+                       m_CurDataDesiredFoodIndex = lTempFoodindex;
+                   }
+               });
            });
        }).AddTo(this);
     }

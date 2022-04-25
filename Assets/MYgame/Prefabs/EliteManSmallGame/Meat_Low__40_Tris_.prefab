@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FoodData: {fileID: 11400000, guid: cfdac70c534ba5d438847f1488c33672, type: 2}
+  m_MyRigidbody: {fileID: 0}
 --- !u!54 &5157706338470236113
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ GameObject:
   - component: {fileID: 2768875942530655733}
   - component: {fileID: 2768875942530655734}
   - component: {fileID: 2768875942530655735}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

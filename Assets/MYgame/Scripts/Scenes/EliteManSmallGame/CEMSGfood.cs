@@ -13,9 +13,24 @@ public class CEMSGfood : MonoBehaviour
 
     // ==================== SerializeField ===========================================
 
+    protected Rigidbody m_MyRigidbody = null;
+
+
+    public void Awake()
+    {
+        m_MyRigidbody = this.GetComponent<Rigidbody>();
+    }
+
     public void OnMouseDown()
     {
         OBClickReturnVal().OnNext(this);
+    }
+
+    public void OpewRigidbody(bool open)
+    {
+        m_MyRigidbody.useGravity = true;
+        m_MyRigidbody.isKinematic = false;
+        m_MyRigidbody.constraints = RigidbodyConstraints.None;
     }
 
     // ===================== UniRx ======================
