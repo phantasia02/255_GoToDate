@@ -199,7 +199,7 @@ public class CEliteManSmallGame : CScenesChangChar
 
                        m_ResultUI.NextButton.onClick.AddListener(() =>
                        {
-                           StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
+                           StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameEliteManLove);
                        });
 
                        if (m_MaxScore <= m_CurScore)

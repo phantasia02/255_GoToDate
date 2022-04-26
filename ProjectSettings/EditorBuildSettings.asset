@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MYgame/Scenes/EliteManSmallGame.unity
     guid: 1869e55c49a493e48bd17edbfc4d2dc0
+  - enabled: 1
+    path: Assets/MYgame/Scenes/EliteManLove.unity
+    guid: c029d8264bce57f4c9650c250a338ba1
   m_configObjects: {}

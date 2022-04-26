@@ -93,6 +93,7 @@ public static class StaticGlobalDel
     public const string g_ScenesNameChatroom        = "Chatroom";
     public const string g_ScenesNameDatingDress     = "DatingDress";
     public const string g_ScenesNameDatingMeet      = "DatingMeet";
+    public const string g_ScenesNameEliteManLove    = "EliteManLove";
 
     public const string g_testScenesName            = "test";
     public const string g_ShowCurLevelNamePrefix    = "STAGE ";
