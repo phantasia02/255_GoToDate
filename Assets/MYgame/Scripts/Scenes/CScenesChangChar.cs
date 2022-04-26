@@ -29,6 +29,6 @@ public class CScenesChangChar : CScenesCtrlBase
 
         m_ManObj = GameObject.Instantiate(StaticGlobalDel.TargetDataObj.Model, m_TargetManObj);
         m_ManObj.transform.localPosition = Vector3.zero;
-        m_ManObj.transform.localScale = Vector3.one * 1.55f;
+        m_ManObj.transform.localScale = Vector3.one * StaticGlobalDel.TargetDataObj.Scale;
     }
 }

@@ -13,6 +13,7 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
     public class CDataObjChar : ScriptableObject
     {
         [SerializeField] protected CMessageList _StartMessageList = null;
+        [SerializeField] protected float _Scale = 1.55f;
         [SerializeField] protected Sprite _MugShot = null;
         [SerializeField] protected Sprite _ChatMugShot = null;
         [SerializeField] protected string _PersonalityDescription = null;
@@ -25,6 +26,7 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
   
 
         public CMessageList StartMessageList => _StartMessageList;
+        public float Scale => _Scale;
         public Sprite MugShot => _MugShot;
         public Sprite ChatMugShot => _ChatMugShot;
         public string PD => _PersonalityDescription;
