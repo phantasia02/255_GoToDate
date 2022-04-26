@@ -5091,7 +5091,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 92920701815317416, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 105055519304886330, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 308981909940844061, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5155,7 +5163,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Girl2
       objectReference: {fileID: 0}
+    - target: {fileID: 2601077410098271526, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4257263584783308740, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710074125689098706, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5170,6 +5186,22 @@ PrefabInstance:
     - target: {fileID: 5469169410090414070, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131766749702779388, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308538395868900550, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7110251085762059863, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687840735489676156, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8352085336304928225, guid: dbd5a107532196e4184a013713f5a0b3, type: 3}
       propertyPath: m_IsActive
