@@ -23,5 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb15f4f55f2fbbf4fb5ab14c405b5b1a, type: 2}
   - {fileID: 11400000, guid: cfff7ad257a8d664bb8f3cd7369b8a62, type: 2}
   m_NextQuestion: {fileID: 11400000, guid: bb15f4f55f2fbbf4fb5ab14c405b5b1a, type: 2}
-  m_LoveAdd: 2
+  m_LoveAdd: 0
   m_Breakpoint: 2

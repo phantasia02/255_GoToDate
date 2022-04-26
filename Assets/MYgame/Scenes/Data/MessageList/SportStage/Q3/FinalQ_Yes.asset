@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_NextQuestion: {fileID: 0}
-  m_LoveAdd: 1
+  m_LoveAdd: 0
   m_Breakpoint: 4
