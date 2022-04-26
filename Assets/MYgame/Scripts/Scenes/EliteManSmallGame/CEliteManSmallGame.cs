@@ -38,6 +38,7 @@ public class CEliteManSmallGame : CScenesChangChar
     [SerializeField] protected Transform m_ForkEndTrans = null;
     [Header("Food")]
     [SerializeField] protected List<CDataEliteManSmallGameFood> m_DataDesiredFoodList = null;
+    [SerializeField] protected List<CDataEliteManSmallGameFood> m_TableAllFoodList = null;
     [Header("UI Food")]
     [SerializeField] protected CEMSGUIDesiredFood m_MyCEMSGUIDesiredFood = null;
     [Header("Time Line")]
@@ -45,7 +46,7 @@ public class CEliteManSmallGame : CScenesChangChar
 
     // ==================== SerializeField ===========================================
 
-    protected CEMSGfood[] m_AllEMSGfood = null;
+    protected List<CEMSGfood> m_AllEMSGfood = null;
     protected CEMSGfood m_PlayGameAnimation = null;
     protected GameObject m_ManMouth = null;
     protected List<CDataEliteManSmallGameFood> m_CurDataDesiredFoodList = null;
@@ -66,13 +67,15 @@ public class CEliteManSmallGame : CScenesChangChar
 
         m_ManAnimator.runtimeAnimatorController = m_SetManAnimator;
 
-        m_AllEMSGfood = this.GetComponentsInChildren<CEMSGfood>();
+        CEMSGfood[] lTempAllEMSGfood = this.GetComponentsInChildren<CEMSGfood>();
+        m_AllEMSGfood = lTempAllEMSGfood.ToList();
 
         foreach (var item in m_AllEMSGfood)
         {
             item.OBClickReturnVal()
                 .Where(Val => OBStateVal().Value == EState.ePlayGame)
                 .Subscribe(val => {
+                    m_AllEMSGfood.Remove(val);
                     m_PlayGameAnimation = val;
                     OBStateVal().Value = EState.ePlayGameAnimation;
                 }).AddTo(this); ;
@@ -180,6 +183,14 @@ public class CEliteManSmallGame : CScenesChangChar
                    else
                    {
                        m_CurDataDesiredFoodIndex = lTempFoodindex;
+
+                       if (m_CurDataDesiredFoodIndex == 3 && 80 > m_CurScore && 60 < m_CurScore)
+                       {
+                           CEMSGfood lTemnpEMSGfood = m_AllEMSGfood[Random.Range(0, m_AllEMSGfood.Count - 1)];
+                           m_CurDataDesiredFoodList.Add(lTemnpEMSGfood.FoodData);
+                           OBStateVal().Value = EState.ePlayGame;
+                           return;
+                       }
 
                        m_ResultUI.OverButton.onClick.AddListener(() =>
                        {
