@@ -746,8 +746,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348302049}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 20.6, y: 24.6, z: 0.2}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0.99, y: 1.31, z: 0.195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732237969}
   m_RootOrder: 0
@@ -6485,10 +6485,10 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.33
     m_Bias: 0.02
     m_NormalBias: 0.1
     m_NearPlane: 0.1
@@ -6811,11 +6811,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3806784945646141489, guid: 49bb2c5b2c274af44b876498bb8427a9, type: 3}
       propertyPath: m_text
-      value: "Love \u2665"
+      value: "Go To Kiss \u2665"
       objectReference: {fileID: 0}
     - target: {fileID: 6392863494955585599, guid: 49bb2c5b2c274af44b876498bb8427a9, type: 3}
       propertyPath: m_text
-      value: "Love \u2665"
+      value: "Go To Kiss \u2665"
       objectReference: {fileID: 0}
     - target: {fileID: 6392863495268091849, guid: 49bb2c5b2c274af44b876498bb8427a9, type: 3}
       propertyPath: m_Pivot.x
