@@ -1510,6 +1510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabGameSceneData: {fileID: 1509596396949040922, guid: 05e7b6e00344118419787de0fc01772d, type: 3}
+  m_InfoTEXT: {fileID: 2096126378}
   m_AllChangeDatingDress:
   - {fileID: 1108156991}
   - {fileID: 327886433}
@@ -1550,6 +1551,7 @@ GameObject:
   - component: {fileID: 2096126375}
   - component: {fileID: 2096126377}
   - component: {fileID: 2096126376}
+  - component: {fileID: 2096126378}
   m_Layer: 5
   m_Name: InfoTEXT
   m_TagString: Untagged
@@ -1675,6 +1677,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096126374}
   m_CullTransparentMesh: 0
+--- !u!114 &2096126378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096126374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58208b2cf849c6d4197a99559c8b7799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Text: {fileID: 2096126376}
 --- !u!33 &1497966234137552332
 MeshFilter:
   m_ObjectHideFlags: 0

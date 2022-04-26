@@ -7,6 +7,7 @@ using System;
 
 public class CDatingDress : CScenesCtrlBase
 {
+    [SerializeField] protected CUIText m_InfoTEXT = null;
     [SerializeField] protected CUIButton[] m_AllChangeDatingDress = null;
     [SerializeField] protected CUIButton m_ApplyBtn            = null;
     [SerializeField] protected GameObject m_PlayerPosRef            = null;
@@ -20,7 +21,7 @@ public class CDatingDress : CScenesCtrlBase
     {
         base.Awake();
 
-        CGGameSceneData lTempCGGameSceneData = CGGameSceneData.SharedInstance;
+       // CGGameSceneData lTempCGGameSceneData = CGGameSceneData.SharedInstance;
         List<CDataSkinChange> lTempAllSuitSkin = StaticGlobalDel.TargetDataObj.AllSelectSkin;
 
 
@@ -52,6 +53,8 @@ public class CDatingDress : CScenesCtrlBase
         {
             m_AllChangeDatingDress[i].SetSprite(m_AllDataSkin[i].PreviewPhoto);
         }
+
+        m_InfoTEXT.SetText(StaticGlobalDel.TargetDataObj.DatingDressScreenStr);
     }
 
     // Start is called before the first frame update

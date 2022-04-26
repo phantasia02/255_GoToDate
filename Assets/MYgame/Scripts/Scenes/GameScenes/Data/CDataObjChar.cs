@@ -21,6 +21,7 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         [SerializeField] protected List<CDataSkinChange> _AllSelectSkin = null;
         [SerializeField] protected string _DatingMeetScreenStr = null;
         [SerializeField] protected string _EndSmallGameScreenStr = null;
+        [SerializeField] protected string _DatingDressScreenStr = null;
   
 
         public CMessageList StartMessageList => _StartMessageList;
@@ -32,6 +33,7 @@ namespace MYgame.Scripts.Scenes.GameScenes.Data
         public List<CDataSkinChange> AllSelectSkin => _AllSelectSkin;
         public string DatingMeetScreenStr => _DatingMeetScreenStr;
         public string EndSmallGameScreenStr => _EndSmallGameScreenStr;
+        public string DatingDressScreenStr => _DatingDressScreenStr;
 
     }
 }
