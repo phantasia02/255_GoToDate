@@ -68,7 +68,7 @@ public class CEliteManLove : CScenesChangChar
 
         OBStateVal().Where(_ => _ == EState.eKissGameStart)
         .Subscribe(X => {
-         
+
              Sequence lTempSequence = DOTween.Sequence()
                   .AppendCallback(() => {
                       m_UIKGAll.DOFade(1.0f, 0.4f);
@@ -91,12 +91,12 @@ public class CEliteManLove : CScenesChangChar
                 {
                     StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
                 });
-
                 m_UIKGLovePressButton.gameObject.SetActive(false);
                 m_UIKGShowImage.gameObject.SetActive(false);
                 m_LoveFxLoopObj.transform.position = Vector3.Lerp(m_ManMouth.transform.position, Camera.main.transform.position, 0.5f);
                 m_LoveFxLoopObj.SetActive(true);
                 m_ResultUI.ShowSuccessUI(0.5f);
+                m_UIKGAll.gameObject.SetActive(false);
 
             }).AddTo(this);
 

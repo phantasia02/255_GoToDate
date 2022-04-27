@@ -266,6 +266,7 @@ public class CS001SmallGame : CScenesChangChar
         OBStateVal().Where(_ => _ == EState.eKissGameWin)
        .Subscribe(X => {
 
+           m_UIKGAll.gameObject.SetActive(false);
            m_LoveFxLoopObj.SetActive(true);
            m_UIKGLovePressButton.gameObject.SetActive(false);
            m_UIKGShowImage.gameObject.SetActive(false);
