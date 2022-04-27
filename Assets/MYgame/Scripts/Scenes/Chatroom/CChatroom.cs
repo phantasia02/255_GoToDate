@@ -107,7 +107,7 @@ public class CChatroom : CScenesCtrlBase
                 StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectObject);
             });
 
-            m_ResultUI.ShowFailedUI();
+            m_ResultUI.ShowFailedUI(1.0f);
         }
         else if (parMessageList.Breakpoint == EDialogueBreakpoint.eWin)
         {
@@ -116,7 +116,7 @@ public class CChatroom : CScenesCtrlBase
                 StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameDatingDress);
             });
 
-            m_ResultUI.ShowSuccessUI();
+            m_ResultUI.ShowSuccessUI(1.0f);
         }
     }
 
