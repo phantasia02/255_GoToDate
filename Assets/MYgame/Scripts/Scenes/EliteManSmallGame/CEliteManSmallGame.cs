@@ -155,6 +155,7 @@ public class CEliteManSmallGame : CScenesChangChar
                m_ForkObj.DORotateQuaternion(m_ForkEndTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear);
            });
 
+           float lTempDelayTime = 2.0f;
            if (m_PlayGameAnimation.FoodData == m_CurDataDesiredFood)
            {
                lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.8f);
@@ -165,7 +166,10 @@ public class CEliteManSmallGame : CScenesChangChar
                    Transform lTempFx = StaticGlobalDel.NewFxAddParentShow(m_ManMouth.transform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
                    lTempFx.localScale = Vector3.one * 0.3f;
                    AddScore(m_CurDataDesiredFood.Score);
+                   m_ManAnimator.SetTrigger("Yes");
                }));
+               lTempDelayTime = 4.0f;
+               //lTempSequence.AppendInterval(3.0f);
            }
            else
            {
@@ -175,15 +179,28 @@ public class CEliteManSmallGame : CScenesChangChar
                    m_PlayGameAnimation.OpewRigidbody(true);
                    m_ExpressionAngry.gameObject.SetActive(true);
                    m_ExpressionAngry.DOScale(0.5f, 0.2f).SetLoops(4, LoopType.Yoyo)
-                   .OnComplete(()=> { m_ExpressionAngry.gameObject.SetActive(false); });
+                   .OnComplete(()=> {
+                       m_ExpressionAngry.gameObject.SetActive(false);
+                       m_ManAnimator.SetTrigger("No");
+                   });
                });
-               lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.1f);
+               lTempDelayTime = 2.0f; 
            }
 
-           lTempSequence.AppendCallback(() => {
+
+           lTempSequence.AppendCallback(() =>{
+
+               m_DesiredFoodTimeLine.time = 0.0f;
+               m_DesiredFoodTimeLine.Stop();
+               m_MyCEMSGUIDesiredFood.gameObject.SetActive(false);
                m_ForkObj.DOMove(m_ForkStartTrans.position, lTempMoveForkEndTime).SetEase(Ease.Linear);
-               m_ForkObj.DORotateQuaternion(m_ForkStartTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear)
-               .OnComplete(()=> {
+               m_ForkObj.DORotateQuaternion(m_ForkStartTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear);
+           });
+           lTempSequence.AppendInterval(lTempDelayTime);
+           lTempSequence.AppendCallback(() => {
+               //m_ForkObj.DOMove(m_ForkStartTrans.position, lTempMoveForkEndTime).SetEase(Ease.Linear);
+               //m_ForkObj.DORotateQuaternion(m_ForkStartTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear);
+              // .OnComplete(()=> {
                    int lTempFoodindex = m_CurDataDesiredFoodIndex + 1;
                   // Debug.Log($"lTempFoodindex = {lTempFoodindex}");
                    if (lTempFoodindex < m_CurDataDesiredFoodList.Count)
@@ -218,7 +235,7 @@ public class CEliteManSmallGame : CScenesChangChar
                        else
                            m_ResultUI.ShowFailedUI(0.5f);
                    }
-               });
+               //});
            });
        }).AddTo(this);
     }
