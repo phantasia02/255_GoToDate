@@ -17,7 +17,7 @@ public class CSelectRole : CScenesCtrlBase
     [SerializeField] protected TMP_InputField       m_InputName             = null;
     //[SerializeField] protected CUIButton        m_Next                  = null;
     [SerializeField] protected CUIButton            m_Confirn                = null;
-    [SerializeField] protected GameObject           m_StartUI               = null;
+    //[SerializeField] protected GameObject           m_StartUI               = null;
     // ==================== SerializeField ===========================================
     protected int           m_CurIndexDataRole = -1;
     protected CDataRole[]   m_TempAllDataRole = null;
@@ -28,11 +28,11 @@ public class CSelectRole : CScenesCtrlBase
 
         m_TempAllDataRole = CGGameSceneData.SharedInstance.m_AllDataRole;
 
-        DOTween.Sequence()
-        .AppendInterval(1.0f)
-        .AppendCallback(() => {
-            m_StartUI.SetActive(false);
-        });
+        //DOTween.Sequence()
+        //.AppendInterval(1.0f)
+        //.AppendCallback(() => {
+        //    m_StartUI.SetActive(false);
+        //});
         //  UpdateCurShowImage(0);
 
         m_Confirn.EnableButton(false);
