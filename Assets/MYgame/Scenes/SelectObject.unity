@@ -1216,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6281378219698802617, guid: 14cfad2b9b301164fba0f9e689b6fdd9, type: 3}
       propertyPath: m_text
-      value: Select Your Date!
+      value: Choose Your Date
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cfad2b9b301164fba0f9e689b6fdd9, type: 3}
