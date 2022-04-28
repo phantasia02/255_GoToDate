@@ -9,7 +9,52 @@ ModelImporter:
   - first:
       74: -6519760567115542380
     second: TPose
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Accessory
+    second: {fileID: 2100000, guid: 3a162b609d2170c489a3e08542d993fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BusinessShirt
+    second: {fileID: 2100000, guid: dc89d0973a7107e459ae4ca943149ab7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: c979a7bd19a6e404a996c2ee0998ba9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guy5Body
+    second: {fileID: 2100000, guid: 148664dc376df764087e2499b5fa7c84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guy5Face
+    second: {fileID: 2100000, guid: 09d49bef593c63c4f890410fcc9b17e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hairtsyle4
+    second: {fileID: 2100000, guid: 268508fdba250d2478ce81426f1d0f13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OpenJacket
+    second: {fileID: 2100000, guid: 0594d1b835ef71a4798bfb8c0fb29b86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: c2e7ce0d776fff84dbf7b8c338b63a20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes
+    second: {fileID: 2100000, guid: b3814c5b997f21a4dbd0991e4c5999f1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

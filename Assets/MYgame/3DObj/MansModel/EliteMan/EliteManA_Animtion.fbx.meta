@@ -33,7 +33,47 @@ ModelImporter:
   - first:
       74: 2562888284788868603
     second: Idle2
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Accessory
+    second: {fileID: 2100000, guid: 3800a95296a25f143b1b333f3fb4a8a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: 2168a32fb50946448991eb14ef47e546, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guy3Body
+    second: {fileID: 2100000, guid: 9c36503acda943e4996aa40b998942f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hairstyle1
+    second: {fileID: 2100000, guid: 45cff403d5e0052488509028cc409bf4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NewFaceUnwrap
+    second: {fileID: 2100000, guid: 5b9a63adca0f9a44e9c85668e411d7bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: a6e02a6e29975f7449a33e45c34e81af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShirtWithVest
+    second: {fileID: 2100000, guid: ea24640b481bc2540aa2a093ce63aaff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes
+    second: {fileID: 2100000, guid: 0604e2326f32b1e488ab36b2da78217a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
