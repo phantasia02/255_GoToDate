@@ -103,6 +103,17 @@ public class CEliteManSmallGame : CScenesChangChar
         .AppendInterval(1.0f)
         .AppendCallback(() =>{
             OBStateVal().Value = EState.ePlayGame;
+
+
+           // SetRenderQueue
+
+            Vector3 lTempV3 =  m_PlayerObj.transform.position;
+            lTempV3.x = 0.85f;
+            m_PlayerObj.transform.position = lTempV3;
+            
+            SkinnedMeshRenderer[] lTempAllSkinnedMeshRenderer = m_PlayerObj.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (var item in lTempAllSkinnedMeshRenderer)
+                item.gameObject.AddComponent<SetRenderQueue>();
          });
 
 
