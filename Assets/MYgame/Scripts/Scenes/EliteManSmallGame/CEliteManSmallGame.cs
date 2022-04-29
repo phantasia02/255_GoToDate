@@ -151,7 +151,24 @@ public class CEliteManSmallGame : CScenesChangChar
            lTempSequence.AppendCallback(() =>{
                m_PlayGameAnimation.gameObject.transform.SetParent(m_ForkObj.transform);
                m_ForkEndTrans.transform.position = m_ManMouth.transform.position;
-               m_ForkObj.DOMove(m_ForkEndTrans.position - (m_ForkEndTrans.forward * 0.05f), lTempMoveForkEndTime).SetEase(Ease.Linear);
+
+               Vector3 lTempForkStartPos = m_ForkObj.transform.position;
+              
+               float lTempBlendVal = 0.0f;
+               DOTween.To(() => lTempBlendVal, x => lTempBlendVal = x, 1.0f, lTempMoveForkEndTime)
+                .SetEase(Ease.Linear)
+                .OnUpdate(() => {
+                    //StaticGlobalDel.SetAnimatorFloat(m_ManAnimator, CGGameSceneData.g_AnimatorHashReadBlend, lTempBlendVal);
+                    //m_ForkObj.DOMove(m_ForkEndTrans.position - (m_ForkEndTrans.forward * 0.05f), lTempMoveForkEndTime);
+                    //m_ForkObj.DORotateQuaternion(m_ForkEndTrans.rotation, lTempMoveForkEndTime);
+                    Debug.Log(lTempBlendVal);
+                    Vector3 lTempForkEndPos = m_ManMouth.transform.position;
+                    lTempForkEndPos -= (m_ForkEndTrans.forward * 0.1f);
+                    m_ForkObj.transform.position = Vector3.Lerp(lTempForkStartPos, lTempForkEndPos, lTempBlendVal);
+                    //m_ForkObj.transform.rotation = Quaternion.Lerp(m_ForkEndTrans.rotation, m_ManMouth.transform.rotation, lTempBlendVal);
+                });
+
+               //m_ForkObj.DOMove(m_ForkEndTrans.position - (m_ForkEndTrans.forward * 0.05f), lTempMoveForkEndTime).SetEase(Ease.Linear);
                m_ForkObj.DORotateQuaternion(m_ForkEndTrans.rotation, lTempMoveForkEndTime).SetEase(Ease.Linear);
            });
 
@@ -165,23 +182,29 @@ public class CEliteManSmallGame : CScenesChangChar
                    m_PlayGameAnimation.gameObject.SetActive(false);
                    Transform lTempFx = StaticGlobalDel.NewFxAddParentShow(m_ManMouth.transform, CGGameSceneData.EAllFXType.eEmojiNoLoop);
                    lTempFx.localScale = Vector3.one * 0.3f;
+
+                   Vector3 lTempFxPos = lTempFx.transform.position;
+                   lTempFxPos.x += 0.2f;
+                   lTempFx.transform.position = lTempFxPos;
+
                    AddScore(m_CurDataDesiredFood.Score);
                    m_ManAnimator.SetTrigger("Yes");
                }));
-               lTempDelayTime = 4.0f;
+               lTempDelayTime = 3.0f;
                //lTempSequence.AppendInterval(3.0f);
            }
            else
            {
-               lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.9f);
+               lTempSequence.AppendInterval(lTempMoveForkEndTime * 0.8f);
                lTempSequence.AppendCallback(() => {
+                   m_ManAnimator.SetTrigger("No");
                    m_PlayGameAnimation.transform.SetParent(m_OutFoodTransform);
                    m_PlayGameAnimation.OpewRigidbody(true);
                    m_ExpressionAngry.gameObject.SetActive(true);
                    m_ExpressionAngry.DOScale(0.5f, 0.2f).SetLoops(4, LoopType.Yoyo)
                    .OnComplete(()=> {
                        m_ExpressionAngry.gameObject.SetActive(false);
-                       m_ManAnimator.SetTrigger("No");
+                       
                    });
                });
                lTempDelayTime = 2.0f; 
