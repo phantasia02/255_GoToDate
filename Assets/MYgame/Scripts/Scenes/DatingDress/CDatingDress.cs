@@ -7,12 +7,14 @@ using System;
 
 public class CDatingDress : CScenesCtrlBase
 {
-    [SerializeField] protected CUIText m_InfoTEXT = null;
-    [SerializeField] protected CUIButton[] m_AllChangeDatingDress = null;
-    [SerializeField] protected CUIButton m_ApplyBtn            = null;
+    [SerializeField] protected CUIText m_InfoTEXT                   = null;
+    [SerializeField] protected CUIButton[] m_AllChangeDatingDress   = null;
+   // [SerializeField] protected CUIButton m_ApplyBtn                 = null;
+    [SerializeField] protected CUIButton m_Confirn                  = null;
     [SerializeField] protected GameObject m_PlayerPosRef            = null;
-    [SerializeField] protected DataTimeLine m_DataTimeLine = null;
-    [SerializeField] protected CActorSetSkin m_PlayerSkin = null;
+    [SerializeField] protected DataTimeLine m_DataTimeLine          = null;
+    [SerializeField] protected CActorSetSkin m_PlayerSkin           = null;
+    [SerializeField] protected RectTransform m_Focus                = null;
 
     protected List<CDataSkinChange> m_AllDataSkin = new List<CDataSkinChange>();
     protected CDataSkinChange m_CurSelectSkinChange = null;
@@ -55,6 +57,7 @@ public class CDatingDress : CScenesCtrlBase
         }
 
         m_InfoTEXT.SetText(StaticGlobalDel.TargetDataObj.DatingDressScreenStr);
+        m_Confirn.EnableButton(false);
     }
 
     // Start is called before the first frame update
@@ -65,7 +68,7 @@ public class CDatingDress : CScenesCtrlBase
 
 
         m_PlayerSkin.SetUpdateSkinMat(StaticGlobalDel.BuffMyRoleData.DataSkinMat);
-        m_ApplyBtn.AddListener(() => {
+        m_Confirn.AddListener(() => {
 
             //SelectSkin
             StaticGlobalDel.SelectSkin = m_CurSelectSkinChange;
@@ -81,10 +84,19 @@ public class CDatingDress : CScenesCtrlBase
         RectTransform lTempRectTransform = m_AllChangeDatingDress[index].MyRectTransform;
         m_AllChangeDatingDress[index].AddListener(() =>
         {
-            m_ApplyBtn.gameObject.SetActive(true);
+            // m_ApplyBtn.gameObject.SetActive(true);
+            if (!m_Focus.gameObject.activeSelf)
+            {
+                m_Focus.gameObject.SetActive(true);
+                m_Confirn.EnableButton(true);
+            }
+
             Vector2 lTempVector2 = lTempRectTransform.anchoredPosition;
-            lTempVector2.y -= lTempRectTransform.sizeDelta.y / 2.0f;
-            m_ApplyBtn.MyRectTransform.anchoredPosition = lTempVector2;
+            // lTempVector2.y -= lTempRectTransform.sizeDelta.y / 2.0f;
+
+            //m_ApplyBtn.MyRectTransform.anchoredPosition = lTempVector2;
+
+            m_Focus.anchoredPosition = lTempVector2;
 
             m_PlayerSkin.SetUpdateSkinObj(m_AllDataSkin[index]);
             m_CurSelectSkinChange = m_AllDataSkin[index];
