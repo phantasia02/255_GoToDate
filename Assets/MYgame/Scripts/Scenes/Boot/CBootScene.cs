@@ -11,19 +11,19 @@ public class CBootScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
 
-        if (CSaveManager.m_status.LevelIndex.Value == 0)
-            CSaveManager.m_status.LevelIndex.Value = 0;
 
-#if UNITY_EDITOR
+        //        if (CSaveManager.m_status.LevelIndex.Value == 0)
+        //            CSaveManager.m_status.LevelIndex.Value = 0;
 
-        if (m_InitLevelIndex > 0)
-            CSaveManager.m_status.LevelIndex.Value = m_InitLevelIndex - 1;
-#endif
-        CSaveManager.Save();
+        //#if UNITY_EDITOR
 
-        m_ChangeScenes.LoadGameScenes();
+        //        if (m_InitLevelIndex > 0)
+        //            CSaveManager.m_status.LevelIndex.Value = m_InitLevelIndex - 1;
+        //#endif
+        //        CSaveManager.Save();
+
+        StaticGlobalDel.g_ChangeScenes.ChangeScenes(StaticGlobalDel.g_ScenesNameSelectRole);
     }
 
 }
